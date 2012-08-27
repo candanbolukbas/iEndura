@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ADB7244115EA65B300D3D749 /* SimpleClass.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7244015EA65B300D3D749 /* SimpleClass.m */; };
+		ADB7244415EA666000D3D749 /* IEXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7244315EA666000D3D749 /* IEXMLParser.m */; };
 		ADDE2F7D15E7B1A200DA582D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDE2F7C15E7B1A200DA582D /* UIKit.framework */; };
 		ADDE2F7F15E7B1A200DA582D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDE2F7E15E7B1A200DA582D /* Foundation.framework */; };
 		ADDE2F8115E7B1A200DA582D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDE2F8015E7B1A200DA582D /* CoreGraphics.framework */; };
@@ -15,22 +17,48 @@
 		ADDE2F8D15E7B1A200DA582D /* IEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE2F8C15E7B1A200DA582D /* IEAppDelegate.m */; };
 		ADDE2F9015E7B1A200DA582D /* IEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE2F8F15E7B1A200DA582D /* IEViewController.m */; };
 		ADDE2F9315E7B1A200DA582D /* IEViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADDE2F9115E7B1A200DA582D /* IEViewController.xib */; };
+		ADDE2FA315E7B44400DA582D /* IEHelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE2FA215E7B44400DA582D /* IEHelperMethods.m */; };
+		ADDE2FA815E7BE2300DA582D /* button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDE2FA515E7BE2300DA582D /* button_bg.png */; };
+		ADDE2FA915E7BE2300DA582D /* iendura_top.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDE2FA615E7BE2300DA582D /* iendura_top.png */; };
+		ADDE2FAA15E7BE2300DA582D /* iendura_top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDE2FA715E7BE2300DA582D /* iendura_top@2x.png */; };
+		ADDE2FAC15E7C67F00DA582D /* iendura_app_icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDE2FAB15E7C67F00DA582D /* iendura_app_icon_57.png */; };
+		ADDE2FAE15E7C68600DA582D /* iendura_app_icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDE2FAD15E7C68600DA582D /* iendura_app_icon_114.png */; };
+		ADDE2FB115E81E4C00DA582D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDE2FB015E81E4C00DA582D /* libsqlite3.dylib */; };
+		ADDE2FC015E98ECB00DA582D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE2FBD15E98ECB00DA582D /* NSData+Base64.m */; };
+		ADDE2FC115E98ECB00DA582D /* StringEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE2FBF15E98ECB00DA582D /* StringEncryption.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ADB7243F15EA65B300D3D749 /* SimpleClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleClass.h; sourceTree = "<group>"; };
+		ADB7244015EA65B300D3D749 /* SimpleClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleClass.m; sourceTree = "<group>"; };
+		ADB7244215EA666000D3D749 /* IEXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEXMLParser.h; sourceTree = "<group>"; };
+		ADB7244315EA666000D3D749 /* IEXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEXMLParser.m; sourceTree = "<group>"; };
 		ADDE2F7815E7B1A200DA582D /* iEndura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iEndura.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADDE2F7C15E7B1A200DA582D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ADDE2F7E15E7B1A200DA582D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ADDE2F8015E7B1A200DA582D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		ADDE2F8415E7B1A200DA582D /* iEndura-Info.plist */ = {isa = PBXFileReference; path = "iEndura-Info.plist"; sourceTree = "<group>"; };
+		ADDE2F8415E7B1A200DA582D /* iEndura-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iEndura-Info.plist"; sourceTree = "<group>"; };
 		ADDE2F8615E7B1A200DA582D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ADDE2F8815E7B1A200DA582D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		ADDE2F8A15E7B1A200DA582D /* iEndura-Prefix.pch */ = {isa = PBXFileReference; path = "iEndura-Prefix.pch"; sourceTree = "<group>"; };
-		ADDE2F8B15E7B1A200DA582D /* IEAppDelegate.h */ = {isa = PBXFileReference; path = IEAppDelegate.h; sourceTree = "<group>"; };
+		ADDE2F8A15E7B1A200DA582D /* iEndura-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iEndura-Prefix.pch"; sourceTree = "<group>"; };
+		ADDE2F8B15E7B1A200DA582D /* IEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IEAppDelegate.h; sourceTree = "<group>"; };
 		ADDE2F8C15E7B1A200DA582D /* IEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IEAppDelegate.m; sourceTree = "<group>"; };
-		ADDE2F8E15E7B1A200DA582D /* IEViewController.h */ = {isa = PBXFileReference; path = IEViewController.h; sourceTree = "<group>"; };
+		ADDE2F8E15E7B1A200DA582D /* IEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IEViewController.h; sourceTree = "<group>"; };
 		ADDE2F8F15E7B1A200DA582D /* IEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IEViewController.m; sourceTree = "<group>"; };
 		ADDE2F9215E7B1A200DA582D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IEViewController.xib; sourceTree = "<group>"; };
+		ADDE2F9E15E7B42200DA582D /* IEGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEGlobals.h; sourceTree = "<group>"; };
+		ADDE2FA115E7B44400DA582D /* IEHelperMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEHelperMethods.h; sourceTree = "<group>"; };
+		ADDE2FA215E7B44400DA582D /* IEHelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEHelperMethods.m; sourceTree = "<group>"; };
+		ADDE2FA515E7BE2300DA582D /* button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bg.png; sourceTree = "<group>"; };
+		ADDE2FA615E7BE2300DA582D /* iendura_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iendura_top.png; sourceTree = "<group>"; };
+		ADDE2FA715E7BE2300DA582D /* iendura_top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iendura_top@2x.png"; sourceTree = "<group>"; };
+		ADDE2FAB15E7C67F00DA582D /* iendura_app_icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iendura_app_icon_57.png; path = ../../iendura_app_icon_57.png; sourceTree = "<group>"; };
+		ADDE2FAD15E7C68600DA582D /* iendura_app_icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iendura_app_icon_114.png; path = ../../iendura_app_icon_114.png; sourceTree = "<group>"; };
+		ADDE2FB015E81E4C00DA582D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		ADDE2FBC15E98ECB00DA582D /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		ADDE2FBD15E98ECB00DA582D /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		ADDE2FBE15E98ECB00DA582D /* StringEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringEncryption.h; sourceTree = "<group>"; };
+		ADDE2FBF15E98ECB00DA582D /* StringEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringEncryption.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADDE2FB115E81E4C00DA582D /* libsqlite3.dylib in Frameworks */,
 				ADDE2F7D15E7B1A200DA582D /* UIKit.framework in Frameworks */,
 				ADDE2F7F15E7B1A200DA582D /* Foundation.framework in Frameworks */,
 				ADDE2F8115E7B1A200DA582D /* CoreGraphics.framework in Frameworks */,
@@ -47,9 +76,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ADB7243D15EA658300D3D749 /* TemplateClasses */ = {
+			isa = PBXGroup;
+			children = (
+				ADB7243F15EA65B300D3D749 /* SimpleClass.h */,
+				ADB7244015EA65B300D3D749 /* SimpleClass.m */,
+			);
+			name = TemplateClasses;
+			sourceTree = "<group>";
+		};
 		ADDE2F6D15E7B1A200DA582D = {
 			isa = PBXGroup;
 			children = (
+				ADDE2FB015E81E4C00DA582D /* libsqlite3.dylib */,
 				ADDE2F8215E7B1A200DA582D /* iEndura */,
 				ADDE2F7B15E7B1A200DA582D /* Frameworks */,
 				ADDE2F7915E7B1A200DA582D /* Products */,
@@ -82,7 +121,15 @@
 				ADDE2F8E15E7B1A200DA582D /* IEViewController.h */,
 				ADDE2F8F15E7B1A200DA582D /* IEViewController.m */,
 				ADDE2F9115E7B1A200DA582D /* IEViewController.xib */,
+				ADDE2F9E15E7B42200DA582D /* IEGlobals.h */,
+				ADDE2FA115E7B44400DA582D /* IEHelperMethods.h */,
+				ADDE2FA215E7B44400DA582D /* IEHelperMethods.m */,
+				ADB7244215EA666000D3D749 /* IEXMLParser.h */,
+				ADB7244315EA666000D3D749 /* IEXMLParser.m */,
+				ADB7243D15EA658300D3D749 /* TemplateClasses */,
+				ADDE2FBB15E98EAC00DA582D /* Security */,
 				ADDE2F8315E7B1A200DA582D /* Supporting Files */,
+				ADDE2FA415E7BE2300DA582D /* images */,
 			);
 			path = iEndura;
 			sourceTree = "<group>";
@@ -96,6 +143,37 @@
 				ADDE2F8A15E7B1A200DA582D /* iEndura-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ADDE2FA415E7BE2300DA582D /* images */ = {
+			isa = PBXGroup;
+			children = (
+				ADDE2FAF15E7CDBC00DA582D /* app icons */,
+				ADDE2FA515E7BE2300DA582D /* button_bg.png */,
+				ADDE2FA615E7BE2300DA582D /* iendura_top.png */,
+				ADDE2FA715E7BE2300DA582D /* iendura_top@2x.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		ADDE2FAF15E7CDBC00DA582D /* app icons */ = {
+			isa = PBXGroup;
+			children = (
+				ADDE2FAD15E7C68600DA582D /* iendura_app_icon_114.png */,
+				ADDE2FAB15E7C67F00DA582D /* iendura_app_icon_57.png */,
+			);
+			name = "app icons";
+			sourceTree = "<group>";
+		};
+		ADDE2FBB15E98EAC00DA582D /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				ADDE2FBC15E98ECB00DA582D /* NSData+Base64.h */,
+				ADDE2FBD15E98ECB00DA582D /* NSData+Base64.m */,
+				ADDE2FBE15E98ECB00DA582D /* StringEncryption.h */,
+				ADDE2FBF15E98ECB00DA582D /* StringEncryption.m */,
+			);
+			name = Security;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +230,11 @@
 			files = (
 				ADDE2F8715E7B1A200DA582D /* InfoPlist.strings in Resources */,
 				ADDE2F9315E7B1A200DA582D /* IEViewController.xib in Resources */,
+				ADDE2FA815E7BE2300DA582D /* button_bg.png in Resources */,
+				ADDE2FA915E7BE2300DA582D /* iendura_top.png in Resources */,
+				ADDE2FAA15E7BE2300DA582D /* iendura_top@2x.png in Resources */,
+				ADDE2FAC15E7C67F00DA582D /* iendura_app_icon_57.png in Resources */,
+				ADDE2FAE15E7C68600DA582D /* iendura_app_icon_114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +248,11 @@
 				ADDE2F8915E7B1A200DA582D /* main.m in Sources */,
 				ADDE2F8D15E7B1A200DA582D /* IEAppDelegate.m in Sources */,
 				ADDE2F9015E7B1A200DA582D /* IEViewController.m in Sources */,
+				ADDE2FA315E7B44400DA582D /* IEHelperMethods.m in Sources */,
+				ADDE2FC015E98ECB00DA582D /* NSData+Base64.m in Sources */,
+				ADDE2FC115E98ECB00DA582D /* StringEncryption.m in Sources */,
+				ADB7244115EA65B300D3D749 /* SimpleClass.m in Sources */,
+				ADB7244415EA666000D3D749 /* IEXMLParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +298,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -228,7 +316,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -241,6 +329,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iEndura/iEndura-Prefix.pch";
 				INFOPLIST_FILE = "iEndura/iEndura-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -252,6 +341,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iEndura/iEndura-Prefix.pch";
 				INFOPLIST_FILE = "iEndura/iEndura-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -276,6 +366,7 @@
 				ADDE2F9815E7B1A200DA582D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

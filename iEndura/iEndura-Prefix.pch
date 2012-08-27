@@ -11,4 +11,9 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import "IEGlobals.h"
+    #import "IEHelperMethods.h"
+    #import "StringEncryption.h"
+    #import "NSData+Base64.h"
+    #import "IEXMLParser.h"
 #endif

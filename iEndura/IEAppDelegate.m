@@ -7,7 +7,7 @@
 //
 
 #import "IEAppDelegate.h"
-
+#import "IEHelperMethods.h"
 #import "IEViewController.h"
 
 @implementation IEAppDelegate

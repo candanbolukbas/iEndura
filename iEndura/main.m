@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 T.C. Cumhurbaşkanlığı. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 #import "IEAppDelegate.h"
 
 int main(int argc, char *argv[])

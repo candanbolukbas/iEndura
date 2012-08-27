@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IEViewController : UIViewController
+@interface IEViewController : UIViewController {
+	NSMutableData *enduraData;
+}
+
+@property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
+
+
+- (IBAction)submitButtonClicked:(UIButton *)sender;
+- (BOOL) textFieldShouldReturn:(UITextField *)textField;
 
 @end
