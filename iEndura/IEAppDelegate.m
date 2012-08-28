@@ -8,7 +8,7 @@
 
 #import "IEAppDelegate.h"
 #import "IEHelperMethods.h"
-#import "IEViewController.h"
+#import "IEMainViewController.h"
 
 @implementation IEAppDelegate
 
@@ -19,7 +19,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[IEViewController alloc] initWithNibName:@"IEViewController" bundle:nil];
+    self.viewController = [[IEMainViewController alloc] initWithNibName:@"IEMainViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

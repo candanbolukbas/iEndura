@@ -29,7 +29,7 @@ exit(-1);			\
 
 @implementation StringEncryption
 
-NSString *_key = @"1234567891123456";
+NSString *_key = ENC_KEY;
 CCOptions padding = kCCOptionPKCS7Padding;
 
 + (NSString *) EncryptString:(NSString *)plainSourceStringToEncrypt
@@ -48,9 +48,9 @@ CCOptions padding = kCCOptionPKCS7Padding;
 
 + (NSString *)DecryptString:(NSString *)base64StringToDecrypt
 {
-	StringEncryption *crypto = [[StringEncryption alloc] init];
+    StringEncryption *crypto = [[StringEncryption alloc] init];
 	NSData *data = [crypto decrypt:[base64StringToDecrypt dataUsingEncoding:NSUTF8StringEncoding] key:[_key dataUsingEncoding:NSUTF8StringEncoding] padding: &padding];
-	
+	NSLog(@"data: %@", data);
 	return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
@@ -117,8 +117,8 @@ CCOptions padding = kCCOptionPKCS7Padding;
     uint8_t iv[kChosenCipherBlockSize];
     memset((void *) iv, 0x0, (size_t) sizeof(iv));
 	
-    NSLog(@"doCipher: plaintext: %@", plainText);
-    NSLog(@"doCipher: key length: %d", [aSymmetricKey length]);
+    //NSLog(@"doCipher: plaintext: %@", plainText);
+    //NSLog(@"doCipher: key length: %d", [aSymmetricKey length]);
 	
     //LOGGING_FACILITY(plainText != nil, @"PlainText object cannot be nil." );
     //LOGGING_FACILITY(aSymmetricKey != nil, @"Symmetric key object cannot be nil." );
@@ -129,7 +129,7 @@ CCOptions padding = kCCOptionPKCS7Padding;
 	
     //LOGGING_FACILITY(plainTextBufferSize > 0, @"Empty plaintext passed in." );
 	
-    NSLog(@"pkcs7: %d", *pkcs7);
+    //NSLog(@"pkcs7: %d", *pkcs7);
     // We don't want to toss padding on if we don't need to
     if(encryptOrDecrypt == kCCEncrypt) {
         if(*pkcs7 != kCCOptionECBMode) {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD028F3915ECC58D00FF6F33 /* IEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD028F3715ECC58D00FF6F33 /* IEMainViewController.m */; };
+		AD028F3A15ECC58D00FF6F33 /* IEMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD028F3815ECC58D00FF6F33 /* IEMainViewController.xib */; };
 		ADB7244115EA65B300D3D749 /* SimpleClass.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7244015EA65B300D3D749 /* SimpleClass.m */; };
 		ADB7244415EA666000D3D749 /* IEXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7244315EA666000D3D749 /* IEXMLParser.m */; };
 		ADDE2F7D15E7B1A200DA582D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDE2F7C15E7B1A200DA582D /* UIKit.framework */; };
@@ -26,9 +28,13 @@
 		ADDE2FB115E81E4C00DA582D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDE2FB015E81E4C00DA582D /* libsqlite3.dylib */; };
 		ADDE2FC015E98ECB00DA582D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE2FBD15E98ECB00DA582D /* NSData+Base64.m */; };
 		ADDE2FC115E98ECB00DA582D /* StringEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE2FBF15E98ECB00DA582D /* StringEncryption.m */; };
+		EB3C5FA215ECE522000B4E70 /* IEConnController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3C5FA115ECE522000B4E70 /* IEConnController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD028F3615ECC58D00FF6F33 /* IEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEMainViewController.h; sourceTree = "<group>"; };
+		AD028F3715ECC58D00FF6F33 /* IEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEMainViewController.m; sourceTree = "<group>"; };
+		AD028F3815ECC58D00FF6F33 /* IEMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IEMainViewController.xib; sourceTree = "<group>"; };
 		ADB7243F15EA65B300D3D749 /* SimpleClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleClass.h; sourceTree = "<group>"; };
 		ADB7244015EA65B300D3D749 /* SimpleClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleClass.m; sourceTree = "<group>"; };
 		ADB7244215EA666000D3D749 /* IEXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEXMLParser.h; sourceTree = "<group>"; };
@@ -59,6 +65,9 @@
 		ADDE2FBD15E98ECB00DA582D /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		ADDE2FBE15E98ECB00DA582D /* StringEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringEncryption.h; sourceTree = "<group>"; };
 		ADDE2FBF15E98ECB00DA582D /* StringEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringEncryption.m; sourceTree = "<group>"; };
+		ADE7D99815ED3F3C007F4C85 /* IEEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEEnums.h; sourceTree = "<group>"; };
+		EB3C5FA015ECE522000B4E70 /* IEConnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEConnController.h; sourceTree = "<group>"; };
+		EB3C5FA115ECE522000B4E70 /* IEConnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEConnController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +85,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD028F3515ECC55700FF6F33 /* XML */ = {
+			isa = PBXGroup;
+			children = (
+				ADB7244215EA666000D3D749 /* IEXMLParser.h */,
+				ADB7244315EA666000D3D749 /* IEXMLParser.m */,
+			);
+			name = XML;
+			sourceTree = "<group>";
+		};
 		ADB7243D15EA658300D3D749 /* TemplateClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,11 +142,16 @@
 				ADDE2F9E15E7B42200DA582D /* IEGlobals.h */,
 				ADDE2FA115E7B44400DA582D /* IEHelperMethods.h */,
 				ADDE2FA215E7B44400DA582D /* IEHelperMethods.m */,
-				ADB7244215EA666000D3D749 /* IEXMLParser.h */,
-				ADB7244315EA666000D3D749 /* IEXMLParser.m */,
+				AD028F3615ECC58D00FF6F33 /* IEMainViewController.h */,
+				AD028F3715ECC58D00FF6F33 /* IEMainViewController.m */,
+				AD028F3815ECC58D00FF6F33 /* IEMainViewController.xib */,
+				EB3C5FA015ECE522000B4E70 /* IEConnController.h */,
+				EB3C5FA115ECE522000B4E70 /* IEConnController.m */,
+				ADE7D99815ED3F3C007F4C85 /* IEEnums.h */,
 				ADB7243D15EA658300D3D749 /* TemplateClasses */,
 				ADDE2FBB15E98EAC00DA582D /* Security */,
 				ADDE2F8315E7B1A200DA582D /* Supporting Files */,
+				AD028F3515ECC55700FF6F33 /* XML */,
 				ADDE2FA415E7BE2300DA582D /* images */,
 			);
 			path = iEndura;
@@ -235,6 +258,7 @@
 				ADDE2FAA15E7BE2300DA582D /* iendura_top@2x.png in Resources */,
 				ADDE2FAC15E7C67F00DA582D /* iendura_app_icon_57.png in Resources */,
 				ADDE2FAE15E7C68600DA582D /* iendura_app_icon_114.png in Resources */,
+				AD028F3A15ECC58D00FF6F33 /* IEMainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +277,8 @@
 				ADDE2FC115E98ECB00DA582D /* StringEncryption.m in Sources */,
 				ADB7244115EA65B300D3D749 /* SimpleClass.m in Sources */,
 				ADB7244415EA666000D3D749 /* IEXMLParser.m in Sources */,
+				AD028F3915ECC58D00FF6F33 /* IEMainViewController.m in Sources */,
+				EB3C5FA215ECE522000B4E70 /* IEConnController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

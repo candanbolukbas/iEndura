@@ -16,4 +16,5 @@
     #import "StringEncryption.h"
     #import "NSData+Base64.h"
     #import "IEXMLParser.h"
+    #import "IEEnums.h"
 #endif

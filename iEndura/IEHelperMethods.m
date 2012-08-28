@@ -19,6 +19,27 @@
     [prefs synchronize];
 }
 
++ (NSString *)getUserDefaultSettingsString:(NSString *)objectKey
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    return [prefs objectForKey:objectKey];
+}
+
++ (NSArray *)getExtractedDataFromJSONArray:(NSData *)data
+{
+    NSError* error;
+    NSArray *jsArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    return jsArray;
+}
+
++ (NSDictionary *)getExtractedDataFromJSONItem:(NSData *)data
+{
+    NSError* error;
+    NSDictionary *jsDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    return jsDict;
+}
+
 + (UIColor *)getColorFromRGB:(unsigned int)r blue:(unsigned int)b green:(unsigned int)g {
     return [UIColor colorWithRed:((float)r)/255.0
                            green:((float)g)/255.0

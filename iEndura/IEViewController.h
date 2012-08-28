@@ -6,11 +6,9 @@
 //  Copyright (c) 2012 T.C. Cumhurbaşkanlığı. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "IEConnController.h"
 
-@interface IEViewController : UIViewController {
-	NSMutableData *enduraData;
-}
+@interface IEViewController : UIViewController <IEConnControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;

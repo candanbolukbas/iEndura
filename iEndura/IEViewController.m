@@ -14,73 +14,31 @@
 @end
 
 @implementation IEViewController
-@synthesize userNameTextField;
-@synthesize passwordTextField;
-@synthesize resultLabel;
+@synthesize userNameTextField, passwordTextField, resultLabel;
 
-- (void)viewDidLoad
-{
+- (void) viewDidLoad {
     [self.view setBackgroundColor:[IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_LIGHT_BLUE]]; 
     
-//    NSURL *xmlUrl = [NSURL URLWithString:[NSString stringWithFormat:IENDURA_ENC_URL_FORMAT, @"someString"]];
-//    NSData *xmlData = [NSData dataWithContentsOfURL:xmlUrl];
-//    dispatch_async(IENDURA_DISPATCH_QUEUE, ^{
-//        NSData* data = [NSData dataWithContentsOfURL: 
-//                        [NSURL URLWithString:[NSString stringWithFormat:IENDURA_ENC_URL_FORMAT, @"someString"]]];
-//        [self performSelectorOnMainThread:@selector(fetchedData::) 
-//                               withObject:data waitUntilDone:YES];
-//    });
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+}
 
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://service.iendura.com/iservice/i/e/0"]];
-	NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-	
-	if (conn) {
-		enduraData = [NSMutableData data];
+- (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag {
+	if (tag == IE_Req_Auth) {
+		[self fetchedData:data];
+	}
+	else {
+		
 	}
 }
 
-- (BOOL) connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
-    return YES;
-}
-
-- (void) connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-    [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-}
-
-- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-	[enduraData setLength:0];
-}
-
-- (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-	[enduraData appendData:data];
-}
-
-- (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-}
-
-- (void) connectionDidFinishLoading:(NSURLConnection *)connection {
-	//[self doParse:enduraData];
-    [self fetchedData:enduraData];
-}
-
-
-
-
-
-
-- (void)fetchedData:(NSData *)responseData 
-{
-    //parse out the json data
-    NSError* error;
-    NSArray *jsArray = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-    NSDictionary *jsDict = [jsArray objectAtIndex:0];
+- (void) fetchedData:(NSData *)responseData {
+    NSLog(@"%@", responseData);
+    NSDictionary *jsDict = [IEHelperMethods getExtractedDataFromJSONItem:responseData];
+    NSLog(@"%@", jsDict);
     [resultLabel setText:[jsDict objectForKey:@"Value"]];
 }
 
-- (void)viewDidUnload
-{
+- (void) viewDidUnload {
     [self setUserNameTextField:nil];
     [self setPasswordTextField:nil];
     [self setResultLabel:nil];
@@ -88,13 +46,11 @@
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-- (IBAction)submitButtonClicked:(UIButton *)sender 
-{
+- (IBAction) submitButtonClicked:(UIButton *)sender {
     [passwordTextField resignFirstResponder];
     [userNameTextField resignFirstResponder];
     [resultLabel setText:@"Submitting"];
@@ -107,7 +63,7 @@
     });*/
     
     
-    NSString * _secret = @"_+-*)(\\$%^#@,.;'[]/~=&ğüşiöçıĞÜŞİÖÇI<>?:;\"'{}|";
+    /*NSString * _secret = @"_+-*)(\\$%^#@,.;'[]/~=&ğüşiöçıĞÜŞİÖÇI<>?:;\"'{}|";
 	NSString * _key = @"ju4ev@D++agatuc4";
 	StringEncryption *crypto = [[StringEncryption alloc] init];
 	NSData *_secretData = [_secret dataUsingEncoding:NSUTF8StringEncoding];
@@ -121,11 +77,38 @@
                         [NSURL URLWithString:[NSString stringWithFormat:IENDURA_ENC_URL_FORMAT, encStr]]];
         [self performSelectorOnMainThread:@selector(fetchedData:) 
                                withObject:data waitUntilDone:YES];
-    });
+    });*/
+    
+    NSString *username = userNameTextField.text;
+    NSString *password = passwordTextField.text;
+    NSString *usrPass = [NSString stringWithFormat:@"%@|%@", username, password];
+    NSString *encStr = [StringEncryption EncryptString:usrPass];
+    
+    NSURL *authUrl = [NSURL URLWithString:[NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, encStr]];
+    NSLog(@"%@", authUrl);
+    
+//  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:authUrl];
+//	NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+	
+	IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:0];
+	controller.delegate = self;
+	[controller startConnection];
+	
+    /*[NSURLConnection sendAsynchronousRequest:request 
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               NSLog(@"Finished! data: %@", data);
+                               //[self fetchedData:data];
+                           }];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request
+                                         returningResponse:&response
+                                                     error:&error];
+    NSLog(@"Finished! data: %@", data);*/
 }
 
--(BOOL) textFieldShouldReturn:(UITextField *)textField
-{    
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
     if (textField == userNameTextField) {
 		[textField resignFirstResponder];
 		[passwordTextField becomeFirstResponder];
@@ -136,18 +119,14 @@
 	return YES;
 }
 
-
--(void) encrypTextTest
-{
+- (void) encrypTextTest {
     
 }
 
-- (void) doParse:(NSData *)data 
-{    
+- (void) doParse:(NSData *)data {
     //NSLog(@"doParse xmlData: %@",data);
     // create and init our delegate
 	NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-//	NSLog(@"%@", [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:IENDURA_ENC_URL_FORMAT, @"0"]]]);
     IEXMLParser *parser = [[IEXMLParser alloc] initWithData:data];
     BOOL success = [parser.xmlParser parse];
     // set delegate
@@ -158,7 +137,7 @@
     if (success) {
         NSLog(@"No errors - user count : %i\n %@", [parser.scs count], newArray);
         // get array of users here
-        //  NSMutableArray *users = [parser users];
+        //  NSMutableArray *scs = [parser scs];
     } else {
         NSLog(@"Error parsing document!");
     }
@@ -166,6 +145,7 @@
 }
 
 @end
+
 
 
 
