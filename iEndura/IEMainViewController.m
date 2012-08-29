@@ -31,8 +31,8 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     // Do any additional setup after loading the view from its nib.
-    if ([IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_STRING]) {
-        testLabel.text = [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_STRING];
+    if ([IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY]) {
+        testLabel.text = [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY];
     }
     else {
         testLabel.text = @"No iEndura Server found!";

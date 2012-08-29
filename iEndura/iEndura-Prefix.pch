@@ -17,4 +17,5 @@
     #import "NSData+Base64.h"
     #import "IEXMLParser.h"
     #import "IEEnums.h"
+    #import "SimpleClass.h"
 #endif

@@ -7,6 +7,7 @@
 //
 
 #import "IEViewController.h"
+#import "IESettingsViewController.h"
 #import <CommonCrypto/CommonCryptor.h>
 
 @interface IEViewController ()
@@ -22,20 +23,43 @@
     [super viewDidLoad];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+	if (![IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_ADDRESS_KEY]) {
+        IESettingsViewController *iesv = [[IESettingsViewController alloc] initWithNibName:@"IESettingsViewController" bundle:nil];
+        self.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:iesv animated:YES];
+    }
+    else if(![IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY])
+    {
+        NSLog(@"No user cridentials found!");
+    }
+    else {
+        [self dismissModalViewControllerAnimated:YES];
+    }
+}
+
 - (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag {
 	if (tag == IE_Req_Auth) {
-		[self fetchedData:data];
+		[self setUserCridentials:data];
 	}
 	else {
 		
 	}
 }
 
-- (void) fetchedData:(NSData *)responseData {
-    NSLog(@"%@", responseData);
+- (void) setUserCridentials:(NSData *)responseData {
     NSDictionary *jsDict = [IEHelperMethods getExtractedDataFromJSONItem:responseData];
-    NSLog(@"%@", jsDict);
-    [resultLabel setText:[jsDict objectForKey:@"Value"]];
+    SimpleClass *sc = [[SimpleClass alloc] initWithDictionary:jsDict];
+    if ([sc.Value isEqualToString:SUCCESS_VALUE]) 
+    {
+        if ([IEHelperMethods setUserDefaultSettingsString:APP_DELEGATE.encryptedUsrPassString key:IENDURA_SERVER_USRPASS_KEY]) {
+            [self dismissModalViewControllerAnimated:YES];
+        };
+    }
+    else 
+    {
+        [resultLabel setText:sc.Value];
+    }
 }
 
 - (void) viewDidUnload {
@@ -54,6 +78,7 @@
     [passwordTextField resignFirstResponder];
     [userNameTextField resignFirstResponder];
     [resultLabel setText:@"Submitting"];
+    
     /*dispatch_async(IENDURA_DISPATCH_QUEUE, ^{
         NSData* data = [NSData dataWithContentsOfURL: 
                         [NSURL URLWithString:[NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, 
@@ -62,50 +87,31 @@
                                withObject:data waitUntilDone:YES];
     });*/
     
-    
-    /*NSString * _secret = @"_+-*)(\\$%^#@,.;'[]/~=&ğüşiöçıĞÜŞİÖÇI<>?:;\"'{}|";
-	NSString * _key = @"ju4ev@D++agatuc4";
-	StringEncryption *crypto = [[StringEncryption alloc] init];
-	NSData *_secretData = [_secret dataUsingEncoding:NSUTF8StringEncoding];
-	CCOptions padding = kCCOptionPKCS7Padding;
-	NSData *encryptedData = [crypto encrypt:_secretData key:[_key dataUsingEncoding:NSUTF8StringEncoding] padding:&padding];
-    NSString *encStr = [NSString stringWithFormat:@"%@", [encryptedData base64EncodingWithLineLength:0]];
-    NSLog(@"encrypted data string for export: %@",encStr);
-    
-    dispatch_async(IENDURA_DISPATCH_QUEUE, ^{
-        NSData* data = [NSData dataWithContentsOfURL: 
-                        [NSURL URLWithString:[NSString stringWithFormat:IENDURA_ENC_URL_FORMAT, encStr]]];
-        [self performSelectorOnMainThread:@selector(fetchedData:) 
-                               withObject:data waitUntilDone:YES];
-    });*/
+    /*[NSURLConnection sendAsynchronousRequest:request 
+     queue:[NSOperationQueue mainQueue]
+     completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+     NSLog(@"Finished! data: %@", data);
+     //[self fetchedData:data];
+     }];
+     NSURLResponse *response = nil;
+     NSError *error = nil;
+     NSData *data = [NSURLConnection sendSynchronousRequest:request
+     returningResponse:&response
+     error:&error];
+     NSLog(@"Finished! data: %@", data);*/
     
     NSString *username = userNameTextField.text;
     NSString *password = passwordTextField.text;
     NSString *usrPass = [NSString stringWithFormat:@"%@|%@", username, password];
     NSString *encStr = [StringEncryption EncryptString:usrPass];
+    APP_DELEGATE.encryptedUsrPassString = encStr;
     
     NSURL *authUrl = [NSURL URLWithString:[NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, encStr]];
     NSLog(@"%@", authUrl);
-    
-//  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:authUrl];
-//	NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 	
 	IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:0];
 	controller.delegate = self;
 	[controller startConnection];
-	
-    /*[NSURLConnection sendAsynchronousRequest:request 
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               NSLog(@"Finished! data: %@", data);
-                               //[self fetchedData:data];
-                           }];
-    NSURLResponse *response = nil;
-    NSError *error = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request
-                                         returningResponse:&response
-                                                     error:&error];
-    NSLog(@"Finished! data: %@", data);*/
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
@@ -117,10 +123,6 @@
 		[textField resignFirstResponder];
 	}
 	return YES;
-}
-
-- (void) encrypTextTest {
-    
 }
 
 - (void) doParse:(NSData *)data {

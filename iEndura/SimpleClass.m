@@ -12,4 +12,14 @@
 
 @synthesize Id, Value;
 
+- (id) initWithDictionary:(NSDictionary *)jsDict
+{
+    self = [super init];
+    
+    Id = [jsDict objectForKey:@"Id"];
+    Value = [jsDict objectForKey:@"Value"];
+    
+    return self;
+}
+
 @end

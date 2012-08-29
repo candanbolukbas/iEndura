@@ -15,6 +15,7 @@
 + (UIColor *)getColorFromRGB:(unsigned int)r blue:(unsigned int)b green:(unsigned int)g;
 + (UIColor *)getColorFromRGBColorCode:(NSString *)colorCode;
 + (void)setUserDefaultSettings;
++ (BOOL)setUserDefaultSettingsString:(NSString *)objectValue key:(NSString *)objectKey;
 + (NSString *)getUserDefaultSettingsString:(NSString *)objectKey;
 + (NSArray *)getExtractedDataFromJSONArray:(NSData *)data;
 + (NSDictionary *)getExtractedDataFromJSONItem:(NSData *)data;

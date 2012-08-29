@@ -28,6 +28,8 @@
 		ADDE2FB115E81E4C00DA582D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDE2FB015E81E4C00DA582D /* libsqlite3.dylib */; };
 		ADDE2FC015E98ECB00DA582D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE2FBD15E98ECB00DA582D /* NSData+Base64.m */; };
 		ADDE2FC115E98ECB00DA582D /* StringEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE2FBF15E98ECB00DA582D /* StringEncryption.m */; };
+		ADE7D99F15ED477D007F4C85 /* IESettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D99D15ED477D007F4C85 /* IESettingsViewController.m */; };
+		ADE7D9A015ED477D007F4C85 /* IESettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D99E15ED477D007F4C85 /* IESettingsViewController.xib */; };
 		EB3C5FA215ECE522000B4E70 /* IEConnController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3C5FA115ECE522000B4E70 /* IEConnController.m */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,9 @@
 		ADDE2FBE15E98ECB00DA582D /* StringEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringEncryption.h; sourceTree = "<group>"; };
 		ADDE2FBF15E98ECB00DA582D /* StringEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringEncryption.m; sourceTree = "<group>"; };
 		ADE7D99815ED3F3C007F4C85 /* IEEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEEnums.h; sourceTree = "<group>"; };
+		ADE7D99C15ED477D007F4C85 /* IESettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IESettingsViewController.h; sourceTree = "<group>"; };
+		ADE7D99D15ED477D007F4C85 /* IESettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IESettingsViewController.m; sourceTree = "<group>"; };
+		ADE7D99E15ED477D007F4C85 /* IESettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IESettingsViewController.xib; sourceTree = "<group>"; };
 		EB3C5FA015ECE522000B4E70 /* IEConnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEConnController.h; sourceTree = "<group>"; };
 		EB3C5FA115ECE522000B4E70 /* IEConnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEConnController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +150,9 @@
 				AD028F3615ECC58D00FF6F33 /* IEMainViewController.h */,
 				AD028F3715ECC58D00FF6F33 /* IEMainViewController.m */,
 				AD028F3815ECC58D00FF6F33 /* IEMainViewController.xib */,
+				ADE7D99C15ED477D007F4C85 /* IESettingsViewController.h */,
+				ADE7D99D15ED477D007F4C85 /* IESettingsViewController.m */,
+				ADE7D99E15ED477D007F4C85 /* IESettingsViewController.xib */,
 				EB3C5FA015ECE522000B4E70 /* IEConnController.h */,
 				EB3C5FA115ECE522000B4E70 /* IEConnController.m */,
 				ADE7D99815ED3F3C007F4C85 /* IEEnums.h */,
@@ -259,6 +267,7 @@
 				ADDE2FAC15E7C67F00DA582D /* iendura_app_icon_57.png in Resources */,
 				ADDE2FAE15E7C68600DA582D /* iendura_app_icon_114.png in Resources */,
 				AD028F3A15ECC58D00FF6F33 /* IEMainViewController.xib in Resources */,
+				ADE7D9A015ED477D007F4C85 /* IESettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +288,7 @@
 				ADB7244415EA666000D3D749 /* IEXMLParser.m in Sources */,
 				AD028F3915ECC58D00FF6F33 /* IEMainViewController.m in Sources */,
 				EB3C5FA215ECE522000B4E70 /* IEConnController.m in Sources */,
+				ADE7D99F15ED477D007F4C85 /* IESettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,7 +17,9 @@
 
 #define ENC_KEY @"ju4ev@D++agatuc4"
 
+#define IENDURA_SERVER_ADDRESS_KEY @"IENDURA_SERVER"
+#define IENDURA_SERVER_USRPASS_KEY @"IENDURA_SERVER_USRPASS"
 
-#define IENDURA_SERVER_STRING @"IENDURA_SERVER"
+#define allTrim(object) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
 
-//#define IENDURA_FUNCTIONS enum iEnduraRequestTypes { Auth, CamImage, CamList };
+#define SUCCESS_VALUE @"1"

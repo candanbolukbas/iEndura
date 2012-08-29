@@ -26,6 +26,21 @@
     return [prefs objectForKey:objectKey];
 }
 
++ (BOOL)setUserDefaultSettingsString:(NSString *)objectValue key:(NSString *)objectKey
+{
+    if([objectValue isEqualToString:@""] || [allTrim( objectValue ) length] == 0
+       || [objectKey isEqualToString:@""] || [allTrim( objectKey ) length] == 0)
+    {
+        return NO;
+    }
+    else
+    {
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setObject:objectValue forKey:objectKey];
+        return [prefs synchronize];
+    }
+}
+
 + (NSArray *)getExtractedDataFromJSONArray:(NSData *)data
 {
     NSError* error;

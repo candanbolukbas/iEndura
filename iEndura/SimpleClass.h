@@ -17,5 +17,6 @@
 @property (nonatomic, copy) NSString *Id;
 @property (nonatomic, copy) NSString *Value;
 
+- (id) initWithDictionary:(NSDictionary *)jsDict;
 
 @end

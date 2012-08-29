@@ -14,6 +14,7 @@
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
+@synthesize encryptedUsrPassString;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
