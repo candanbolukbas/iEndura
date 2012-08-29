@@ -58,11 +58,6 @@
 
 - (IBAction)goButtonClicked:(UIButton *)sender 
 {
-    testLabel.text = @"No iEndura Server found! Go!";
-    IEViewController *iev = [[IEViewController alloc] init];
-    //iev.view.opaque = NO;
-    //iev.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6f];
-    self.modalPresentationStyle = UIModalPresentationCurrentContext;
-    [self presentModalViewController:iev animated:YES];
+    
 }
 @end
