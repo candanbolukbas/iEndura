@@ -16,6 +16,7 @@
 #define IENDURA_ENC_URL_FORMAT @"https://service.iendura.com/iservice/i/e/%@"
 
 #define ENC_KEY @"ju4ev@D++agatuc4"
+#define IENDURA_DATABASE_FILE @"iEnduraDB.sqlite"
 
 #define IENDURA_SERVER_ADDRESS_KEY @"IENDURA_SERVER"
 #define IENDURA_SERVER_USRPASS_KEY @"IENDURA_SERVER_USRPASS"

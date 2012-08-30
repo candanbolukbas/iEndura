@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface IESettingsViewController : UIViewController
+{
+    sqlite3 *db;
+}
 @property (weak, nonatomic) IBOutlet UITextField *serviceUrlTextField;
+@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 - (IBAction)saveButtonClicked:(UIButton *)sender;
+- (NSMutableArray *) getSampleItems;
 
 @end

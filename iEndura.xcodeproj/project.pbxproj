@@ -30,7 +30,9 @@
 		ADE7D99F15ED477D007F4C85 /* IESettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D99D15ED477D007F4C85 /* IESettingsViewController.m */; };
 		ADE7D9A015ED477D007F4C85 /* IESettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D99E15ED477D007F4C85 /* IESettingsViewController.xib */; };
 		ADE7D9A315EECFCE007F4C85 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE7D9A215EECFCE007F4C85 /* libsqlite3.dylib */; };
-		ADE7D9A815EED5AC007F4C85 /* iEnduraDB.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D9A715EED5AC007F4C85 /* iEnduraDB.sqlite */; };
+		ADE7D9AA15EED6DF007F4C85 /* iEnduraDB.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D9A915EED6DF007F4C85 /* iEnduraDB.sqlite */; };
+		ADE7D9AE15EFEBDE007F4C85 /* IEPelcoCameraClass.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9AD15EFEBDE007F4C85 /* IEPelcoCameraClass.m */; };
+		ADE7D9B515F00658007F4C85 /* IECrudOp.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9B415F00658007F4C85 /* IECrudOp.m */; };
 		EB3C5FA215ECE522000B4E70 /* IEConnController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3C5FA115ECE522000B4E70 /* IEConnController.m */; };
 /* End PBXBuildFile section */
 
@@ -72,7 +74,11 @@
 		ADE7D99D15ED477D007F4C85 /* IESettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IESettingsViewController.m; sourceTree = "<group>"; };
 		ADE7D99E15ED477D007F4C85 /* IESettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IESettingsViewController.xib; sourceTree = "<group>"; };
 		ADE7D9A215EECFCE007F4C85 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		ADE7D9A715EED5AC007F4C85 /* iEnduraDB.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = iEnduraDB.sqlite; sourceTree = "<group>"; };
+		ADE7D9A915EED6DF007F4C85 /* iEnduraDB.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = iEnduraDB.sqlite; sourceTree = "<group>"; };
+		ADE7D9AC15EFEBDE007F4C85 /* IEPelcoCameraClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEPelcoCameraClass.h; sourceTree = "<group>"; };
+		ADE7D9AD15EFEBDE007F4C85 /* IEPelcoCameraClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEPelcoCameraClass.m; sourceTree = "<group>"; };
+		ADE7D9B315F00658007F4C85 /* IECrudOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IECrudOp.h; path = iEndura/IECrudOp.h; sourceTree = "<group>"; };
+		ADE7D9B415F00658007F4C85 /* IECrudOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IECrudOp.m; path = iEndura/IECrudOp.m; sourceTree = "<group>"; };
 		EB3C5FA015ECE522000B4E70 /* IEConnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEConnController.h; sourceTree = "<group>"; };
 		EB3C5FA115ECE522000B4E70 /* IEConnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEConnController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +112,8 @@
 			children = (
 				ADB7243F15EA65B300D3D749 /* SimpleClass.h */,
 				ADB7244015EA65B300D3D749 /* SimpleClass.m */,
+				ADE7D9AC15EFEBDE007F4C85 /* IEPelcoCameraClass.h */,
+				ADE7D9AD15EFEBDE007F4C85 /* IEPelcoCameraClass.m */,
 			);
 			name = TemplateClasses;
 			sourceTree = "<group>";
@@ -162,7 +170,9 @@
 				ADDE2FBB15E98EAC00DA582D /* Security */,
 				ADDE2F8315E7B1A200DA582D /* Supporting Files */,
 				AD028F3515ECC55700FF6F33 /* XML */,
-				ADE7D9A615EED580007F4C85 /* Resources */,
+				ADE7D9A615EED580007F4C85 /* Database */,
+				ADE7D9AF15EFF80F007F4C85 /* Crud */,
+				ADE7D9AB15EFD155007F4C85 /* Model */,
 				ADDE2FA415E7BE2300DA582D /* images */,
 			);
 			path = iEndura;
@@ -210,12 +220,29 @@
 			name = Security;
 			sourceTree = "<group>";
 		};
-		ADE7D9A615EED580007F4C85 /* Resources */ = {
+		ADE7D9A615EED580007F4C85 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				ADE7D9A715EED5AC007F4C85 /* iEnduraDB.sqlite */,
+				ADE7D9A915EED6DF007F4C85 /* iEnduraDB.sqlite */,
 			);
-			name = Resources;
+			name = Database;
+			sourceTree = "<group>";
+		};
+		ADE7D9AB15EFD155007F4C85 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		ADE7D9AF15EFF80F007F4C85 /* Crud */ = {
+			isa = PBXGroup;
+			children = (
+				ADE7D9B315F00658007F4C85 /* IECrudOp.h */,
+				ADE7D9B415F00658007F4C85 /* IECrudOp.m */,
+			);
+			name = Crud;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,7 +306,7 @@
 				ADDE2FAE15E7C68600DA582D /* iendura_app_icon_114.png in Resources */,
 				AD028F3A15ECC58D00FF6F33 /* IEMainViewController.xib in Resources */,
 				ADE7D9A015ED477D007F4C85 /* IESettingsViewController.xib in Resources */,
-				ADE7D9A815EED5AC007F4C85 /* iEnduraDB.sqlite in Resources */,
+				ADE7D9AA15EED6DF007F4C85 /* iEnduraDB.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +328,8 @@
 				AD028F3915ECC58D00FF6F33 /* IEMainViewController.m in Sources */,
 				EB3C5FA215ECE522000B4E70 /* IEConnController.m in Sources */,
 				ADE7D99F15ED477D007F4C85 /* IESettingsViewController.m in Sources */,
+				ADE7D9AE15EFEBDE007F4C85 /* IEPelcoCameraClass.m in Sources */,
+				ADE7D9B515F00658007F4C85 /* IECrudOp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

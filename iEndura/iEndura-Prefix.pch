@@ -10,7 +10,8 @@
 
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
+#import <sqlite3.h>
     #import "IEGlobals.h"
     #import "IEHelperMethods.h"
     #import "StringEncryption.h"
@@ -18,4 +19,5 @@
     #import "IEXMLParser.h"
     #import "IEEnums.h"
     #import "SimpleClass.h"
+    #import "IECrudOp.h"
 #endif
