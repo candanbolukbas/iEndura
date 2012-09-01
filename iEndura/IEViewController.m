@@ -109,7 +109,7 @@
     NSURL *authUrl = [NSURL URLWithString:[NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, encStr]];
     NSLog(@"%@", authUrl);
 	
-	IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:0];
+	IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:IE_Req_Auth];
 	controller.delegate = self;
 	[controller startConnection];
 }

@@ -39,4 +39,7 @@
 @property (nonatomic, copy) NSString *NSMIPAddress; 
 @property (nonatomic, copy) NSString *Port;
 
+- (id) initWithDictionary:(NSDictionary *)jsDict;
+- (NSString *) generateSQLInsertString;
+
 @end

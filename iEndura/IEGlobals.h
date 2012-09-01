@@ -11,8 +11,10 @@
 #define APP_DELEGATE ((IEAppDelegate *) [[UIApplication sharedApplication] delegate])
 
 #define BACKGROUNG_COLOR_LIGHT_BLUE @"CEE7EF"
+#define BACKGROUNG_COLOR_DARK_BLUE @"243960" 
 #define IENDURA_DISPATCH_QUEUE dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 #define IENDURA_AUTH_URL_FORMAT @"https://service.iendura.com/iservice/i/e/auth/%@"
+#define IENDURA_CAM_LIST_URL_FORMAT @"https://service.iendura.com/iservice/i/e/cams/%@"
 #define IENDURA_ENC_URL_FORMAT @"https://service.iendura.com/iservice/i/e/%@"
 
 #define ENC_KEY @"ju4ev@D++agatuc4"

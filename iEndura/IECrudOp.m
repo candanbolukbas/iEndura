@@ -43,6 +43,30 @@
     
 }
 
+-(BOOL) ExecuteSqlStatementText:(NSString *)sqlTxt
+{
+    fileMgr = [NSFileManager defaultManager];
+    //sqlite3_stmt *stmt;
+    sqlite3 *database;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:IENDURA_DATABASE_FILE];
+    
+    NSString *querySQL = @"INSERT INTO PelcoCameras (UUID, IP, Name, CameraType, UpnpModelNumber, RTSP_URL, RemoteLocation, LocationRoot, LocationChild, VLCTranscode, SMsIPAddress, NSMIPAddress, Port) VALUES ('test2','test2','test2','test2','test2','test2','test2','test2','test2','test2','test2','test2','test2')";    
+    const char *query_stmt = [querySQL UTF8String];
+    
+    if(sqlite3_open([filePath UTF8String], &database) == SQLITE_OK) 
+    {
+        if (sqlite3_exec(database, query_stmt, NULL, NULL, NULL))
+        {
+            //Statement prepared successfully
+        } else {
+            //Statement preparation failed
+        }
+    }
+    return false;
+}
+
 -(void)InsertRecords:(NSString *) txt{
     fileMgr = [NSFileManager defaultManager];
     sqlite3_stmt *stmt;

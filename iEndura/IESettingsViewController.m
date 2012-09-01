@@ -52,7 +52,7 @@
         [self dismissModalViewControllerAnimated:YES];
     };
     
-    CrudOp *dbCrud = [[CrudOp alloc] init];
+    //CrudOp *dbCrud = [[CrudOp alloc] init];
     //[dbCrud InsertRecords:@"test2"];
     
     /*NSFileManager *fileMgr = [NSFileManager defaultManager];

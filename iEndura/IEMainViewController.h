@@ -6,7 +6,12 @@
 //  Copyright (c) 2012 T.C. Cumhurbaşkanlığı. All rights reserved.
 //
 
-@interface IEMainViewController : UIViewController
+@interface IEMainViewController : IEBaseViewController <IEConnControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+{
+    NSArray *remoteLocations;
+}
+
+@property (weak, nonatomic) IBOutlet UITableView *rootLocationsTableView;
 @property (weak, nonatomic) IBOutlet UILabel *testLabel;
 - (IBAction)goButtonClicked:(UIButton *)sender;
 

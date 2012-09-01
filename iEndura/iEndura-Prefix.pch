@@ -19,5 +19,8 @@
     #import "IEXMLParser.h"
     #import "IEEnums.h"
     #import "SimpleClass.h"
-    #import "IECrudOp.h"
+    #import "IEDatabaseOps.h"
+    #import "IEBaseViewController.h"
+    #import "IEConnController.h"
+    #import "IEPelcoCameraClass.h"
 #endif

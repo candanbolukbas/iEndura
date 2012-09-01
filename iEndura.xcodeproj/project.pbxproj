@@ -33,6 +33,17 @@
 		ADE7D9AA15EED6DF007F4C85 /* iEnduraDB.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D9A915EED6DF007F4C85 /* iEnduraDB.sqlite */; };
 		ADE7D9AE15EFEBDE007F4C85 /* IEPelcoCameraClass.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9AD15EFEBDE007F4C85 /* IEPelcoCameraClass.m */; };
 		ADE7D9B515F00658007F4C85 /* IECrudOp.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9B415F00658007F4C85 /* IECrudOp.m */; };
+		ADE7D9B915F1498B007F4C85 /* IEBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9B715F1498A007F4C85 /* IEBaseViewController.m */; };
+		ADE7D9C015F15B24007F4C85 /* IEDatabaseOps.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9BF15F15B24007F4C85 /* IEDatabaseOps.m */; };
+		ADE7D9C315F23543007F4C85 /* IERemoteLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9C215F23543007F4C85 /* IERemoteLocations.m */; };
+		ADE7D9C715F23C18007F4C85 /* DDBadgeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9C615F23C18007F4C85 /* DDBadgeViewCell.m */; };
+		ADE7D9DC15F263C0007F4C85 /* right_indicator_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D9D815F263C0007F4C85 /* right_indicator_dark.png */; };
+		ADE7D9DD15F263C0007F4C85 /* right_indicator_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D9D915F263C0007F4C85 /* right_indicator_dark@2x.png */; };
+		ADE7D9DE15F263C0007F4C85 /* right_indicator_light.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D9DA15F263C0007F4C85 /* right_indicator_light.png */; };
+		ADE7D9DF15F263C0007F4C85 /* right_indicator_light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D9DB15F263C0007F4C85 /* right_indicator_light@2x.png */; };
+		ADE7D9E215F2721D007F4C85 /* IECameraLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9E115F2721D007F4C85 /* IECameraLocation.m */; };
+		ADE7D9E615F2732E007F4C85 /* IECamListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9E415F2732C007F4C85 /* IECamListViewController.m */; };
+		ADE7D9E715F2732E007F4C85 /* IECamListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D9E515F2732E007F4C85 /* IECamListViewController.xib */; };
 		EB3C5FA215ECE522000B4E70 /* IEConnController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3C5FA115ECE522000B4E70 /* IEConnController.m */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +90,23 @@
 		ADE7D9AD15EFEBDE007F4C85 /* IEPelcoCameraClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEPelcoCameraClass.m; sourceTree = "<group>"; };
 		ADE7D9B315F00658007F4C85 /* IECrudOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IECrudOp.h; path = iEndura/IECrudOp.h; sourceTree = "<group>"; };
 		ADE7D9B415F00658007F4C85 /* IECrudOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IECrudOp.m; path = iEndura/IECrudOp.m; sourceTree = "<group>"; };
+		ADE7D9B615F1498A007F4C85 /* IEBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEBaseViewController.h; sourceTree = "<group>"; };
+		ADE7D9B715F1498A007F4C85 /* IEBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEBaseViewController.m; sourceTree = "<group>"; };
+		ADE7D9BE15F15B24007F4C85 /* IEDatabaseOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEDatabaseOps.h; path = iEndura/IEDatabaseOps.h; sourceTree = "<group>"; };
+		ADE7D9BF15F15B24007F4C85 /* IEDatabaseOps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IEDatabaseOps.m; path = iEndura/IEDatabaseOps.m; sourceTree = "<group>"; };
+		ADE7D9C115F23543007F4C85 /* IERemoteLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IERemoteLocations.h; sourceTree = "<group>"; };
+		ADE7D9C215F23543007F4C85 /* IERemoteLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IERemoteLocations.m; sourceTree = "<group>"; };
+		ADE7D9C515F23C18007F4C85 /* DDBadgeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDBadgeViewCell.h; sourceTree = "<group>"; };
+		ADE7D9C615F23C18007F4C85 /* DDBadgeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDBadgeViewCell.m; sourceTree = "<group>"; };
+		ADE7D9D815F263C0007F4C85 /* right_indicator_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_indicator_dark.png; sourceTree = "<group>"; };
+		ADE7D9D915F263C0007F4C85 /* right_indicator_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_indicator_dark@2x.png"; sourceTree = "<group>"; };
+		ADE7D9DA15F263C0007F4C85 /* right_indicator_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_indicator_light.png; sourceTree = "<group>"; };
+		ADE7D9DB15F263C0007F4C85 /* right_indicator_light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_indicator_light@2x.png"; sourceTree = "<group>"; };
+		ADE7D9E015F2721D007F4C85 /* IECameraLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IECameraLocation.h; sourceTree = "<group>"; };
+		ADE7D9E115F2721D007F4C85 /* IECameraLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IECameraLocation.m; sourceTree = "<group>"; };
+		ADE7D9E315F2732B007F4C85 /* IECamListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IECamListViewController.h; sourceTree = "<group>"; };
+		ADE7D9E415F2732C007F4C85 /* IECamListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IECamListViewController.m; sourceTree = "<group>"; };
+		ADE7D9E515F2732E007F4C85 /* IECamListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IECamListViewController.xib; sourceTree = "<group>"; };
 		EB3C5FA015ECE522000B4E70 /* IEConnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEConnController.h; sourceTree = "<group>"; };
 		EB3C5FA115ECE522000B4E70 /* IEConnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEConnController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +142,8 @@
 				ADB7244015EA65B300D3D749 /* SimpleClass.m */,
 				ADE7D9AC15EFEBDE007F4C85 /* IEPelcoCameraClass.h */,
 				ADE7D9AD15EFEBDE007F4C85 /* IEPelcoCameraClass.m */,
+				ADE7D9C115F23543007F4C85 /* IERemoteLocations.h */,
+				ADE7D9C215F23543007F4C85 /* IERemoteLocations.m */,
 			);
 			name = TemplateClasses;
 			sourceTree = "<group>";
@@ -154,25 +184,26 @@
 				ADDE2F8E15E7B1A200DA582D /* IEViewController.h */,
 				ADDE2F8F15E7B1A200DA582D /* IEViewController.m */,
 				ADDE2F9115E7B1A200DA582D /* IEViewController.xib */,
-				ADDE2F9E15E7B42200DA582D /* IEGlobals.h */,
-				ADDE2FA115E7B44400DA582D /* IEHelperMethods.h */,
-				ADDE2FA215E7B44400DA582D /* IEHelperMethods.m */,
 				AD028F3615ECC58D00FF6F33 /* IEMainViewController.h */,
 				AD028F3715ECC58D00FF6F33 /* IEMainViewController.m */,
 				AD028F3815ECC58D00FF6F33 /* IEMainViewController.xib */,
+				ADE7D9E315F2732B007F4C85 /* IECamListViewController.h */,
+				ADE7D9E415F2732C007F4C85 /* IECamListViewController.m */,
+				ADE7D9E515F2732E007F4C85 /* IECamListViewController.xib */,
 				ADE7D99C15ED477D007F4C85 /* IESettingsViewController.h */,
 				ADE7D99D15ED477D007F4C85 /* IESettingsViewController.m */,
 				ADE7D99E15ED477D007F4C85 /* IESettingsViewController.xib */,
-				EB3C5FA015ECE522000B4E70 /* IEConnController.h */,
-				EB3C5FA115ECE522000B4E70 /* IEConnController.m */,
-				ADE7D99815ED3F3C007F4C85 /* IEEnums.h */,
 				ADB7243D15EA658300D3D749 /* TemplateClasses */,
 				ADDE2FBB15E98EAC00DA582D /* Security */,
+				ADE7D9BB15F14D65007F4C85 /* Statics */,
 				ADDE2F8315E7B1A200DA582D /* Supporting Files */,
 				AD028F3515ECC55700FF6F33 /* XML */,
 				ADE7D9A615EED580007F4C85 /* Database */,
 				ADE7D9AF15EFF80F007F4C85 /* Crud */,
+				ADE7D9BD15F14DB6007F4C85 /* iService */,
+				ADE7D9BC15F14DA9007F4C85 /* Base */,
 				ADE7D9AB15EFD155007F4C85 /* Model */,
+				ADE7D9C415F23BF4007F4C85 /* BadgeViewCell */,
 				ADDE2FA415E7BE2300DA582D /* images */,
 			);
 			path = iEndura;
@@ -192,6 +223,10 @@
 		ADDE2FA415E7BE2300DA582D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				ADE7D9D815F263C0007F4C85 /* right_indicator_dark.png */,
+				ADE7D9D915F263C0007F4C85 /* right_indicator_dark@2x.png */,
+				ADE7D9DA15F263C0007F4C85 /* right_indicator_light.png */,
+				ADE7D9DB15F263C0007F4C85 /* right_indicator_light@2x.png */,
 				ADDE2FAF15E7CDBC00DA582D /* app icons */,
 				ADDE2FA515E7BE2300DA582D /* button_bg.png */,
 				ADDE2FA615E7BE2300DA582D /* iendura_top.png */,
@@ -231,6 +266,8 @@
 		ADE7D9AB15EFD155007F4C85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ADE7D9E015F2721D007F4C85 /* IECameraLocation.h */,
+				ADE7D9E115F2721D007F4C85 /* IECameraLocation.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -240,9 +277,49 @@
 			children = (
 				ADE7D9B315F00658007F4C85 /* IECrudOp.h */,
 				ADE7D9B415F00658007F4C85 /* IECrudOp.m */,
+				ADE7D9BE15F15B24007F4C85 /* IEDatabaseOps.h */,
+				ADE7D9BF15F15B24007F4C85 /* IEDatabaseOps.m */,
 			);
 			name = Crud;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		ADE7D9BB15F14D65007F4C85 /* Statics */ = {
+			isa = PBXGroup;
+			children = (
+				ADDE2F9E15E7B42200DA582D /* IEGlobals.h */,
+				ADDE2FA115E7B44400DA582D /* IEHelperMethods.h */,
+				ADDE2FA215E7B44400DA582D /* IEHelperMethods.m */,
+				ADE7D99815ED3F3C007F4C85 /* IEEnums.h */,
+			);
+			name = Statics;
+			sourceTree = "<group>";
+		};
+		ADE7D9BC15F14DA9007F4C85 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				ADE7D9B615F1498A007F4C85 /* IEBaseViewController.h */,
+				ADE7D9B715F1498A007F4C85 /* IEBaseViewController.m */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		ADE7D9BD15F14DB6007F4C85 /* iService */ = {
+			isa = PBXGroup;
+			children = (
+				EB3C5FA015ECE522000B4E70 /* IEConnController.h */,
+				EB3C5FA115ECE522000B4E70 /* IEConnController.m */,
+			);
+			name = iService;
+			sourceTree = "<group>";
+		};
+		ADE7D9C415F23BF4007F4C85 /* BadgeViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				ADE7D9C515F23C18007F4C85 /* DDBadgeViewCell.h */,
+				ADE7D9C615F23C18007F4C85 /* DDBadgeViewCell.m */,
+			);
+			name = BadgeViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,6 +384,11 @@
 				AD028F3A15ECC58D00FF6F33 /* IEMainViewController.xib in Resources */,
 				ADE7D9A015ED477D007F4C85 /* IESettingsViewController.xib in Resources */,
 				ADE7D9AA15EED6DF007F4C85 /* iEnduraDB.sqlite in Resources */,
+				ADE7D9DC15F263C0007F4C85 /* right_indicator_dark.png in Resources */,
+				ADE7D9DD15F263C0007F4C85 /* right_indicator_dark@2x.png in Resources */,
+				ADE7D9DE15F263C0007F4C85 /* right_indicator_light.png in Resources */,
+				ADE7D9DF15F263C0007F4C85 /* right_indicator_light@2x.png in Resources */,
+				ADE7D9E715F2732E007F4C85 /* IECamListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +412,12 @@
 				ADE7D99F15ED477D007F4C85 /* IESettingsViewController.m in Sources */,
 				ADE7D9AE15EFEBDE007F4C85 /* IEPelcoCameraClass.m in Sources */,
 				ADE7D9B515F00658007F4C85 /* IECrudOp.m in Sources */,
+				ADE7D9B915F1498B007F4C85 /* IEBaseViewController.m in Sources */,
+				ADE7D9C015F15B24007F4C85 /* IEDatabaseOps.m in Sources */,
+				ADE7D9C315F23543007F4C85 /* IERemoteLocations.m in Sources */,
+				ADE7D9C715F23C18007F4C85 /* DDBadgeViewCell.m in Sources */,
+				ADE7D9E215F2721D007F4C85 /* IECameraLocation.m in Sources */,
+				ADE7D9E615F2732E007F4C85 /* IECamListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

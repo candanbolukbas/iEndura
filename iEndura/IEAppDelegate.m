@@ -21,6 +21,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[IEMainViewController alloc] initWithNibName:@"IEMainViewController" bundle:nil];
+    APP_DELEGATE.encryptedUsrPassString = [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

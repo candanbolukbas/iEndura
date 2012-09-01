@@ -34,5 +34,6 @@
 -(void)InsertRecords:(NSString *)txt;
 -(void)UpdateRecords:(NSString *)txt :(NSMutableString *) utxt;
 -(void)DeleteRecords:(NSString *)txt;
+-(BOOL) ExecuteSqlStatementText:(NSString *)sqlTxt;
 
 @end
