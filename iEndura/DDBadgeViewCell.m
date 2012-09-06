@@ -146,7 +146,7 @@
 #pragma mark -
 #pragma mark init & dealloc
 
-/*- (void)dealloc {
+- (void)dealloc {
 	
 	badgeView_ = nil;
 	summary_ = nil;
@@ -154,7 +154,7 @@
 	badgeText_ = nil;
 	badgeColor_ = nil;
 	badgeHighlightedColor_ = nil;
-}*/
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	
@@ -192,4 +192,22 @@
 	[self.badgeView setNeedsDisplay];
 }
 
+-(void) HideBadge:(BOOL)hidden
+{
+    if(hidden)
+    {
+        self.badgeColor = [UIColor clearColor];
+        self.badgeHighlightedColor = [UIColor clearColor];
+    }
+    else 
+    {
+        self.badgeColor = badgeColor_;
+        self.badgeHighlightedColor = badgeHighlightedColor_;
+    }
+}
+
 @end
+
+
+
+

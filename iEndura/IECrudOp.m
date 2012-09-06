@@ -52,7 +52,7 @@
     NSString *documentsPath = [paths objectAtIndex:0];
     NSString *filePath = [documentsPath stringByAppendingPathComponent:IENDURA_DATABASE_FILE];
     
-    NSString *querySQL = @"INSERT INTO PelcoCameras (UUID, IP, Name, CameraType, UpnpModelNumber, RTSP_URL, RemoteLocation, LocationRoot, LocationChild, VLCTranscode, SMsIPAddress, NSMIPAddress, Port) VALUES ('test2','test2','test2','test2','test2','test2','test2','test2','test2','test2','test2','test2','test2')";    
+    NSString *querySQL = @"INSERT INTO Cameras (UUID, IP, Name, CameraType, UpnpModelNumber, RTSP_URL, RemoteLocation, LocationRoot, LocationChild, VLCTranscode, SMsIPAddress, NSMIPAddress, Port) VALUES ('test2','test2','test2','test2','test2','test2','test2','test2','test2','test2','test2','test2','test2')";    
     const char *query_stmt = [querySQL UTF8String];
     
     if(sqlite3_open([filePath UTF8String], &database) == SQLITE_OK) 
@@ -78,7 +78,7 @@
     if(sqlite3_open([filePath UTF8String], &database) == SQLITE_OK) 
     {
         //insert
-        const char *sql = "INSERT INTO PelcoCameras (UUID, IP, Name, CameraType, UpnpModelNumber, RTSP_URL, RemoteLocation, LocationRoot, LocationChild, VLCTranscode, SMsIPAddress, NSMIPAddress, Port) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        const char *sql = "INSERT INTO Cameras (UUID, IP, Name, CameraType, UpnpModelNumber, RTSP_URL, RemoteLocation, LocationRoot, LocationChild, VLCTranscode, SMsIPAddress, NSMIPAddress, Port) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
         //Open db
         //NSString *cruddatabase = [self.GetDocumentDirectory stringByAppendingPathComponent:IENDURA_DATABASE_FILE];

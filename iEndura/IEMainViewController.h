@@ -11,7 +11,7 @@
     NSArray *remoteLocations;
 }
 
-@property (weak, nonatomic) IBOutlet UITableView *rootLocationsTableView;
+@property (weak, nonatomic) IBOutlet UITableView *remoteLocationsTableView;
 @property (weak, nonatomic) IBOutlet UILabel *testLabel;
 - (IBAction)goButtonClicked:(UIButton *)sender;
 

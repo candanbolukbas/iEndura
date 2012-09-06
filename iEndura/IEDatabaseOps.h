@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IECameraLocation.h"
 
 @interface IEDatabaseOps  : NSObject
 {
@@ -20,11 +21,13 @@
 @property (nonatomic,retain) NSFileManager *fileMgr;
 
 -(void)CopyDbToDocumentsFolder;
+-(BOOL)DBExistsInDocumentsFolder;
 -(NSString *) GetDocumentDirectory;
 
 -(BOOL) ExecuteSqlStatementText:(NSString *)sqlTxt;
--(BOOL) InsertBulkPelcoCameras:(NSArray *)pelcoCameras :(BOOL)overwrite;
+-(BOOL) InsertBulkCameras:(NSArray *)Cameras :(BOOL)overwrite;
 -(NSArray *) GetCameraList;
 -(NSArray *) GetRemoteLocations;
+-(NSArray *) GetItemsOfALocation:(IECameraLocation *)location;
 
 @end

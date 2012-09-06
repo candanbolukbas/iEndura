@@ -6,15 +6,15 @@
 //  Copyright (c) 2012 T.C. Cumhurbaşkanlığı. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @class IEMainViewController;
 
-@interface IEAppDelegate : UIResponder <UIApplicationDelegate>
+@interface IEAppDelegate : UIResponder <UIApplicationDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) IEMainViewController *viewController;
+@property (strong, nonatomic) UINavigationController *viewController;
 @property (nonatomic, strong) NSString *encryptedUsrPassString;
+@property (nonatomic, strong) NSString *userSeesionId;
+@property (nonatomic, strong) NSString *navBarTitle;
 
 @end

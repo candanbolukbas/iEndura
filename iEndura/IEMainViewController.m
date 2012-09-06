@@ -10,13 +10,14 @@
 #import "IEViewController.h"
 #import "IERemoteLocations.h"
 #import "DDBadgeViewCell.h"
+#import "IECamListViewController.h"
 
 @interface IEMainViewController ()
 
 @end
 
 @implementation IEMainViewController
-@synthesize rootLocationsTableView;
+@synthesize remoteLocationsTableView;
 @synthesize testLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -28,19 +29,6 @@
     return self;
 }
 
-- (void) viewDidLoad 
-{
-    [super viewDidLoad];
-    
-    //Add items
-    IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
-    remoteLocations = [dbOps GetRemoteLocations];
-    
-    [self.view setBackgroundColor:[IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_LIGHT_BLUE]];
-    
-    //Set the title
-    self.navigationItem.title = @"Countries";
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
@@ -95,16 +83,40 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger indexRow = indexPath.row;
-    
-    NSLog(@"%d, %d", indexPath.row, indexPath.section);
     IERemoteLocations *rl = [remoteLocations objectAtIndex:indexRow];
-    NSLog(@"%@", rl.RemoteLocationName);
+    
+    IECameraLocation *cl = [[IECameraLocation alloc] init];
+    cl.RemoteLocation = rl.RemoteLocationName;
+    cl.LocationType = IE_Cam_Loc_Remote;
+    //IECamListViewController *clvc = [[IECamListViewController alloc] init];
+    IECamListViewController *clvc = [[IECamListViewController alloc] initWithNibName:@"IECamListViewController" bundle:[NSBundle mainBundle]];
+    [clvc.navigationItem setTitle:cl.RemoteLocation];
+    clvc.CurrentCameraLocation = cl;
+    
+    //self.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    //[self presentModalViewController:clvc animated:YES];
+
+	[self.navigationController pushViewController:clvc animated:YES];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     // Do any additional setup after loading the view from its nib.
-    if ([IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY]) {
-        testLabel.text = [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY];
+    if ([IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY]) 
+    {
+        if([APP_DELEGATE.userSeesionId isEqualToString:@""])
+        {
+            NSString *urlStr = [NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY]];
+            NSURL *authUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+            NSLog(@"%@", authUrl);
+            
+            IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:IE_Req_Auth];
+            controller.delegate = self;
+            [controller startConnection];
+        }
+        else 
+        {
+            testLabel.text = APP_DELEGATE.userSeesionId;
+        }
     }
     else {
         testLabel.text = @"No iEndura Server found!";
@@ -114,9 +126,26 @@
     }
 }
 
+- (void) viewDidLoad 
+{
+    [super viewDidLoad];
+    
+    //Add items
+    IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
+    remoteLocations = [dbOps GetRemoteLocations];
+    
+    [self.view setBackgroundColor:[IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_LIGHT_BLUE]];
+    testLabel.text = APP_DELEGATE.userSeesionId;
+    //APP_DELEGATE.navBarTitle = @"iEndura";
+    self.navigationItem.title = @"iEndura";
+	
+	UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(goButtonClicked:)];
+	self.navigationItem.rightBarButtonItem = rightBtn;
+}
+
 - (void) viewDidUnload {
     [self setTestLabel:nil];
-    [self setRootLocationsTableView:nil];
+    [self setRemoteLocationsTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -128,34 +157,62 @@
 
 - (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag 
 {
-	if (tag == IE_Req_Auth) {
-		NSLog(@"Ooops!");
+	if (tag == IE_Req_Auth) 
+    {
+		[self setUserSessionId:data];
 	}
 	else if (tag == IE_Req_CamList)  
     {
         NSArray *jsArray = [IEHelperMethods getExtractedDataFromJSONArray:data];
-        NSMutableArray *pelcoCameras = [[NSMutableArray alloc] init];
+        NSMutableArray *Cameras = [[NSMutableArray alloc] init];
         
         for (NSDictionary *jsDict in jsArray) 
         {
-            IEPelcoCameraClass *pcc = [[IEPelcoCameraClass alloc] initWithDictionary:jsDict];
-            [pelcoCameras addObject:pcc];
+            IECameraClass *cc = [[IECameraClass alloc] initWithDictionary:jsDict];
+            [Cameras addObject:cc];
         }
         
         IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
-        BOOL result = [dbOps InsertBulkPelcoCameras:pelcoCameras :YES];
-        NSLog(@"Result: %@", result ? @"YES" : @"NO");
+        BOOL result = [dbOps InsertBulkCameras:Cameras :YES];
+        if(result)
+        {
+            IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
+            remoteLocations = [dbOps GetRemoteLocations];
+            [remoteLocationsTableView reloadData];
+            
+            NSLog(@"ReloadData: %d", remoteLocations.count);
+            NSLog(@"%@", remoteLocationsTableView);
+        }
+        else 
+        {
+            NSLog(@"Result: %@", result ? @"YES" : @"NO");
+        }
 	}
     else {
         NSLog(@"We have a problem!");
     }
 }
 
+- (void) setUserSessionId:(NSData *)responseData 
+{
+    NSDictionary *jsDict = [IEHelperMethods getExtractedDataFromJSONItem:responseData];
+    SimpleClass *sc = [[SimpleClass alloc] initWithDictionary:jsDict];
+    if ([sc.Id isEqualToString:POZITIVE_VALUE]) 
+    {
+        if ([IEHelperMethods setUserDefaultSettingsString:APP_DELEGATE.encryptedUsrPassString key:IENDURA_SERVER_USRPASS_KEY]) 
+        {
+            APP_DELEGATE.userSeesionId = sc.Value;
+        }
+    }
+    [testLabel setText:sc.Value];
+}
+
 - (IBAction)goButtonClicked:(UIButton *)sender 
 {
-    NSString *encStr = APP_DELEGATE.encryptedUsrPassString;
-    
-    NSURL *camsUrl = [NSURL URLWithString:[NSString stringWithFormat:IENDURA_CAM_LIST_URL_FORMAT, encStr]];
+    NSString *encStr = [StringEncryption EncryptString:APP_DELEGATE.userSeesionId];
+    NSString *urlStr = [NSString stringWithFormat:IENDURA_CAM_LIST_URL_FORMAT, encStr];
+    NSURL *camsUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+    //NSURL *camsUrl = [NSURL URLWithString:[NSString stringWithFormat:IENDURA_CAM_LIST_URL_FORMAT, encStr]];
     NSLog(@"%@", camsUrl);
 	
 	IEConnController *controller = [[IEConnController alloc] initWithURL:camsUrl property:IE_Req_CamList];

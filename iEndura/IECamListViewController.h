@@ -6,8 +6,13 @@
 //  Copyright (c) 2012 T.C. Cumhurbaşkanlığı. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@interface IECamListViewController : IEBaseViewController <IEConnControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+{
+    IECameraLocation *CurrentCameraLocation;
+    NSArray *LocAndCamList;
+}
 
-@interface IECamListViewController : UIViewController
+@property (nonatomic,retain) IECameraLocation *CurrentCameraLocation;
+- (IBAction)goButtonClicked:(UIButton *)sender;
 
 @end

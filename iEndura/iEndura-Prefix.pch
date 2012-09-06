@@ -22,5 +22,6 @@
     #import "IEDatabaseOps.h"
     #import "IEBaseViewController.h"
     #import "IEConnController.h"
-    #import "IEPelcoCameraClass.h"
+    #import "IECameraClass.h"
+    #import "IECameraLocation.h"
 #endif

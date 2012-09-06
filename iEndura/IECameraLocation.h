@@ -6,20 +6,19 @@
 //  Copyright (c) 2012 T.C. Cumhurbaşkanlığı. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface IECameraLocation : NSObject
 {
     NSString *RemoteLocation;   
     NSString *LocationRoot;     
     NSString *LocationChild;     
+    iEnduraCameraLocationTypes LocationType;  
+    NSString *NumberOfCameras;  
 }
 
 @property (nonatomic, copy) NSString *RemoteLocation;
 @property (nonatomic, copy) NSString *LocationRoot;
 @property (nonatomic, copy) NSString *LocationChild;
-
-- (id) initWithArray:(NSArray *)locArray;
-
+@property (nonatomic, copy) NSString *NumberOfCameras;
+@property (nonatomic, assign) iEnduraCameraLocationTypes LocationType;
 
 @end

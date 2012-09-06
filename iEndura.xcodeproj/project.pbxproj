@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		AD028F3915ECC58D00FF6F33 /* IEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD028F3715ECC58D00FF6F33 /* IEMainViewController.m */; };
 		AD028F3A15ECC58D00FF6F33 /* IEMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD028F3815ECC58D00FF6F33 /* IEMainViewController.xib */; };
+		AD335BF015F52049004401FA /* IECamPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD335BEE15F52049004401FA /* IECamPlayViewController.m */; };
+		AD335BF115F52049004401FA /* IECamPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD335BEF15F52049004401FA /* IECamPlayViewController.xib */; };
+		AD335BF715F694A2004401FA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD335BF615F694A2004401FA /* MediaPlayer.framework */; };
 		ADB7244115EA65B300D3D749 /* SimpleClass.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7244015EA65B300D3D749 /* SimpleClass.m */; };
 		ADB7244415EA666000D3D749 /* IEXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7244315EA666000D3D749 /* IEXMLParser.m */; };
 		ADDE2F7D15E7B1A200DA582D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDE2F7C15E7B1A200DA582D /* UIKit.framework */; };
@@ -31,7 +34,7 @@
 		ADE7D9A015ED477D007F4C85 /* IESettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D99E15ED477D007F4C85 /* IESettingsViewController.xib */; };
 		ADE7D9A315EECFCE007F4C85 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE7D9A215EECFCE007F4C85 /* libsqlite3.dylib */; };
 		ADE7D9AA15EED6DF007F4C85 /* iEnduraDB.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D9A915EED6DF007F4C85 /* iEnduraDB.sqlite */; };
-		ADE7D9AE15EFEBDE007F4C85 /* IEPelcoCameraClass.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9AD15EFEBDE007F4C85 /* IEPelcoCameraClass.m */; };
+		ADE7D9AE15EFEBDE007F4C85 /* IECameraClass.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9AD15EFEBDE007F4C85 /* IECameraClass.m */; };
 		ADE7D9B515F00658007F4C85 /* IECrudOp.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9B415F00658007F4C85 /* IECrudOp.m */; };
 		ADE7D9B915F1498B007F4C85 /* IEBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9B715F1498A007F4C85 /* IEBaseViewController.m */; };
 		ADE7D9C015F15B24007F4C85 /* IEDatabaseOps.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9BF15F15B24007F4C85 /* IEDatabaseOps.m */; };
@@ -51,6 +54,10 @@
 		AD028F3615ECC58D00FF6F33 /* IEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEMainViewController.h; sourceTree = "<group>"; };
 		AD028F3715ECC58D00FF6F33 /* IEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEMainViewController.m; sourceTree = "<group>"; };
 		AD028F3815ECC58D00FF6F33 /* IEMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IEMainViewController.xib; sourceTree = "<group>"; };
+		AD335BED15F52049004401FA /* IECamPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IECamPlayViewController.h; sourceTree = "<group>"; };
+		AD335BEE15F52049004401FA /* IECamPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IECamPlayViewController.m; sourceTree = "<group>"; };
+		AD335BEF15F52049004401FA /* IECamPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IECamPlayViewController.xib; sourceTree = "<group>"; };
+		AD335BF615F694A2004401FA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		ADB7243F15EA65B300D3D749 /* SimpleClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleClass.h; sourceTree = "<group>"; };
 		ADB7244015EA65B300D3D749 /* SimpleClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleClass.m; sourceTree = "<group>"; };
 		ADB7244215EA666000D3D749 /* IEXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEXMLParser.h; sourceTree = "<group>"; };
@@ -86,8 +93,8 @@
 		ADE7D99E15ED477D007F4C85 /* IESettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IESettingsViewController.xib; sourceTree = "<group>"; };
 		ADE7D9A215EECFCE007F4C85 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		ADE7D9A915EED6DF007F4C85 /* iEnduraDB.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = iEnduraDB.sqlite; sourceTree = "<group>"; };
-		ADE7D9AC15EFEBDE007F4C85 /* IEPelcoCameraClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEPelcoCameraClass.h; sourceTree = "<group>"; };
-		ADE7D9AD15EFEBDE007F4C85 /* IEPelcoCameraClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEPelcoCameraClass.m; sourceTree = "<group>"; };
+		ADE7D9AC15EFEBDE007F4C85 /* IECameraClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IECameraClass.h; sourceTree = "<group>"; };
+		ADE7D9AD15EFEBDE007F4C85 /* IECameraClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IECameraClass.m; sourceTree = "<group>"; };
 		ADE7D9B315F00658007F4C85 /* IECrudOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IECrudOp.h; path = iEndura/IECrudOp.h; sourceTree = "<group>"; };
 		ADE7D9B415F00658007F4C85 /* IECrudOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IECrudOp.m; path = iEndura/IECrudOp.m; sourceTree = "<group>"; };
 		ADE7D9B615F1498A007F4C85 /* IEBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEBaseViewController.h; sourceTree = "<group>"; };
@@ -116,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD335BF715F694A2004401FA /* MediaPlayer.framework in Frameworks */,
 				ADE7D9A315EECFCE007F4C85 /* libsqlite3.dylib in Frameworks */,
 				ADDE2F7D15E7B1A200DA582D /* UIKit.framework in Frameworks */,
 				ADDE2F7F15E7B1A200DA582D /* Foundation.framework in Frameworks */,
@@ -140,10 +148,8 @@
 			children = (
 				ADB7243F15EA65B300D3D749 /* SimpleClass.h */,
 				ADB7244015EA65B300D3D749 /* SimpleClass.m */,
-				ADE7D9AC15EFEBDE007F4C85 /* IEPelcoCameraClass.h */,
-				ADE7D9AD15EFEBDE007F4C85 /* IEPelcoCameraClass.m */,
-				ADE7D9C115F23543007F4C85 /* IERemoteLocations.h */,
-				ADE7D9C215F23543007F4C85 /* IERemoteLocations.m */,
+				ADE7D9AC15EFEBDE007F4C85 /* IECameraClass.h */,
+				ADE7D9AD15EFEBDE007F4C85 /* IECameraClass.m */,
 			);
 			name = TemplateClasses;
 			sourceTree = "<group>";
@@ -168,6 +174,7 @@
 		ADDE2F7B15E7B1A200DA582D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD335BF615F694A2004401FA /* MediaPlayer.framework */,
 				ADE7D9A215EECFCE007F4C85 /* libsqlite3.dylib */,
 				ADDE2F7C15E7B1A200DA582D /* UIKit.framework */,
 				ADDE2F7E15E7B1A200DA582D /* Foundation.framework */,
@@ -190,6 +197,9 @@
 				ADE7D9E315F2732B007F4C85 /* IECamListViewController.h */,
 				ADE7D9E415F2732C007F4C85 /* IECamListViewController.m */,
 				ADE7D9E515F2732E007F4C85 /* IECamListViewController.xib */,
+				AD335BED15F52049004401FA /* IECamPlayViewController.h */,
+				AD335BEE15F52049004401FA /* IECamPlayViewController.m */,
+				AD335BEF15F52049004401FA /* IECamPlayViewController.xib */,
 				ADE7D99C15ED477D007F4C85 /* IESettingsViewController.h */,
 				ADE7D99D15ED477D007F4C85 /* IESettingsViewController.m */,
 				ADE7D99E15ED477D007F4C85 /* IESettingsViewController.xib */,
@@ -266,6 +276,8 @@
 		ADE7D9AB15EFD155007F4C85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ADE7D9C115F23543007F4C85 /* IERemoteLocations.h */,
+				ADE7D9C215F23543007F4C85 /* IERemoteLocations.m */,
 				ADE7D9E015F2721D007F4C85 /* IECameraLocation.h */,
 				ADE7D9E115F2721D007F4C85 /* IECameraLocation.m */,
 			);
@@ -389,6 +401,7 @@
 				ADE7D9DE15F263C0007F4C85 /* right_indicator_light.png in Resources */,
 				ADE7D9DF15F263C0007F4C85 /* right_indicator_light@2x.png in Resources */,
 				ADE7D9E715F2732E007F4C85 /* IECamListViewController.xib in Resources */,
+				AD335BF115F52049004401FA /* IECamPlayViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,7 +423,7 @@
 				AD028F3915ECC58D00FF6F33 /* IEMainViewController.m in Sources */,
 				EB3C5FA215ECE522000B4E70 /* IEConnController.m in Sources */,
 				ADE7D99F15ED477D007F4C85 /* IESettingsViewController.m in Sources */,
-				ADE7D9AE15EFEBDE007F4C85 /* IEPelcoCameraClass.m in Sources */,
+				ADE7D9AE15EFEBDE007F4C85 /* IECameraClass.m in Sources */,
 				ADE7D9B515F00658007F4C85 /* IECrudOp.m in Sources */,
 				ADE7D9B915F1498B007F4C85 /* IEBaseViewController.m in Sources */,
 				ADE7D9C015F15B24007F4C85 /* IEDatabaseOps.m in Sources */,
@@ -418,6 +431,7 @@
 				ADE7D9C715F23C18007F4C85 /* DDBadgeViewCell.m in Sources */,
 				ADE7D9E215F2721D007F4C85 /* IECameraLocation.m in Sources */,
 				ADE7D9E615F2732E007F4C85 /* IECamListViewController.m in Sources */,
+				AD335BF015F52049004401FA /* IECamPlayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

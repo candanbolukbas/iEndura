@@ -7,25 +7,10 @@
 //
 
 #import "IECameraLocation.h"
+#import "IEEnums.h"
 
 @implementation IECameraLocation
 
-@synthesize RemoteLocation, LocationRoot, LocationChild;
-
-- (id) initWithArray:(NSArray *)locArray
-{
-    self = [super init];
-    
-    if([locArray count] == 3)
-    {
-        RemoteLocation = [locArray objectAtIndex:0];
-        LocationRoot = [locArray objectAtIndex:1];
-        LocationChild = [locArray objectAtIndex:2];
-    }
-    
-    return self;
-}
-
-
+@synthesize RemoteLocation, LocationRoot, LocationChild, LocationType, NumberOfCameras;
 
 @end

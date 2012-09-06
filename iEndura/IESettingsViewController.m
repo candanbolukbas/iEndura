@@ -75,7 +75,7 @@
     {
         NSLog(@"An error has occured.");
     }
-    const char *sql = "SELECT * FROM PelcoCameras";
+    const char *sql = "SELECT * FROM Cameras";
     sqlite3_stmt *sqlStatement;
     if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
     {

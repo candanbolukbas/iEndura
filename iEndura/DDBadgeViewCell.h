@@ -51,4 +51,10 @@
 @property (nonatomic, retain) UIColor *summaryColor;
 @property (nonatomic, retain) UIColor *detailColor;
 
+-(void) HideBadge:(BOOL)hidden;
+
 @end
+
+
+
+

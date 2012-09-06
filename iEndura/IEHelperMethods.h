@@ -19,7 +19,7 @@
 + (NSString *)getUserDefaultSettingsString:(NSString *)objectKey;
 + (NSArray *)getExtractedDataFromJSONArray:(NSData *)data;
 + (NSDictionary *)getExtractedDataFromJSONItem:(NSData *)data;
-
++ (NSString *)GetUUID;
 
 @end
  

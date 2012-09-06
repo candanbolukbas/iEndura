@@ -47,12 +47,16 @@
 	}
 }
 
-- (void) setUserCridentials:(NSData *)responseData {
+- (void) setUserCridentials:(NSData *)responseData 
+{
     NSDictionary *jsDict = [IEHelperMethods getExtractedDataFromJSONItem:responseData];
     SimpleClass *sc = [[SimpleClass alloc] initWithDictionary:jsDict];
-    if ([sc.Value isEqualToString:SUCCESS_VALUE]) 
+    if ([sc.Id isEqualToString:POZITIVE_VALUE]) 
     {
-        if ([IEHelperMethods setUserDefaultSettingsString:APP_DELEGATE.encryptedUsrPassString key:IENDURA_SERVER_USRPASS_KEY]) {
+        if ([IEHelperMethods setUserDefaultSettingsString:APP_DELEGATE.encryptedUsrPassString key:IENDURA_SERVER_USRPASS_KEY]) 
+        {
+            [IEHelperMethods setUserDefaultSettingsString:userNameTextField.text key:IENDURA_USERNAME_KEY];
+            APP_DELEGATE.userSeesionId = sc.Value;
             [self dismissModalViewControllerAnimated:YES];
         };
     }
@@ -106,7 +110,10 @@
     NSString *encStr = [StringEncryption EncryptString:usrPass];
     APP_DELEGATE.encryptedUsrPassString = encStr;
     
-    NSURL *authUrl = [NSURL URLWithString:[NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, encStr]];
+    NSString *urlStr = [NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, encStr];
+    NSURL *authUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+    
+    //NSURL *authUrl = [NSURL URLWithString:[NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, encStr]];
     NSLog(@"%@", authUrl);
 	
 	IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:IE_Req_Auth];

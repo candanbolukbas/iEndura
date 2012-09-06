@@ -41,8 +41,10 @@ CCOptions padding = kCCOptionPKCS7Padding;
 	// You can use md5 to make sure key is 16 bits long
 	//NSData *encryptedData = [crypto encrypt:_secretData key:[crypto md5data:_key] padding:&padding];		
 	NSData *encryptedData = [crypto encrypt:_secretData key:[_key dataUsingEncoding:NSUTF8StringEncoding] padding:&padding];
-		
-	return [encryptedData base64EncodingWithLineLength:0];	
+	
+	NSString *encStr = [encryptedData base64EncodingWithLineLength:0];
+    encStr = [encStr stringByReplacingOccurrencesOfString:@"/" withString:@"|"]; //url friendly
+	return encStr;	
 }
 
 

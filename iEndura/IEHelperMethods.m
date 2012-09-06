@@ -41,6 +41,15 @@
     }
 }
 
++ (NSString *)GetUUID
+{
+    CFUUIDRef theUUID = CFUUIDCreate(NULL);
+    CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+    CFRelease(theUUID);
+    NSString *retStr = [NSString stringWithFormat:@"%@", string];
+    return retStr;
+}
+
 + (NSArray *)getExtractedDataFromJSONArray:(NSData *)data
 {
     NSError* error;

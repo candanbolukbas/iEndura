@@ -13,16 +13,20 @@
 #define BACKGROUNG_COLOR_LIGHT_BLUE @"CEE7EF"
 #define BACKGROUNG_COLOR_DARK_BLUE @"243960" 
 #define IENDURA_DISPATCH_QUEUE dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-#define IENDURA_AUTH_URL_FORMAT @"https://service.iendura.com/iservice/i/e/auth/%@"
-#define IENDURA_CAM_LIST_URL_FORMAT @"https://service.iendura.com/iservice/i/e/cams/%@"
-#define IENDURA_ENC_URL_FORMAT @"https://service.iendura.com/iservice/i/e/%@"
+#define IENDURA_AUTH_URL_FORMAT @"https://service.iendura.com/iservice/i/e/auth/%@" //USERNAME|PASSWORD
+#define IENDURA_CAM_LIST_URL_FORMAT @"https://service.iendura.com/iservice/i/e/cams/%@" //SESSION_ID
+#define IENDURA_CAM_IMG_URL_FORMAT @"https://service.iendura.com/iservice/i/e/img/%@" //USERNAME|SESSION_ID|CAMERA_IP
+#define IENDURA_CAM_HLS_START_URL_FORMAT @"https://service.iendura.com/iservice/i/e/hls/%@" //USERNAME|SESSION_ID|CAMERA_IP
 
 #define ENC_KEY @"ju4ev@D++agatuc4"
 #define IENDURA_DATABASE_FILE @"iEnduraDB.sqlite"
 
 #define IENDURA_SERVER_ADDRESS_KEY @"IENDURA_SERVER"
 #define IENDURA_SERVER_USRPASS_KEY @"IENDURA_SERVER_USRPASS"
+#define IENDURA_USERNAME_KEY @"IENDURA_USERNAME"
+#define APP_REQUIRES_INIT_KEY @"APP_REQUIRES_INIT" 
 
 #define allTrim(object) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
 
-#define SUCCESS_VALUE @"1"
+#define POZITIVE_VALUE @"1"
+#define NEGATIVE_VALUE @"0"
