@@ -41,6 +41,27 @@
     }
 }
 
+
++ (BOOL)setUserDefaultSettingsObject:(NSObject *)objectValue key:(NSString *)objectKey
+{
+    if(objectValue == nil)
+    {
+        return NO;
+    }
+    else
+    {
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setObject:objectValue forKey:objectKey];
+        return [prefs synchronize];
+    }
+}
+
++ (NSArray *)getUserDefaultSettingsArray:(NSString *)objectKey
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    return [prefs objectForKey:objectKey];
+}
+
 + (NSString *)GetUUID
 {
     CFUUIDRef theUUID = CFUUIDCreate(NULL);
@@ -48,6 +69,12 @@
     CFRelease(theUUID);
     NSString *retStr = [NSString stringWithFormat:@"%@", string];
     return retStr;
+}
+
++ (NSString *)ConvertJsonStringToNormalString:(NSString *)jsonString
+{
+    jsonString = [jsonString substringWithRange:NSMakeRange(1, jsonString.length - 2)];
+    return  [jsonString stringByReplacingOccurrencesOfString:@"\\" withString:@""]; //url friendly
 }
 
 + (NSArray *)getExtractedDataFromJSONArray:(NSData *)data

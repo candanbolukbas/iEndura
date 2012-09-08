@@ -15,6 +15,5 @@
 @property (weak, nonatomic) IBOutlet UITextField *serviceUrlTextField;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 - (IBAction)saveButtonClicked:(UIButton *)sender;
-- (NSMutableArray *) getSampleItems;
 
 @end

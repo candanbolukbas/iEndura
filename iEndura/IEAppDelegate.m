@@ -9,28 +9,29 @@
 #import "IEAppDelegate.h"
 #import "IEHelperMethods.h"
 #import "IEMainViewController.h"
+#import "IESettingsViewController.h"
+#import "IECamListViewController.h"
 
 @implementation IEAppDelegate
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
-@synthesize encryptedUsrPassString, userSeesionId, navBarTitle;
+@synthesize encryptedUsrPassString, userSeesionId, navBarTitle, tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 	
-	IEMainViewController *mainVC = [[IEMainViewController alloc] initWithNibName:@"IEMainViewController" bundle:nil];
+	/*IEMainViewController *mainVC = [[IEMainViewController alloc] initWithNibName:@"IEMainViewController" bundle:nil];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainVC];
 	//navController.delegate = self;
-	navController.navigationBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
+     navController.navigationBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
+     self.viewController = navController;*/
     
     
-    self.viewController = navController;
     APP_DELEGATE.encryptedUsrPassString = [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY];
     APP_DELEGATE.userSeesionId = @"";
-    //APP_DELEGATE.navBarTitle = @"iEnduraa";
     
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
@@ -41,10 +42,50 @@
     {
         IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
         [dbOps CopyDbToDocumentsFolder];
+        NSArray *favoriteCameras = [[NSArray alloc] init];
+        [IEHelperMethods setUserDefaultSettingsObject:favoriteCameras key:FAVORITE_CAMERAS_KEY];
         [IEHelperMethods setUserDefaultSettingsString:NEGATIVE_VALUE key:APP_REQUIRES_INIT_KEY];
     }
     
+    [self setUpTabBar];
     return YES;
+}
+
+- (void) setUpTabBar 
+{
+    IEMainViewController *firstViewController = [[IEMainViewController alloc] initWithNibName:@"IEMainViewController" bundle:nil];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:firstViewController];
+	navController.navigationBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
+    UIImage *tbaImage = [UIImage imageNamed:@"iendura_tab_icon.png"];
+    firstViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"iEndura" image:tbaImage tag:0];
+    firstViewController.title = @"iEndura";
+    UINavigationController *firstNavController = [[UINavigationController alloc]initWithRootViewController:firstViewController];
+    
+    IECamListViewController *secondViewController = [[IECamListViewController alloc]init];
+    IECameraLocation *cl = [[IECameraLocation alloc] init];
+    cl.RemoteLocation = FAVORITE_CAMERAS_TITLE;
+    cl.LocationType = IE_Cam_Loc_Fav;
+    [secondViewController.navigationItem setTitle:cl.RemoteLocation];
+    secondViewController.CurrentCameraLocation = cl;
+    secondViewController.tabBarItem = [[UITabBarItem alloc]initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:1];
+    UINavigationController *secondNavController = [[UINavigationController alloc]initWithRootViewController:secondViewController];
+    
+    IESettingsViewController *thirdViewController = [[IESettingsViewController alloc]init];
+    thirdViewController.title = @"Third View";
+    thirdViewController.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:2];
+    UINavigationController *thirdNavController = [[UINavigationController alloc]initWithRootViewController:thirdViewController];
+    
+    IESettingsViewController *forthViewController = [[IESettingsViewController alloc]init];
+    forthViewController.title = @"Forth View";
+    forthViewController.tabBarItem = [[UITabBarItem alloc]initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:3];
+    UINavigationController *forthNavController = [[UINavigationController alloc]initWithRootViewController:forthViewController];
+    
+    tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
+    tabBarController.viewControllers = [[NSArray alloc] initWithObjects:firstNavController, secondNavController, thirdNavController, forthNavController, nil];
+    tabBarController.tabBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
+    tabBarController.delegate = self;             
+    // add tabbar and show
+    [[self window] addSubview:[tabBarController view]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

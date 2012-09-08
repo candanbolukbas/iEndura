@@ -18,7 +18,6 @@
 
 @implementation IEMainViewController
 @synthesize remoteLocationsTableView;
-@synthesize testLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,9 +56,9 @@
     cell.badgeText = [NSString stringWithFormat:@"%@", rl.NumberOfCameras];
     cell.badgeColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
     cell.badgeHighlightedColor = [UIColor lightGrayColor];
-    UIImageView* accessoryViewImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_indicator_light.png"]];
-    cell.accessoryView = accessoryViewImage;
-    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    //UIImageView* accessoryViewImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_indicator_light.png"]];
+    //cell.accessoryView = accessoryViewImage;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
@@ -88,13 +87,12 @@
     IECameraLocation *cl = [[IECameraLocation alloc] init];
     cl.RemoteLocation = rl.RemoteLocationName;
     cl.LocationType = IE_Cam_Loc_Remote;
-    //IECamListViewController *clvc = [[IECamListViewController alloc] init];
+    if(rl.RemoteLocationName == FAVORITE_CAMERAS_TITLE)
+        cl.LocationType = IE_Cam_Loc_Fav;
+    
     IECamListViewController *clvc = [[IECamListViewController alloc] initWithNibName:@"IECamListViewController" bundle:[NSBundle mainBundle]];
     [clvc.navigationItem setTitle:cl.RemoteLocation];
     clvc.CurrentCameraLocation = cl;
-    
-    //self.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    //[self presentModalViewController:clvc animated:YES];
 
 	[self.navigationController pushViewController:clvc animated:YES];
 }
@@ -105,54 +103,46 @@
     {
         if([APP_DELEGATE.userSeesionId isEqualToString:@""])
         {
-            NSString *urlStr = [NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY]];
-            NSURL *authUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
-            NSLog(@"%@", authUrl);
+            NSURL *authUrl = [IEServiceManager GetAuthenticationUrlFromUsrPass];
             
             IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:IE_Req_Auth];
             controller.delegate = self;
             [controller startConnection];
         }
-        else 
-        {
-            testLabel.text = APP_DELEGATE.userSeesionId;
-        }
     }
-    else {
-        testLabel.text = @"No iEndura Server found!";
+    else 
+    {
         IEViewController *iev = [[IEViewController alloc] initWithNibName:@"IEViewController" bundle:nil];
         self.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:iev animated:YES];
     }
+    
+    IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
+    remoteLocations = [dbOps GetRemoteLocations];
+    [remoteLocationsTableView reloadData];
 }
 
 - (void) viewDidLoad 
 {
     [super viewDidLoad];
-    
-    //Add items
-    IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
-    remoteLocations = [dbOps GetRemoteLocations];
-    
-    [self.view setBackgroundColor:[IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_LIGHT_BLUE]];
-    testLabel.text = APP_DELEGATE.userSeesionId;
-    //APP_DELEGATE.navBarTitle = @"iEndura";
     self.navigationItem.title = @"iEndura";
-	
-	UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(goButtonClicked:)];
+	self.navigationController.navigationBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
+	UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(UpdateCameraList:)];
 	self.navigationItem.rightBarButtonItem = rightBtn;
 }
 
-- (void) viewDidUnload {
-    [self setTestLabel:nil];
+- (void) viewDidUnload 
+{
     [self setRemoteLocationsTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
+{
+    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 - (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag 
@@ -204,21 +194,16 @@
             APP_DELEGATE.userSeesionId = sc.Value;
         }
     }
-    [testLabel setText:sc.Value];
 }
 
-- (IBAction)goButtonClicked:(UIButton *)sender 
-{
-    NSString *encStr = [StringEncryption EncryptString:APP_DELEGATE.userSeesionId];
-    NSString *urlStr = [NSString stringWithFormat:IENDURA_CAM_LIST_URL_FORMAT, encStr];
-    NSURL *camsUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
-    //NSURL *camsUrl = [NSURL URLWithString:[NSString stringWithFormat:IENDURA_CAM_LIST_URL_FORMAT, encStr]];
-    NSLog(@"%@", camsUrl);
-	
+- (void)UpdateCameraList
+{   
+    NSURL *camsUrl = [IEServiceManager GetCamListUrl];
 	IEConnController *controller = [[IEConnController alloc] initWithURL:camsUrl property:IE_Req_CamList];
 	controller.delegate = self;
 	[controller startConnection];
 }
+
 @end
 
 

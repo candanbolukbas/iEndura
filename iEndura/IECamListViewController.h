@@ -13,6 +13,5 @@
 }
 
 @property (nonatomic,retain) IECameraLocation *CurrentCameraLocation;
-- (IBAction)goButtonClicked:(UIButton *)sender;
 
 @end

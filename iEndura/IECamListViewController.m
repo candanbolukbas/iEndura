@@ -37,24 +37,24 @@
     
     static NSString *CellIdentifier = @"Cell";
     
-    //UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+    // Set up the cell...
     DDBadgeViewCell *cell = (DDBadgeViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if (cell == nil) 
+    {
         cell = [[DDBadgeViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.summaryColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
         //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
-    // Set up the cell...
     NSObject *LocOrCam = [LocAndCamList objectAtIndex:indexPath.row];
-    cell.summaryColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
     
     if([LocOrCam isKindOfClass:[IECameraClass class]])
     {
         IECameraClass *cc = [LocAndCamList objectAtIndex:indexPath.row];
         cell.summary = cc.Name;
-        cell.detail = cc.IP;
+        cell.detail = [NSString stringWithFormat:@"%@ - %@", cc.IP, cc.UpnpModelNumber];
         [cell HideBadge:YES];
+        cell.imageView.image = [UIImage imageNamed:@"iendura_tab_icon.png"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if([LocOrCam isKindOfClass:[IECameraLocation class]])
     {
@@ -77,21 +77,21 @@
         //UIImageView* accessoryViewImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_indicator_light.png"]];
         //cell.accessoryView = accessoryViewImage;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.imageView.image = [UIImage imageNamed:@"iendura_tab_icon.png"];
     }
-    
     return cell;
 }
 
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source.
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
-}
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        // Delete the row from the data source.
+//    }   
+//    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+//    }   
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -159,6 +159,13 @@
     }
 }
 
+- (void) viewDidUnload 
+{
+    [self setCurrentCameraLocation:nil];
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
 
 - (void)viewDidLoad
 {
@@ -168,8 +175,7 @@
     //Add items
     IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
     LocAndCamList = [dbOps GetItemsOfALocation:CurrentCameraLocation];
-    
-    [self.view setBackgroundColor:[IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_LIGHT_BLUE]];
+	self.navigationController.navigationBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
 }
 
 //- (void)viewDidAppear:(BOOL)animated
@@ -187,20 +193,10 @@
     [super viewWillAppear:animated]; 
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
-- (IBAction)goButtonClicked:(UIButton *)sender 
-{
-    [self dismissModalViewControllerAnimated:YES];
-}
 @end

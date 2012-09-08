@@ -12,6 +12,12 @@
 		AD335BF015F52049004401FA /* IECamPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD335BEE15F52049004401FA /* IECamPlayViewController.m */; };
 		AD335BF115F52049004401FA /* IECamPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD335BEF15F52049004401FA /* IECamPlayViewController.xib */; };
 		AD335BF715F694A2004401FA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD335BF615F694A2004401FA /* MediaPlayer.framework */; };
+		AD82BDFD15F8EB21004C497C /* IEServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD82BDFC15F8EB21004C497C /* IEServiceManager.m */; };
+		ADB05A4515FA915D004813E0 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB05A4415FA915D004813E0 /* settings.png */; };
+		ADB05A4915FA9438004813E0 /* iendura_tab_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB05A4715FA9438004813E0 /* iendura_tab_icon.png */; };
+		ADB05A4A15FA9438004813E0 /* iendura_tab_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB05A4815FA9438004813E0 /* iendura_tab_icon@2x.png */; };
+		ADB05A4E15FAA337004813E0 /* IECamImgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB05A4C15FAA337004813E0 /* IECamImgViewController.m */; };
+		ADB05A4F15FAA337004813E0 /* IECamImgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB05A4D15FAA337004813E0 /* IECamImgViewController.xib */; };
 		ADB7244115EA65B300D3D749 /* SimpleClass.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7244015EA65B300D3D749 /* SimpleClass.m */; };
 		ADB7244415EA666000D3D749 /* IEXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7244315EA666000D3D749 /* IEXMLParser.m */; };
 		ADDE2F7D15E7B1A200DA582D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDE2F7C15E7B1A200DA582D /* UIKit.framework */; };
@@ -58,6 +64,14 @@
 		AD335BEE15F52049004401FA /* IECamPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IECamPlayViewController.m; sourceTree = "<group>"; };
 		AD335BEF15F52049004401FA /* IECamPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IECamPlayViewController.xib; sourceTree = "<group>"; };
 		AD335BF615F694A2004401FA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		AD82BDFB15F8EB21004C497C /* IEServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEServiceManager.h; sourceTree = "<group>"; };
+		AD82BDFC15F8EB21004C497C /* IEServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEServiceManager.m; sourceTree = "<group>"; };
+		ADB05A4415FA915D004813E0 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		ADB05A4715FA9438004813E0 /* iendura_tab_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iendura_tab_icon.png; sourceTree = "<group>"; };
+		ADB05A4815FA9438004813E0 /* iendura_tab_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iendura_tab_icon@2x.png"; sourceTree = "<group>"; };
+		ADB05A4B15FAA337004813E0 /* IECamImgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IECamImgViewController.h; sourceTree = "<group>"; };
+		ADB05A4C15FAA337004813E0 /* IECamImgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IECamImgViewController.m; sourceTree = "<group>"; };
+		ADB05A4D15FAA337004813E0 /* IECamImgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IECamImgViewController.xib; sourceTree = "<group>"; };
 		ADB7243F15EA65B300D3D749 /* SimpleClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleClass.h; sourceTree = "<group>"; };
 		ADB7244015EA65B300D3D749 /* SimpleClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleClass.m; sourceTree = "<group>"; };
 		ADB7244215EA666000D3D749 /* IEXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEXMLParser.h; sourceTree = "<group>"; };
@@ -200,6 +214,9 @@
 				AD335BED15F52049004401FA /* IECamPlayViewController.h */,
 				AD335BEE15F52049004401FA /* IECamPlayViewController.m */,
 				AD335BEF15F52049004401FA /* IECamPlayViewController.xib */,
+				ADB05A4B15FAA337004813E0 /* IECamImgViewController.h */,
+				ADB05A4C15FAA337004813E0 /* IECamImgViewController.m */,
+				ADB05A4D15FAA337004813E0 /* IECamImgViewController.xib */,
 				ADE7D99C15ED477D007F4C85 /* IESettingsViewController.h */,
 				ADE7D99D15ED477D007F4C85 /* IESettingsViewController.m */,
 				ADE7D99E15ED477D007F4C85 /* IESettingsViewController.xib */,
@@ -233,11 +250,14 @@
 		ADDE2FA415E7BE2300DA582D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				ADB05A4715FA9438004813E0 /* iendura_tab_icon.png */,
+				ADB05A4815FA9438004813E0 /* iendura_tab_icon@2x.png */,
+				ADDE2FAF15E7CDBC00DA582D /* app icons */,
+				ADB05A4415FA915D004813E0 /* settings.png */,
 				ADE7D9D815F263C0007F4C85 /* right_indicator_dark.png */,
 				ADE7D9D915F263C0007F4C85 /* right_indicator_dark@2x.png */,
 				ADE7D9DA15F263C0007F4C85 /* right_indicator_light.png */,
 				ADE7D9DB15F263C0007F4C85 /* right_indicator_light@2x.png */,
-				ADDE2FAF15E7CDBC00DA582D /* app icons */,
 				ADDE2FA515E7BE2300DA582D /* button_bg.png */,
 				ADDE2FA615E7BE2300DA582D /* iendura_top.png */,
 				ADDE2FA715E7BE2300DA582D /* iendura_top@2x.png */,
@@ -321,6 +341,8 @@
 			children = (
 				EB3C5FA015ECE522000B4E70 /* IEConnController.h */,
 				EB3C5FA115ECE522000B4E70 /* IEConnController.m */,
+				AD82BDFB15F8EB21004C497C /* IEServiceManager.h */,
+				AD82BDFC15F8EB21004C497C /* IEServiceManager.m */,
 			);
 			name = iService;
 			sourceTree = "<group>";
@@ -402,6 +424,10 @@
 				ADE7D9DF15F263C0007F4C85 /* right_indicator_light@2x.png in Resources */,
 				ADE7D9E715F2732E007F4C85 /* IECamListViewController.xib in Resources */,
 				AD335BF115F52049004401FA /* IECamPlayViewController.xib in Resources */,
+				ADB05A4515FA915D004813E0 /* settings.png in Resources */,
+				ADB05A4915FA9438004813E0 /* iendura_tab_icon.png in Resources */,
+				ADB05A4A15FA9438004813E0 /* iendura_tab_icon@2x.png in Resources */,
+				ADB05A4F15FAA337004813E0 /* IECamImgViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +458,8 @@
 				ADE7D9E215F2721D007F4C85 /* IECameraLocation.m in Sources */,
 				ADE7D9E615F2732E007F4C85 /* IECamListViewController.m in Sources */,
 				AD335BF015F52049004401FA /* IECamPlayViewController.m in Sources */,
+				AD82BDFD15F8EB21004C497C /* IEServiceManager.m in Sources */,
+				ADB05A4E15FAA337004813E0 /* IECamImgViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

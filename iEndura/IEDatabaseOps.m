@@ -216,6 +216,18 @@
                 [remoteLocations addObject:rl];
             }
         }
+        {
+            IERemoteLocations *rl = [[IERemoteLocations alloc] init];
+            NSArray *currentFovorites = [IEHelperMethods getUserDefaultSettingsArray:FAVORITE_CAMERAS_KEY];
+            
+            
+            //read the data from the result row
+            rl.RemoteLocationName = FAVORITE_CAMERAS_TITLE;
+            rl.NumberOfCameras = [NSString stringWithFormat:@"%d", [currentFovorites count]];
+            
+            //add the camera object to the cameras array
+            [remoteLocations addObject:rl];
+        }
         
         sqlite3_finalize(compiledStatement);
         sqlite3_close(database);
@@ -242,6 +254,36 @@
         {
             NSString *sqlStrFormat = @"SELECT * FROM Cameras WHERE RemoteLocation = '%@' AND LocationRoot = '%@' AND LocationChild = '%@'";
             NSString *sqlStr = [NSString stringWithFormat:sqlStrFormat, location.RemoteLocation, location.LocationRoot, location.LocationChild];
+            
+            const char *sqlStatement = [sqlStr UTF8String];
+            sqlite3_stmt *compiledStatement;
+            
+            //NSMutableArray *cameras = [[NSMutableArray alloc] init];
+            
+            if (sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) 
+            {
+                //loop through the results and add them to the feeds array
+                while (sqlite3_step(compiledStatement) == SQLITE_ROW) 
+                {
+                    IECameraClass *cc = [self ParseSQLiteRowToCameraClass:compiledStatement];
+                    [LocOrCamItems addObject:cc];
+                }
+            }
+            sqlite3_finalize(compiledStatement);
+        }
+        else if (location.LocationType == IE_Cam_Loc_Fav) 
+        {
+            NSString *sqlStrFormat = @"SELECT * FROM Cameras WHERE IP IN (%@)";
+            NSArray *currentFovorites = [IEHelperMethods getUserDefaultSettingsArray:FAVORITE_CAMERAS_KEY];
+            NSString *sqlFavCams = @"";
+            
+            for (NSString *IP in currentFovorites) 
+            {
+                sqlFavCams = [sqlFavCams stringByAppendingFormat:@"'%@',", IP];
+            }
+            
+            NSString *sqlStr = [NSString stringWithFormat:sqlStrFormat, sqlFavCams];
+            sqlStr = [sqlStr stringByReplacingOccurrencesOfString:@"',)" withString:@"')"];
             
             const char *sqlStatement = [sqlStr UTF8String];
             sqlite3_stmt *compiledStatement;

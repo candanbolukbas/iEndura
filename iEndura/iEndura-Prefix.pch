@@ -24,4 +24,5 @@
     #import "IEConnController.h"
     #import "IECameraClass.h"
     #import "IECameraLocation.h"
+    #import "IEServiceManager.h"
 #endif

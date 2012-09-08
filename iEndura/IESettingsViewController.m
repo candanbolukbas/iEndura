@@ -44,11 +44,13 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
-- (IBAction)saveButtonClicked:(UIButton *)sender {
-    if ([IEHelperMethods setUserDefaultSettingsString:serviceUrlTextField.text key:IENDURA_SERVER_ADDRESS_KEY]) {
+- (IBAction)saveButtonClicked:(UIButton *)sender 
+{
+    if ([IEHelperMethods setUserDefaultSettingsString:serviceUrlTextField.text key:IENDURA_SERVER_ADDRESS_KEY]) 
+    {
         [self dismissModalViewControllerAnimated:YES];
     };
     
@@ -58,36 +60,34 @@
     /*NSFileManager *fileMgr = [NSFileManager defaultManager];
     NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:IENDURA_DATABASE_FILE];
     BOOL success = [fileMgr fileExistsAtPath:dbPath];*/
-    NSFileManager *fileMgr = [NSFileManager defaultManager];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0];
-    NSString *dbPath = [documentsPath stringByAppendingPathComponent:IENDURA_DATABASE_FILE];
-    BOOL success = [fileMgr fileExistsAtPath:dbPath];
-    
-    if(!success)
-    {
-        NSLog(@"Cannot locate database file '%@'.", dbPath);
-    }
-    else {
-        NSLog(@"Located database file '%@'.", dbPath);
-    }
-    if(!(sqlite3_open([dbPath UTF8String], &db) == SQLITE_OK))
-    {
-        NSLog(@"An error has occured.");
-    }
-    const char *sql = "SELECT * FROM Cameras";
-    sqlite3_stmt *sqlStatement;
-    if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-    {
-        NSLog(@"Problem with prepare statement");
-    }
-    
-    while (sqlite3_step(sqlStatement)==SQLITE_ROW) 
-    {
-        //NSString *sampleStr = sqlite3_column_int(sqlStatement, 0);
-        NSString *ipAddress = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement,1)];
-        NSLog(@"IP address: %@", ipAddress);
-    }
+//    NSFileManager *fileMgr = [NSFileManager defaultManager];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsPath = [paths objectAtIndex:0];
+//    NSString *dbPath = [documentsPath stringByAppendingPathComponent:IENDURA_DATABASE_FILE];
+//    BOOL success = [fileMgr fileExistsAtPath:dbPath];
+//    
+//    if(!success)
+//    {
+//        NSLog(@"Cannot locate database file '%@'.", dbPath);
+//    }
+//
+//    if(!(sqlite3_open([dbPath UTF8String], &db) == SQLITE_OK))
+//    {
+//        NSLog(@"An error has occured.");
+//    }
+//    const char *sql = "SELECT * FROM Cameras";
+//    sqlite3_stmt *sqlStatement;
+//    if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
+//    {
+//        NSLog(@"Problem with prepare statement");
+//    }
+//    
+//    while (sqlite3_step(sqlStatement)==SQLITE_ROW) 
+//    {
+//        //NSString *sampleStr = sqlite3_column_int(sqlStatement, 0);
+//        NSString *ipAddress = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement,1)];
+//        NSLog(@"IP address: %@", ipAddress);
+//    }
     
         
     
@@ -104,10 +104,6 @@
     
 }
 
-- (NSMutableArray *) getSampleItems
-{
-    return nil;
-}
 @end
 
 

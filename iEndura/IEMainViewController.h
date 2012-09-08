@@ -12,7 +12,5 @@
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *remoteLocationsTableView;
-@property (weak, nonatomic) IBOutlet UILabel *testLabel;
-- (IBAction)goButtonClicked:(UIButton *)sender;
 
 @end

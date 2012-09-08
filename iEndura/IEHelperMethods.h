@@ -20,6 +20,9 @@
 + (NSArray *)getExtractedDataFromJSONArray:(NSData *)data;
 + (NSDictionary *)getExtractedDataFromJSONItem:(NSData *)data;
 + (NSString *)GetUUID;
++ (NSString *)ConvertJsonStringToNormalString:(NSString *)jsonString;
++ (BOOL)setUserDefaultSettingsObject:(NSObject *)objectValue key:(NSString *)objectKey;
++ (NSArray *)getUserDefaultSettingsArray:(NSString *)objectKey;
 
 @end
  

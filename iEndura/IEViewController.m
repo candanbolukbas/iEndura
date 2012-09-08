@@ -106,15 +106,14 @@
     
     NSString *username = userNameTextField.text;
     NSString *password = passwordTextField.text;
-    NSString *usrPass = [NSString stringWithFormat:@"%@|%@", username, password];
+    /*NSString *usrPass = [NSString stringWithFormat:@"%@|%@", username, password];
     NSString *encStr = [StringEncryption EncryptString:usrPass];
     APP_DELEGATE.encryptedUsrPassString = encStr;
     
     NSString *urlStr = [NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, encStr];
-    NSURL *authUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+    NSURL *authUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];*/
     
-    //NSURL *authUrl = [NSURL URLWithString:[NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, encStr]];
-    NSLog(@"%@", authUrl);
+    NSURL *authUrl = [IEServiceManager GetAuthenticationUrl:username :password];
 	
 	IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:IE_Req_Auth];
 	controller.delegate = self;

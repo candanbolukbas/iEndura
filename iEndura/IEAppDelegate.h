@@ -8,10 +8,10 @@
 
 @class IEMainViewController;
 
-@interface IEAppDelegate : UIResponder <UIApplicationDelegate, UINavigationControllerDelegate>
+@interface IEAppDelegate : UIResponder <UIApplicationDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (nonatomic, strong) IBOutlet UITabBarController *tabBarController;
 @property (strong, nonatomic) UINavigationController *viewController;
 @property (nonatomic, strong) NSString *encryptedUsrPassString;
 @property (nonatomic, strong) NSString *userSeesionId;
