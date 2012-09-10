@@ -11,27 +11,23 @@
 #import "IEMainViewController.h"
 #import "IESettingsViewController.h"
 #import "IECamListViewController.h"
+#import "IESearchViewController.h"
 
 @implementation IEAppDelegate
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
-@synthesize encryptedUsrPassString, userSeesionId, navBarTitle, tabBarController;
+@synthesize userSeesionId, navBarTitle, tabBarController, dbRequiresUpdate;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 	
-	/*IEMainViewController *mainVC = [[IEMainViewController alloc] initWithNibName:@"IEMainViewController" bundle:nil];
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainVC];
-	//navController.delegate = self;
-     navController.navigationBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
-     self.viewController = navController;*/
-    
-    
-    APP_DELEGATE.encryptedUsrPassString = [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY];
+	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
+    [UIApplication sharedApplication].keyWindow.frame=CGRectMake(0, 20, 320, 460);
     APP_DELEGATE.userSeesionId = @"";
+    APP_DELEGATE.dbRequiresUpdate = NO;
     
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
@@ -70,19 +66,20 @@
     secondViewController.tabBarItem = [[UITabBarItem alloc]initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:1];
     UINavigationController *secondNavController = [[UINavigationController alloc]initWithRootViewController:secondViewController];
     
-    IESettingsViewController *thirdViewController = [[IESettingsViewController alloc]init];
-    thirdViewController.title = @"Third View";
+    IESearchViewController *thirdViewController = [[IESearchViewController alloc]init];
+    thirdViewController.title = @"Search";
     thirdViewController.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:2];
     UINavigationController *thirdNavController = [[UINavigationController alloc]initWithRootViewController:thirdViewController];
     
     IESettingsViewController *forthViewController = [[IESettingsViewController alloc]init];
-    forthViewController.title = @"Forth View";
-    forthViewController.tabBarItem = [[UITabBarItem alloc]initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:3];
+    forthViewController.title = @"Settings";
+    UIImage *tbaImageSettings = [UIImage imageNamed:@"settings.png"];
+    forthViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:tbaImageSettings tag:3];
     UINavigationController *forthNavController = [[UINavigationController alloc]initWithRootViewController:forthViewController];
     
     tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
     tabBarController.viewControllers = [[NSArray alloc] initWithObjects:firstNavController, secondNavController, thirdNavController, forthNavController, nil];
-    tabBarController.tabBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
+    tabBarController.tabBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARKER_BLUE];
     tabBarController.delegate = self;             
     // add tabbar and show
     [[self window] addSubview:[tabBarController view]];

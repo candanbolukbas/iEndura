@@ -15,23 +15,24 @@
 @end
 
 @implementation IEViewController
-@synthesize userNameTextField, passwordTextField, resultLabel;
+@synthesize editServerButton;
+@synthesize serverResultLabel, submitButton;
+@synthesize userNameTextField, passwordTextField, resultLabel, serviceUrlTextField;
 
-- (void) viewDidLoad {
-    [self.view setBackgroundColor:[IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_LIGHT_BLUE]]; 
-    
+- (void) viewDidLoad 
+{
+    [self.view setBackgroundColor:[IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_LIGHT_BLUE]];     
     [super viewDidLoad];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-	if (![IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_ADDRESS_KEY]) {
-        IESettingsViewController *iesv = [[IESettingsViewController alloc] initWithNibName:@"IESettingsViewController" bundle:nil];
-        self.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentModalViewController:iesv animated:YES];
+	if (![IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_ADDRESS_KEY]) 
+    {
+        [self showServerDefineView];
     }
     else if(![IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY])
     {
-        NSLog(@"No user cridentials found!");
+        resultLabel.text = [NSString stringWithFormat:@"Enter user cridentials.\nServer: %@\nEnter demo/demo for demo server.", [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_ADDRESS_KEY]];
     }
     else {
         [self dismissModalViewControllerAnimated:YES];
@@ -39,29 +40,62 @@
 }
 
 - (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag {
-	if (tag == IE_Req_Auth) {
+	if (tag == IE_Req_Auth) 
+    {
 		[self setUserCridentials:data];
 	}
-	else {
-		
+	else 
+    {
 	}
+}
+
+- (void) showServerDefineView
+{
+    UIView *overlayView = [self.view viewWithTag:22];
+    [overlayView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.6f]];
+    [overlayView setAlpha:0.0f];
+    [self.view addSubview:overlayView];
+    
+    [UIView animateWithDuration:1
+                     animations:^{
+                         [overlayView setAlpha:1.0f];
+                     }completion:^(BOOL finished) 
+                        {
+                         if ([IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_ADDRESS_KEY]) 
+                         {
+                             [serviceUrlTextField setText:[IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_ADDRESS_KEY]]; 
+                         }
+                     }];
 }
 
 - (void) setUserCridentials:(NSData *)responseData 
 {
     NSDictionary *jsDict = [IEHelperMethods getExtractedDataFromJSONItem:responseData];
     SimpleClass *sc = [[SimpleClass alloc] initWithDictionary:jsDict];
+    if(sc == nil)
+    {
+        [submitButton setEnabled:YES];
+        [submitButton setTitle:@"Submit" forState:UIControlStateNormal];
+        [resultLabel setText:@"Can't connect to server. Please check server name."];
+    }
     if ([sc.Id isEqualToString:POZITIVE_VALUE]) 
     {
-        if ([IEHelperMethods setUserDefaultSettingsString:APP_DELEGATE.encryptedUsrPassString key:IENDURA_SERVER_USRPASS_KEY]) 
+        NSString *usrPass = [NSString stringWithFormat:@"%@|%@", userNameTextField.text, passwordTextField.text];
+        NSString *encStr = [StringEncryption EncryptString:usrPass];
+        
+        if ([IEHelperMethods setUserDefaultSettingsString:encStr key:IENDURA_SERVER_USRPASS_KEY]) 
         {
             [IEHelperMethods setUserDefaultSettingsString:userNameTextField.text key:IENDURA_USERNAME_KEY];
+            [IEHelperMethods setUserDefaultSettingsString:passwordTextField.text key:IENDURA_PASSWORD_KEY];
             APP_DELEGATE.userSeesionId = sc.Value;
+            APP_DELEGATE.dbRequiresUpdate = YES;
             [self dismissModalViewControllerAnimated:YES];
         };
     }
     else 
     {
+        [submitButton setEnabled:YES];
+        [submitButton setTitle:@"Submit" forState:UIControlStateNormal];
         [resultLabel setText:sc.Value];
     }
 }
@@ -70,51 +104,45 @@
     [self setUserNameTextField:nil];
     [self setPasswordTextField:nil];
     [self setResultLabel:nil];
+    [self setServerResultLabel:nil];
+    [self setEditServerButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return NO;
+}
+
+- (void)CheckAuthResult:(NSTimer *)theTimer
+{
+    if(authTimerCounter == 30)
+    {
+        [submitButton setEnabled:YES];
+        [submitButton setTitle:@"Submit" forState:UIControlStateNormal];
+        [resultLabel setText:@"Can't connect to server. Please check server name."];
+        [authTimer invalidate];
+    }
+    else if(![IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY])
+    {
+        authTimerCounter++;
+    }
 }
 
 - (IBAction) submitButtonClicked:(UIButton *)sender {
     [passwordTextField resignFirstResponder];
     [userNameTextField resignFirstResponder];
-    [resultLabel setText:@"Submitting"];
-    
-    /*dispatch_async(IENDURA_DISPATCH_QUEUE, ^{
-        NSData* data = [NSData dataWithContentsOfURL: 
-                        [NSURL URLWithString:[NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, 
-                                              userNameTextField.text, passwordTextField.text]]];
-        [self performSelectorOnMainThread:@selector(fetchedData:) 
-                               withObject:data waitUntilDone:YES];
-    });*/
-    
-    /*[NSURLConnection sendAsynchronousRequest:request 
-     queue:[NSOperationQueue mainQueue]
-     completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-     NSLog(@"Finished! data: %@", data);
-     //[self fetchedData:data];
-     }];
-     NSURLResponse *response = nil;
-     NSError *error = nil;
-     NSData *data = [NSURLConnection sendSynchronousRequest:request
-     returningResponse:&response
-     error:&error];
-     NSLog(@"Finished! data: %@", data);*/
+    [submitButton setEnabled:NO];
+    [submitButton setTitle:@"Submitting..." forState:UIControlStateDisabled];
+    //[resultLabel setText:@"Submitting"];
     
     NSString *username = userNameTextField.text;
     NSString *password = passwordTextField.text;
-    /*NSString *usrPass = [NSString stringWithFormat:@"%@|%@", username, password];
-    NSString *encStr = [StringEncryption EncryptString:usrPass];
-    APP_DELEGATE.encryptedUsrPassString = encStr;
-    
-    NSString *urlStr = [NSString stringWithFormat:IENDURA_AUTH_URL_FORMAT, encStr];
-    NSURL *authUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];*/
-    
     NSURL *authUrl = [IEServiceManager GetAuthenticationUrl:username :password];
 	
+    authTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(CheckAuthResult:) userInfo:nil repeats:YES];
+    authTimerCounter = 0;
+    
 	IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:IE_Req_Auth];
 	controller.delegate = self;
 	[controller startConnection];
@@ -128,7 +156,36 @@
 	else if (textField == passwordTextField) {
 		[textField resignFirstResponder];
 	}
+    else if (textField == serviceUrlTextField) {
+        [textField resignFirstResponder];
+    }
 	return YES;
+}
+
+- (IBAction)saveButtonClicked:(UIButton *)sender 
+{
+    if ([serviceUrlTextField.text length] > 0 && [IEHelperMethods setUserDefaultSettingsString:serviceUrlTextField.text key:IENDURA_SERVER_ADDRESS_KEY]) 
+    {
+        UIView *overlayView = [self.view viewWithTag:22];
+        [userNameTextField becomeFirstResponder];
+        [userNameTextField resignFirstResponder];
+        
+        [UIView animateWithDuration:1
+                         animations:^{
+                             [overlayView setAlpha:0.0f];
+                         }completion:^(BOOL finished) {
+                             resultLabel.text = [NSString stringWithFormat:@"Enter user cridentials.\nServer: %@\nEnter demo/demo for demo server.", serviceUrlTextField.text];
+                         }];
+    }
+    else
+    {
+        serverResultLabel.text = @"Please enter a valid server name.";
+    }
+}
+
+- (IBAction)editServerButtonClicked:(id)sender 
+{
+    [self showServerDefineView];
 }
 
 - (void) doParse:(NSData *)data {

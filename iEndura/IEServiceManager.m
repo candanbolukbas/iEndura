@@ -17,12 +17,11 @@
                                
     NSString *usrPass = [NSString stringWithFormat:@"%@|%@", username, password];
     NSString *encStr = [StringEncryption EncryptString:usrPass];
-    APP_DELEGATE.encryptedUsrPassString = encStr;
+    //APP_DELEGATE.encryptedUsrPassString = encStr;
     
     NSString *urlStr = [NSString stringWithFormat:authUrlFormat, iEnduraServerAddress, encStr];
     NSURL *authUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
 
-    NSLog(@"Auth Url 1: %@", authUrl);
     return authUrl;
 }
 
@@ -33,8 +32,17 @@
     NSString *usrPassEncStr = [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY];
     NSString *urlStr = [NSString stringWithFormat:authUrlFormat, iEnduraServerAddress, usrPassEncStr];
     NSURL *authUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+
+    return authUrl;
+}
+
++ (NSURL *)GetAuthenticationUrlFromEncStr:(NSString *)encStr
+{
+    NSString *authUrlFormat = @"https://%@/iservice/i/e/auth/%@"; //...SERVER_ADDRESS...ENCSTR and USR_PASS_ENC_STR
+    NSString *iEnduraServerAddress = [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_ADDRESS_KEY];
+    NSString *urlStr = [NSString stringWithFormat:authUrlFormat, iEnduraServerAddress, encStr];
+    NSURL *authUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
     
-    NSLog(@"Auth Url 2: %@", authUrl);
     return authUrl;
 }
 
@@ -45,8 +53,7 @@
     NSString *encStr = [StringEncryption EncryptString:APP_DELEGATE.userSeesionId];
     NSString *urlStr = [NSString stringWithFormat:camListUrlFormat, iEnduraServerAddress, encStr];
     NSURL *camsUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
-    
-    NSLog(@"Cam List Url: %@", camsUrl);
+
     return camsUrl;
 }
 

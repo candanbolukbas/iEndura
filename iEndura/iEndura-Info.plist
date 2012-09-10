@@ -16,6 +16,9 @@
 			<array>
 				<string>iendura_app_icon_57.png</string>
 				<string>iendura_app_icon_114.png</string>
+				<string>Default.png</string>
+				<string>Default@2x.png</string>
+				<string>Default.png</string>
 			</array>
 		</dict>
 	</dict>
@@ -45,5 +48,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

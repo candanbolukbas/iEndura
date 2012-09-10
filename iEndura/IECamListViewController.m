@@ -16,6 +16,7 @@
 
 @implementation IECamListViewController
 
+@synthesize camListTableView;
 @synthesize CurrentCameraLocation;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -53,7 +54,7 @@
         cell.summary = cc.Name;
         cell.detail = [NSString stringWithFormat:@"%@ - %@", cc.IP, cc.UpnpModelNumber];
         [cell HideBadge:YES];
-        cell.imageView.image = [UIImage imageNamed:@"iendura_tab_icon.png"];
+        cell.imageView.image = [UIImage imageNamed:@"cctv.png"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if([LocOrCam isKindOfClass:[IECameraLocation class]])
@@ -77,7 +78,7 @@
         //UIImageView* accessoryViewImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_indicator_light.png"]];
         //cell.accessoryView = accessoryViewImage;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.imageView.image = [UIImage imageNamed:@"iendura_tab_icon.png"];
+        cell.imageView.image = [UIImage imageNamed:@"building.png"];
     }
     return cell;
 }
@@ -134,34 +135,36 @@
     }
 }
 
-- (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag 
-{
-	if (tag == IE_Req_Auth) {
-		NSLog(@"Ooops!");
-	}
-	else if (tag == IE_Req_CamList)  
-    {
-        NSArray *jsArray = [IEHelperMethods getExtractedDataFromJSONArray:data];
-        NSMutableArray *Cameras = [[NSMutableArray alloc] init];
-        
-        for (NSDictionary *jsDict in jsArray) 
-        {
-            IECameraClass *cc = [[IECameraClass alloc] initWithDictionary:jsDict];
-            [Cameras addObject:cc];
-        }
-        
-        IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
-        BOOL result = [dbOps InsertBulkCameras:Cameras :YES];
-        NSLog(@"Result: %@", result ? @"YES" : @"NO");
-	}
-    else {
-        NSLog(@"We have a problem!");
-    }
-}
+//- (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag 
+//{
+//	if (tag == IE_Req_Auth) {
+//		NSLog(@"Ooops!");
+//	}
+//	else if (tag == IE_Req_CamList)  
+//    {
+//        NSArray *jsArray = [IEHelperMethods getExtractedDataFromJSONArray:data];
+//        NSMutableArray *Cameras = [[NSMutableArray alloc] init];
+//        
+//        for (NSDictionary *jsDict in jsArray) 
+//        {
+//            IECameraClass *cc = [[IECameraClass alloc] initWithDictionary:jsDict];
+//            [Cameras addObject:cc];
+//        }
+//        
+//        IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
+//        BOOL result = [dbOps InsertBulkCameras:Cameras :YES];
+//        NSLog(@"Result: %@", result ? @"YES" : @"NO");
+//	}
+//    else {
+//        NSLog(@"We have a problem!");
+//    }
+//}
 
 - (void) viewDidUnload 
 {
     [self setCurrentCameraLocation:nil];
+    LocAndCamList = nil;
+    [self setCamListTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -178,12 +181,12 @@
 	self.navigationController.navigationBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
 }
 
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    CGRect theFrame = [self.view frame];
-//    theFrame.origin.y = -290;
-//    [self.view setNeedsDisplay];
-//}
+- (void)viewDidAppear:(BOOL)animated
+{
+    IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
+    LocAndCamList = [dbOps GetItemsOfALocation:CurrentCameraLocation];
+    [camListTableView reloadData];
+}
 
 -(void)viewWillAppear:(BOOL)animated 
 { 

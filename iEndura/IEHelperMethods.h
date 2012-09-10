@@ -23,6 +23,6 @@
 + (NSString *)ConvertJsonStringToNormalString:(NSString *)jsonString;
 + (BOOL)setUserDefaultSettingsObject:(NSObject *)objectValue key:(NSString *)objectKey;
 + (NSArray *)getUserDefaultSettingsArray:(NSString *)objectKey;
-
++ (void)resetUserDefaultSettings;
 @end
  

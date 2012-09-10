@@ -164,7 +164,7 @@
     if (sqlite3_open([filePath UTF8String], &database) == SQLITE_OK) 
     {
         //setup the SQL statement and compile it for faster access
-        const char *sqlStatement = "select * from Cameras";
+        const char *sqlStatement = "select * from Cameras ORDER BY Name";
         sqlite3_stmt *compiledStatement;
         
         if (sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) 
@@ -235,6 +235,52 @@
     return remoteLocations;
 }
 
+-(NSArray *) GetFavoriteCameras
+{
+    //Setup the database object
+    sqlite3 *database;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:IENDURA_DATABASE_FILE];
+    
+    //Init the restaurant array
+    NSMutableArray *LocOrCamItems = [[NSMutableArray alloc] init];
+    
+    //Open the database from the users filesystem
+    if (sqlite3_open([filePath UTF8String], &database) == SQLITE_OK) 
+    {
+        NSString *sqlStrFormat = @"SELECT * FROM Cameras WHERE IP IN (%@)";
+        NSArray *currentFovorites = [IEHelperMethods getUserDefaultSettingsArray:FAVORITE_CAMERAS_KEY];
+        NSString *sqlFavCams = @"";
+        
+        for (NSString *IP in currentFovorites) 
+        {
+            sqlFavCams = [sqlFavCams stringByAppendingFormat:@"'%@',", IP];
+        }
+        
+        NSString *sqlStr = [NSString stringWithFormat:sqlStrFormat, sqlFavCams];
+        sqlStr = [sqlStr stringByReplacingOccurrencesOfString:@"',)" withString:@"')"];
+        
+        const char *sqlStatement = [sqlStr UTF8String];
+        sqlite3_stmt *compiledStatement;
+        
+        //NSMutableArray *cameras = [[NSMutableArray alloc] init];
+        
+        if (sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) 
+        {
+            //loop through the results and add them to the feeds array
+            while (sqlite3_step(compiledStatement) == SQLITE_ROW) 
+            {
+                IECameraClass *cc = [self ParseSQLiteRowToCameraClass:compiledStatement];
+                [LocOrCamItems addObject:cc];
+            }
+        }
+        sqlite3_finalize(compiledStatement);
+        sqlite3_close(database);
+        return LocOrCamItems;
+    }
+    return nil;
+}
 
 -(NSArray *) GetItemsOfALocation:(IECameraLocation *)location
 {

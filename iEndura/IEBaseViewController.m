@@ -7,7 +7,7 @@
 //
 
 #import "IEBaseViewController.h"
-#import "IESettingsViewController.h"
+#import "IEFavoritesViewController.h"
 
 @interface IEBaseViewController ()
 
@@ -42,6 +42,10 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -49,11 +53,11 @@
 
 - (IBAction)twoFingerTouchAction
 {
-    IESettingsViewController *mv = [[IESettingsViewController alloc] init];
+    IEFavoritesViewController *mv = [[IEFavoritesViewController alloc] init];
     mv.view.opaque = NO;
     mv.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6f];
     self.modalPresentationStyle = UIModalPresentationCurrentContext;
-    [self presentModalViewController:mv animated:YES];
+    [self presentModalViewController:mv animated:NO];
 }
 
 @end

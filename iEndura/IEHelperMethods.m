@@ -41,6 +41,17 @@
     }
 }
 
++ (void)resetUserDefaultSettings
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs removeObjectForKey:IENDURA_SERVER_ADDRESS_KEY];
+    [prefs removeObjectForKey:IENDURA_USERNAME_KEY];
+    [prefs removeObjectForKey:IENDURA_PASSWORD_KEY];
+    [prefs removeObjectForKey:IENDURA_SERVER_USRPASS_KEY];
+    [prefs removeObjectForKey:APP_REQUIRES_INIT_KEY];
+    APP_DELEGATE.userSeesionId = @"";
+    [prefs synchronize];
+}
 
 + (BOOL)setUserDefaultSettingsObject:(NSObject *)objectValue key:(NSString *)objectKey
 {

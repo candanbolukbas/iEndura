@@ -45,6 +45,7 @@
     [self setScreenshotImageView:nil];
     [self setVideoWebView:nil];
     [self setImageTimer:nil];
+    CurrentCamera = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

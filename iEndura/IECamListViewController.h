@@ -6,12 +6,13 @@
 //  Copyright (c) 2012 T.C. Cumhurbaşkanlığı. All rights reserved.
 //
 
-@interface IECamListViewController : IEBaseViewController <IEConnControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface IECamListViewController : IEBaseViewController <UITableViewDelegate, UITableViewDataSource>
 {
     IECameraLocation *CurrentCameraLocation;
     NSArray *LocAndCamList;
 }
 
+@property (weak, nonatomic) IBOutlet UITableView *camListTableView;
 @property (nonatomic,retain) IECameraLocation *CurrentCameraLocation;
 
 @end

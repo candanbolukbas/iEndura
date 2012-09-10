@@ -29,5 +29,6 @@
 -(NSArray *) GetCameraList;
 -(NSArray *) GetRemoteLocations;
 -(NSArray *) GetItemsOfALocation:(IECameraLocation *)location;
+-(NSArray *) GetFavoriteCameras;
 
 @end

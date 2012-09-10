@@ -17,7 +17,7 @@
 	NSMutableURLRequest *request;
 }
 
-@property (nonatomic, assign) id <IEConnControllerDelegate> delegate;
+@property (nonatomic, strong) id <IEConnControllerDelegate> delegate;
 
 - (id) initWithURL:(NSURL *)url property:(iEnduraRequestTypes)tag;
 - (void) startConnection;
