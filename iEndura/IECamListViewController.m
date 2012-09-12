@@ -44,7 +44,6 @@
     {
         cell = [[DDBadgeViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.summaryColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
-        //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSObject *LocOrCam = [LocAndCamList objectAtIndex:indexPath.row];
     
@@ -83,17 +82,6 @@
     return cell;
 }
 
-// Override to support editing the table view.
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        // Delete the row from the data source.
-//    }   
-//    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-//    }   
-//}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
@@ -108,6 +96,8 @@
         IECameraClass *cc = [LocAndCamList objectAtIndex:indexPath.row];
         IECamPlayViewController *cpvc = [[IECamPlayViewController alloc] init];
         cpvc.CurrentCamera = cc;
+        NSArray *neighborCameras = [[NSArray alloc] initWithArray:[self GetCamerasOfLocation:CurrentCameraLocation]];
+        cpvc.neighborCameras = neighborCameras;
         [cpvc.navigationItem setTitle:cc.Name];
         [self.navigationController pushViewController:cpvc animated:YES];
     }
@@ -135,30 +125,20 @@
     }
 }
 
-//- (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag 
-//{
-//	if (tag == IE_Req_Auth) {
-//		NSLog(@"Ooops!");
-//	}
-//	else if (tag == IE_Req_CamList)  
-//    {
-//        NSArray *jsArray = [IEHelperMethods getExtractedDataFromJSONArray:data];
-//        NSMutableArray *Cameras = [[NSMutableArray alloc] init];
-//        
-//        for (NSDictionary *jsDict in jsArray) 
-//        {
-//            IECameraClass *cc = [[IECameraClass alloc] initWithDictionary:jsDict];
-//            [Cameras addObject:cc];
-//        }
-//        
-//        IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
-//        BOOL result = [dbOps InsertBulkCameras:Cameras :YES];
-//        NSLog(@"Result: %@", result ? @"YES" : @"NO");
-//	}
-//    else {
-//        NSLog(@"We have a problem!");
-//    }
-//}
+- (NSMutableArray *) GetCamerasOfLocation:(IECameraLocation *)Location
+{
+    NSMutableArray *cams = [[NSMutableArray alloc] init];
+    
+    IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
+    NSArray *neighbors = [[NSArray alloc] initWithArray:[dbOps GetItemsOfALocation:Location]];
+    
+    for (NSObject *locOrCam in neighbors) 
+    {
+        if([locOrCam isKindOfClass:[IECameraClass class]])
+            [cams addObject:locOrCam];
+    }
+    return cams;
+}
 
 - (void) viewDidUnload 
 {
@@ -186,14 +166,6 @@
     IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
     LocAndCamList = [dbOps GetItemsOfALocation:CurrentCameraLocation];
     [camListTableView reloadData];
-}
-
--(void)viewWillAppear:(BOOL)animated 
-{ 
-    //self.view.frame = CGRectMake(50, -290, 320, 200);
-    CGRect theFrame = [self.view frame];
-    theFrame.origin.y = -290;
-    [super viewWillAppear:animated]; 
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

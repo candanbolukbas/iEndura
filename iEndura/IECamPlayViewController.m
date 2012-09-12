@@ -15,19 +15,29 @@
 @end
 
 @implementation IECamPlayViewController
-
+@synthesize overlayView;
+@synthesize camNameLabel;
+@synthesize camIPLabel;
+@synthesize camModelLabel;
+@synthesize nextCamLabel, playCamLabel, prevCamLabel, nextButton, prevButton, neighborCameras;
 @synthesize CurrentCamera, testLabel, screenshotImageView, addToFavoritesButton, playScrollView;
 @synthesize alertBoxBGImageView, alertBoxIconImageView, alertBoxDescLabel, videoWebView;
 @synthesize imageTimer, dismissButton, playSmoothButton, playSmoothTimer, serverDefineView, showDismissButton;
 
-- (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag 
+- (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag withObject:(NSObject *)additionalParameters 
 {
 	if (tag == IE_Req_CamImage)  
     {
-        NSString *base64EncodedString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSData *imgData = [[NSData alloc] initWithBase64EncodedString:base64EncodedString];
-        UIImage *ret = [UIImage imageWithData:imgData];
-        screenshotImageView.image = ret;
+        IECameraClass *cc = [[IECameraClass alloc] init];
+        cc = (IECameraClass *)additionalParameters;
+        if([cc.Name isEqualToString:CurrentCamera.Name] && [cc.IP isEqualToString:CurrentCamera.IP])
+        {
+            NSString *base64EncodedString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSData *imgData = [[NSData alloc] initWithBase64EncodedString:base64EncodedString];
+            UIImage *ret = [UIImage imageWithData:imgData];
+            screenshotImageView.image = ret;
+        }
+        connnectionReady = YES;
     }
     else if (tag == IE_Req_CamHls) 
     {
@@ -42,9 +52,14 @@
             [playSmoothTimer invalidate];
             [playSmoothButton setEnabled:YES];
             playSmoothCounter = 20;
+            NSLog(@"%@", streamUrl);
             [videoWebView loadRequest:[NSURLRequest requestWithURL:streamUrl]];
         }
-        else {
+        else 
+        {
+            [playSmoothTimer invalidate];
+            [playSmoothButton setEnabled:YES];
+            playSmoothCounter = 20;
             testLabel.text = sc.Value;
         }
     }
@@ -62,11 +77,51 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void)SetPlayButtons
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    testLabel.text = CurrentCamera.Name;
+    int neighborCount = neighborCameras.count;
+    if(neighborCount > 0)
+    {
+        int camIndex = [self FindIndexOfCamera:CurrentCamera InArray:neighborCameras];
+        if (camIndex != -1) 
+        {
+            if (camIndex == 0) 
+            {
+                [prevButton setEnabled:NO];
+                [prevCamLabel setText:@""];
+            }
+            else 
+            {
+                [prevButton setEnabled:YES];
+                IECameraClass *prevCam = [[IECameraClass alloc] init];
+                prevCam = [neighborCameras objectAtIndex:camIndex-1];
+                [prevCamLabel setText:prevCam.Name];
+            }
+            if (camIndex == neighborCount - 1) 
+            {
+                [nextButton setEnabled:NO];
+                [nextCamLabel setText:@""];
+            }
+            else 
+            {
+                [nextButton setEnabled:YES];
+                IECameraClass *nextCam = [[IECameraClass alloc] init];
+                nextCam = [neighborCameras objectAtIndex:camIndex+1];
+                [nextCamLabel setText:nextCam.Name];
+            }
+        }
+    }
+    else 
+    {
+        [prevButton setEnabled:NO];
+        [prevCamLabel setText:@""];
+        [nextButton setEnabled:NO];
+        [nextCamLabel setText:@""];
+    }
+}
+
+- (void)SetFavoriteButton
+{
     NSArray *currentFovorites = [IEHelperMethods getUserDefaultSettingsArray:FAVORITE_CAMERAS_KEY];
     if([currentFovorites containsObject:CurrentCamera.IP])
     {
@@ -78,29 +133,50 @@
         UIImage *btnImage = [UIImage imageNamed:@"button_circular_fav_disabled.png"];
         [addToFavoritesButton setImage:btnImage forState:UIControlStateNormal];
     }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
     
     UITapGestureRecognizer *oneFingerDoubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTouchAction)];
 	[oneFingerDoubleTap setNumberOfTapsRequired:1];
 	[oneFingerDoubleTap setNumberOfTouchesRequired:1];
     [screenshotImageView addGestureRecognizer:oneFingerDoubleTap];
-	//[self.view addGestureRecognizer:oneFingerDoubleTap];
+	
     if (showDismissButton) 
     {
         [self.dismissButton setHidden:NO];
     }
+    
+    [self SetFavoriteButton];
+    [self SetPlayButtons];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)SetScreenShotImage
 {
+    testLabel.text = CurrentCamera.Name;
     if(CurrentCamera.uuid.length > 0)
     {
         [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
-        imageTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(UpdateImage:) userInfo:nil repeats:YES];
+        connnectionReady = YES;
+        imageTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(UpdateImage:) userInfo:nil repeats:YES];
     }
     else 
     {
         screenshotImageView.image = [UIImage imageNamed:@"no_preview.png"];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if(APP_DELEGATE.currCam != nil)
+    {
+        CurrentCamera = APP_DELEGATE.currCam;
+        APP_DELEGATE.currCam = nil;
+    }
+    [self ResetObjects];
 }
 
 - (void)viewDidUnload
@@ -115,9 +191,19 @@
     [self setAlertBoxIconImageView:nil];
     [self setAlertBoxDescLabel:nil];
     [self setDismissButton:nil];
+    [self setPlaySmoothButton:nil];
+    [self setNextButton:nil];
+    [self setPrevButton:nil];
+    [self setNextCamLabel:nil];
+    [self setPlayCamLabel:nil];
+    [self setPrevCamLabel:nil];
+    [self setOverlayView:nil];
     CurrentCamera = nil;
     civc = nil;
-    [self setPlaySmoothButton:nil];
+    neighborCameras = nil;
+    [self setCamNameLabel:nil];
+    [self setCamIPLabel:nil];
+    [self setCamModelLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -137,7 +223,7 @@
     }
     else 
     {
-        playScrollView.contentSize = CGSizeMake(480, 400);
+        playScrollView.contentSize = CGSizeMake(480, 370);
     }
     return YES;
 }
@@ -145,9 +231,14 @@
 - (void)UpdateImage:(NSTimer *)theTimer 
 {
     NSURL *camImgUrl = [IEServiceManager GetCamImgUrl:CurrentCamera.IP];
-	IEConnController *controller = [[IEConnController alloc] initWithURL:camImgUrl property:IE_Req_CamImage];
-	controller.delegate = self;
-	[controller startConnection];
+    if(connnectionReady)
+    {
+        IEConnController *controller = [[IEConnController alloc] initWithURL:camImgUrl property:IE_Req_CamImage];
+        controller.delegate = self;
+        controller.addParams = CurrentCamera;
+        [controller startConnection];
+        connnectionReady = NO;
+    }
 }
 
 - (void)UpdatePlaySmoothCounter:(NSTimer *)theTimer
@@ -159,7 +250,8 @@
     }
     else
     {
-        [playSmoothButton setTitle:[NSString stringWithFormat:@"The stream will be ready in %d secs.", playSmoothCounter--] forState:UIControlStateDisabled];
+        testLabel.text = [NSString stringWithFormat:@"The smooth stream will be ready in %d secs.", playSmoothCounter--];
+        //[playSmoothButton setTitle:[NSString stringWithFormat:@"The stream will be ready in %d secs.", playSmoothCounter--] forState:UIControlStateDisabled];
     }
 }
 
@@ -172,8 +264,78 @@
     
     playSmoothCounter = 20;
     [playSmoothButton setEnabled:NO];
-    [playSmoothButton setTitle:[NSString stringWithFormat:@"The stream will be ready in %d secs.", playSmoothCounter] forState:UIControlStateDisabled];
+    testLabel.text = [NSString stringWithFormat:@"The smooth stream will be ready in %d secs.", playSmoothCounter--];
+    //[playSmoothButton setTitle:[NSString stringWithFormat:@"The stream will be ready in %d secs.", playSmoothCounter] forState:UIControlStateDisabled];
     playSmoothTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(UpdatePlaySmoothCounter:) userInfo:nil repeats:YES];
+}
+
+- (void) ResetObjects
+{        
+    [imageTimer invalidate];
+    [self setImageTimer:nil];
+    screenshotImageView.image = [UIImage imageNamed:@"connecting.png"];
+    camIPLabel.text = CurrentCamera.IP;
+    camModelLabel.text = CurrentCamera.UpnpModelNumber;
+    camNameLabel.text = CurrentCamera.Name;
+    [self.navigationItem setTitle:CurrentCamera.Name];
+    [self SetFavoriteButton];
+    [self SetPlayButtons];
+    [self SetScreenShotImage];
+}
+
+- (int) FindIndexOfCamera:(IECameraClass *)cam InArray:(NSArray *)camArray
+{
+    for (int i=0; i < camArray.count; i++) 
+    {
+        IECameraClass *cc = [[IECameraClass alloc] init];
+        cc = [camArray objectAtIndex:i];
+        if([cc.Name isEqualToString:cam.Name] && [cc.IP isEqualToString:cam.IP ])
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+- (IBAction)swipeLeftImageView
+{
+    [self nextButtonClicked:nil];
+}
+- (IBAction)swipeRightImageView
+{
+    [self prevButtonClicked:nil];
+}
+
+- (IBAction)prevButtonClicked:(UIButton *)sender 
+{
+    [self showUpdateView];
+    int camIndex = [self FindIndexOfCamera:CurrentCamera InArray:neighborCameras];
+    
+    if (camIndex != -1 && camIndex != 0) 
+    {
+        IECameraClass *prevCam = [[IECameraClass alloc] init];
+        prevCam = [neighborCameras objectAtIndex:camIndex-1];
+        CurrentCamera = prevCam;
+        
+        [self ResetObjects];
+    }
+    [self hideUpdateView];
+}
+
+- (IBAction)nextButtonClicked:(UIButton *)sender 
+{
+    [self showUpdateView];
+    int camIndex = [self FindIndexOfCamera:CurrentCamera InArray:neighborCameras];
+   
+    if (camIndex != -1 && camIndex != neighborCameras.count-1) 
+    {
+        IECameraClass *nextCam = [[IECameraClass alloc] init];
+        nextCam = [neighborCameras objectAtIndex:camIndex+1];
+        CurrentCamera = nextCam;
+        
+        [self ResetObjects];
+    }
+    [self hideUpdateView];
 }
 
 - (void)dismissAlertWindow
@@ -257,8 +419,29 @@
 {
     civc = [[IECamImgViewController alloc] init];
     civc.CurrentCamera = CurrentCamera;
+    civc.neighborCameras = neighborCameras;
     self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentModalViewController:civc animated:YES];
+}
+
+
+- (void) showUpdateView
+{
+    [overlayView setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.3f]];
+    [overlayView setAlpha:0.0f];
+    
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         [overlayView setAlpha:1.0f];
+                     }];
+}
+
+- (void) hideUpdateView
+{
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         [overlayView setAlpha:0.0f];
+                     }];
 }
 
 

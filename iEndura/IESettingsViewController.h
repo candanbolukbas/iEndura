@@ -19,8 +19,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *settingsScrollView;
+@property (weak, nonatomic) IBOutlet UISwitch *autoUpdateSwitch;
 
 - (IBAction)saveButtonClicked:(UIButton *)sender;
 - (IBAction)locoutButtonClicked:(id)sender;
+- (IBAction)changeAutoDBUpdate:(UISwitch *)sender;
 
 @end

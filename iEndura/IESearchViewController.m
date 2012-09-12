@@ -66,6 +66,7 @@
     IECameraClass *cc = [CamList objectAtIndex:indexPath.row];
     IECamPlayViewController *cpvc = [[IECamPlayViewController alloc] init];
     cpvc.CurrentCamera = cc;
+    cpvc.neighborCameras = CamList;
     [cpvc.navigationItem setTitle:cc.Name];
     [self.navigationController pushViewController:cpvc animated:YES];
 }
@@ -98,6 +99,7 @@
     AllCams = [dbOps GetCameraList];
     CamList = [[NSArray alloc] initWithArray:AllCams];
 	self.navigationController.navigationBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
+	self.searchDisplayController.searchBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
     // Do any additional setup after loading the view from its nib.
 }
 

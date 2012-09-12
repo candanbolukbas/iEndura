@@ -50,6 +50,7 @@
         
         [self animateButton:button angle:120-(i*30)];
     }
+    APP_DELEGATE.favMenuOpened = YES;
 }
 
 - (IBAction)animateButton:(UIButton *)sender angle:(CGFloat)angle
@@ -182,6 +183,7 @@
             [label removeFromSuperview];
             [self animateButtonSwap:button isFinished:i==12];
         }
+        APP_DELEGATE.favMenuOpened = NO;
         [self dismissModalViewControllerAnimated:YES];
     }
     else if(sender.tag-1 < [currentFavorites count])
@@ -189,6 +191,10 @@
         IECameraClass *currentCamera = [currentFavorites objectAtIndex:sender.tag-1];
         IECamPlayViewController *cpvc = [[IECamPlayViewController alloc] init];
         cpvc.CurrentCamera = currentCamera;
+        IECameraLocation *CurrentCameraLocation = [[IECameraLocation alloc] init];
+        CurrentCameraLocation.LocationType = IE_Cam_Loc_Fav;
+        NSArray *neighborCameras = [[NSArray alloc] initWithArray:[self GetCamerasOfLocation:CurrentCameraLocation]];
+        cpvc.neighborCameras = neighborCameras;
         [cpvc.dismissButton setHidden:NO];
         cpvc.showDismissButton = YES;
         [self presentModalViewController:cpvc animated:YES];
@@ -198,4 +204,23 @@
         [self animateAlertBox:@"No favorite in this slot!"];
     }
 }
+
+- (NSMutableArray *) GetCamerasOfLocation:(IECameraLocation *)Location
+{
+    NSMutableArray *cams = [[NSMutableArray alloc] init];
+    
+    IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
+    NSArray *neighbors = [[NSArray alloc] initWithArray:[dbOps GetItemsOfALocation:Location]];
+    
+    for (NSObject *locOrCam in neighbors) 
+    {
+        if([locOrCam isKindOfClass:[IECameraClass class]])
+            [cams addObject:locOrCam];
+    }
+    return cams;
+}
+
 @end
+
+
+

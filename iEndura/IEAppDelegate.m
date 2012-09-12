@@ -17,7 +17,7 @@
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
-@synthesize userSeesionId, navBarTitle, tabBarController, dbRequiresUpdate;
+@synthesize userSeesionId, navBarTitle, tabBarController, dbRequiresUpdate, favMenuOpened, currCam;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -28,7 +28,9 @@
     [UIApplication sharedApplication].keyWindow.frame=CGRectMake(0, 20, 320, 460);
     APP_DELEGATE.userSeesionId = @"";
     APP_DELEGATE.dbRequiresUpdate = NO;
-    
+    APP_DELEGATE.favMenuOpened = NO;
+    APP_DELEGATE.currCam = nil;
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
@@ -41,6 +43,7 @@
         NSArray *favoriteCameras = [[NSArray alloc] init];
         [IEHelperMethods setUserDefaultSettingsObject:favoriteCameras key:FAVORITE_CAMERAS_KEY];
         [IEHelperMethods setUserDefaultSettingsString:NEGATIVE_VALUE key:APP_REQUIRES_INIT_KEY];
+        [IEHelperMethods setUserDefaultSettingsString:POZITIVE_VALUE key:AUTO_UPDATE_CAMERA_DB_KEY];
     }
     
     [self setUpTabBar];

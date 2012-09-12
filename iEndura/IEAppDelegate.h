@@ -7,6 +7,7 @@
 //
 
 @class IEMainViewController;
+@class IECameraClass;
 
 @interface IEAppDelegate : UIResponder <UIApplicationDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate>
 
@@ -17,5 +18,7 @@
 @property (nonatomic, strong) NSString *userSeesionId;
 @property (nonatomic, strong) NSString *navBarTitle;
 @property (nonatomic, assign) BOOL dbRequiresUpdate;
+@property (nonatomic, assign) BOOL favMenuOpened;
+@property (nonatomic, strong) IECameraClass *currCam;
 
 @end

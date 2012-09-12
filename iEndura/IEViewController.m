@@ -16,6 +16,7 @@
 
 @implementation IEViewController
 @synthesize editServerButton;
+@synthesize changeServer;
 @synthesize serverResultLabel, submitButton;
 @synthesize userNameTextField, passwordTextField, resultLabel, serviceUrlTextField;
 
@@ -39,7 +40,8 @@
     }
 }
 
-- (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag {
+- (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag withObject:(NSObject *)additionalParameters
+{
 	if (tag == IE_Req_Auth) 
     {
 		[self setUserCridentials:data];
@@ -106,6 +108,7 @@
     [self setResultLabel:nil];
     [self setServerResultLabel:nil];
     [self setEditServerButton:nil];
+    [self setChangeServer:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -118,7 +121,7 @@
 {
     if(authTimerCounter == 30)
     {
-        [submitButton setEnabled:YES];
+        [self EnableInputFields:YES];
         [submitButton setTitle:@"Submit" forState:UIControlStateNormal];
         [resultLabel setText:@"Can't connect to server. Please check server name."];
         [authTimer invalidate];
@@ -129,12 +132,19 @@
     }
 }
 
+- (void) EnableInputFields:(BOOL)setEnable
+{
+    [submitButton setEnabled:setEnable];
+    [changeServer setEnabled:setEnable];
+    [userNameTextField setEnabled:setEnable];
+    [passwordTextField setEnabled:setEnable];
+}
+
 - (IBAction) submitButtonClicked:(UIButton *)sender {
     [passwordTextField resignFirstResponder];
     [userNameTextField resignFirstResponder];
-    [submitButton setEnabled:NO];
+    [self EnableInputFields:NO];
     [submitButton setTitle:@"Submitting..." forState:UIControlStateDisabled];
-    //[resultLabel setText:@"Submitting"];
     
     NSString *username = userNameTextField.text;
     NSString *password = passwordTextField.text;

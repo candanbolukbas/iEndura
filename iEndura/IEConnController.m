@@ -9,7 +9,7 @@
 #import "IEConnController.h"
 
 @implementation IEConnController
-@synthesize delegate;
+@synthesize delegate, addParams;
 
 - (id) initWithURL:(NSURL *)url property:(iEnduraRequestTypes)tag 
 {
@@ -73,7 +73,7 @@
 {
     @try 
     {
-        [self.delegate finishedWithData:resultData forTag:connTag];
+        [self.delegate finishedWithData:resultData forTag:connTag withObject:addParams];
     }
     @catch (NSException *exception) 
     {

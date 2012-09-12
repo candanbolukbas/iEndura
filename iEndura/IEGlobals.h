@@ -29,9 +29,10 @@
 #define IENDURA_PASSWORD_KEY @"IENDURA_PASSWORD"
 #define APP_REQUIRES_INIT_KEY @"APP_REQUIRES_INIT" 
 #define FAVORITE_CAMERAS_KEY @"FAVORITE_CAMERAS"
-#define FAVORITE_CAMERAS_TITLE @"Favorite Cameras"
+#define AUTO_UPDATE_CAMERA_DB_KEY @"AUTO_UPDATE_CAMERA_DB"
 
 #define allTrim(object) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
 
+#define FAVORITE_CAMERAS_TITLE @"Favorite Cameras"
 #define POZITIVE_VALUE @"1"
 #define NEGATIVE_VALUE @"0"

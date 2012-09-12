@@ -15,6 +15,7 @@
 
 @implementation IESettingsViewController
 @synthesize settingsScrollView;
+@synthesize autoUpdateSwitch;
 @synthesize logoutButton;
 @synthesize serviceUrlTextField;
 @synthesize userNameTextField;
@@ -37,6 +38,16 @@
     serviceUrlTextField.text = [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_ADDRESS_KEY];
     userNameTextField.text = [IEHelperMethods getUserDefaultSettingsString:IENDURA_USERNAME_KEY];
     passwordTestField.text = [IEHelperMethods getUserDefaultSettingsString:IENDURA_PASSWORD_KEY];
+    NSString *autoUpdate = [IEHelperMethods getUserDefaultSettingsString:AUTO_UPDATE_CAMERA_DB_KEY];
+    
+    if([autoUpdate isEqualToString:POZITIVE_VALUE])
+    {
+        [autoUpdateSwitch setOn:YES];
+    }
+    else {
+        [autoUpdateSwitch setOn:NO];
+    }
+    
 	self.navigationController.navigationBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
     //CrudOp *dbCrud = [[CrudOp alloc] init];
     //[dbCrud CopyDbToDocumentsFolder];
@@ -52,6 +63,7 @@
     [self setPasswordTestField:nil];
     [self setSaveButton:nil];
     [self setLogoutButton:nil];
+    [self setAutoUpdateSwitch:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -62,11 +74,11 @@
     //return (interfaceOrientation == UIInterfaceOrientationPortrait);
     if(interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
     {
-        settingsScrollView.contentSize = CGSizeMake(320, 370);
+        settingsScrollView.contentSize = CGSizeMake(320, 380);
     }
     else 
     {
-        settingsScrollView.contentSize = CGSizeMake(480, 370);
+        settingsScrollView.contentSize = CGSizeMake(480, 380);
     }
     return YES;
 }
@@ -113,7 +125,6 @@
         controller.delegate = self;
         [controller startConnection];
     };
-    
 }
 
 - (void)CheckAuthResult:(NSTimer *)theTimer
@@ -136,7 +147,8 @@
     }
 }
 
-- (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag {
+- (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag withObject:(NSObject *)additionalParameters
+{
 	if (tag == IE_Req_Auth) 
     {
 		[self setUserCridentials:data];
@@ -181,6 +193,11 @@
 {
     [IEHelperMethods resetUserDefaultSettings];
     [self.tabBarController setSelectedIndex:0];
+}
+
+- (IBAction)changeAutoDBUpdate:(UISwitch *)sender 
+{
+    [IEHelperMethods setUserDefaultSettingsString:(autoUpdateSwitch.on ? POZITIVE_VALUE : NEGATIVE_VALUE) key:AUTO_UPDATE_CAMERA_DB_KEY];
 }
 
 

@@ -53,11 +53,14 @@
 
 - (IBAction)twoFingerTouchAction
 {
-    IEFavoritesViewController *mv = [[IEFavoritesViewController alloc] init];
-    mv.view.opaque = NO;
-    mv.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6f];
-    self.modalPresentationStyle = UIModalPresentationCurrentContext;
-    [self presentModalViewController:mv animated:NO];
+    if(!APP_DELEGATE.favMenuOpened)
+    {
+        IEFavoritesViewController *mv = [[IEFavoritesViewController alloc] init];
+        mv.view.opaque = NO;
+        mv.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6f];
+        self.modalPresentationStyle = UIModalPresentationCurrentContext;
+        [self presentModalViewController:mv animated:NO];
+    }
 }
 
 @end

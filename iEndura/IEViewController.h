@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *serverResultLabel;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 @property (weak, nonatomic) IBOutlet UIButton *editServerButton;
+@property (weak, nonatomic) IBOutlet UIButton *changeServer;
 
 - (IBAction)submitButtonClicked:(UIButton *)sender;
 - (BOOL) textFieldShouldReturn:(UITextField *)textField;

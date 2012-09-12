@@ -40,7 +40,8 @@
     static NSString *CellIdentifier = @"Cell";
     
     DDBadgeViewCell *cell = (DDBadgeViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if (cell == nil) 
+    {
         cell = [[DDBadgeViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
@@ -58,17 +59,6 @@
     
     return cell;
 }
-
-// Override to support editing the table view.
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        // Delete the row from the data source.
-//    }   
-//    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-//    }   
-//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -116,23 +106,24 @@
 - (void) viewDidLoad 
 {
     [super viewDidLoad];
-    timeOutCamList = 60;
+    self.navigationItem.title = @"iEndura";
+	self.navigationController.navigationBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
+	UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(UpdateCameraList:)];
+	self.navigationItem.rightBarButtonItem = rightBtn;
+    
+    timeOutCamList = 30;
     if ([IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY]) 
     {
         if([APP_DELEGATE.userSeesionId isEqualToString:@""])
         {
             NSURL *authUrl = [IEServiceManager GetAuthenticationUrlFromUsrPass];
             [self showUpdateDatabaseView];
+            [updateRsultLabel setText:@"Connecting..."];
             IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:IE_Req_Auth];
             controller.delegate = self;
             [controller startConnection];
         }
     }
-    
-    self.navigationItem.title = @"iEndura";
-	self.navigationController.navigationBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
-	UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(UpdateCameraList:)];
-	self.navigationItem.rightBarButtonItem = rightBtn;
 }
 
 - (void) viewDidUnload 
@@ -160,7 +151,7 @@
     return YES;
 }
 
-- (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag 
+- (void) finishedWithData:(NSData *)data forTag:(iEnduraRequestTypes)tag withObject:(NSObject *)additionalParameters
 {
 	if (tag == IE_Req_Auth) 
     {
@@ -203,7 +194,17 @@
     if ([sc.Id isEqualToString:POZITIVE_VALUE]) 
     {
         APP_DELEGATE.userSeesionId = sc.Value;
-        [self UpdateCameraList:NO];
+        
+        NSString *autoUpdate = [IEHelperMethods getUserDefaultSettingsString:AUTO_UPDATE_CAMERA_DB_KEY];
+        
+        if([autoUpdate isEqualToString:POZITIVE_VALUE])
+        {
+            [self UpdateCameraList:NO];
+        }
+        else 
+        {
+            [self hideUpdateDatabaseView];
+        }
     }
 }
 
@@ -212,7 +213,6 @@
     camListTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(CheckCamListResult:) userInfo:nil repeats:YES];
     camListConnectionCounter = 0;
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
-    [updateRsultLabel setText:@"Updating..."];
     UIView *overlayView = [self.view viewWithTag:105];
     [overlayView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.3f]];
     [overlayView setAlpha:0.0f];
@@ -251,12 +251,29 @@
 
 - (void)UpdateCameraList:(BOOL)showProgress
 {   
+    if ([IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY]) 
+    {
+        if([APP_DELEGATE.userSeesionId isEqualToString:@""])
+        {
+            NSURL *authUrl = [IEServiceManager GetAuthenticationUrlFromUsrPass];
+            [self showUpdateDatabaseView];
+            showProgress = NO;
+            [updateRsultLabel setText:@"Connecting..."];
+            IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:IE_Req_Auth];
+            controller.delegate = self;
+            [controller startConnection];
+        }
+    }
+    
     NSURL *camsUrl = [IEServiceManager GetCamListUrl];
 	IEConnController *controller = [[IEConnController alloc] initWithURL:camsUrl property:IE_Req_CamList];
 	controller.delegate = self;
 	[controller startConnection];
+    [updateRsultLabel setText:@"Updating..."];
     if(showProgress)
+    {
         [self showUpdateDatabaseView];
+    }
 }
 
 @end
