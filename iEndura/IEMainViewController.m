@@ -91,6 +91,10 @@
         self.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:iev animated:YES];
     }
+    else if([APP_DELEGATE.userSeesionId isEqualToString:@""])
+    {
+        [self GetSessionId];
+    }
     
     if(APP_DELEGATE.dbRequiresUpdate)
     {
@@ -103,6 +107,16 @@
     [remoteLocationsTableView reloadData];
 }
 
+- (void)GetSessionId
+{
+    NSURL *authUrl = [IEServiceManager GetAuthenticationUrlFromUsrPass];
+    [self showUpdateDatabaseView];
+    [updateRsultLabel setText:@"Connecting..."];
+    IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:IE_Req_Auth];
+    controller.delegate = self;
+    [controller startConnection];
+}
+
 - (void) viewDidLoad 
 {
     [super viewDidLoad];
@@ -112,18 +126,13 @@
 	self.navigationItem.rightBarButtonItem = rightBtn;
     
     timeOutCamList = 30;
-    if ([IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY]) 
-    {
-        if([APP_DELEGATE.userSeesionId isEqualToString:@""])
-        {
-            NSURL *authUrl = [IEServiceManager GetAuthenticationUrlFromUsrPass];
-            [self showUpdateDatabaseView];
-            [updateRsultLabel setText:@"Connecting..."];
-            IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:IE_Req_Auth];
-            controller.delegate = self;
-            [controller startConnection];
-        }
-    }
+//    if ([IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_USRPASS_KEY]) 
+//    {
+//        if([APP_DELEGATE.userSeesionId isEqualToString:@""])
+//        {
+//            [self GetSessionId];
+//        }
+//    }
 }
 
 - (void) viewDidUnload 
@@ -255,13 +264,8 @@
     {
         if([APP_DELEGATE.userSeesionId isEqualToString:@""])
         {
-            NSURL *authUrl = [IEServiceManager GetAuthenticationUrlFromUsrPass];
-            [self showUpdateDatabaseView];
+            [self GetSessionId];
             showProgress = NO;
-            [updateRsultLabel setText:@"Connecting..."];
-            IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:IE_Req_Auth];
-            controller.delegate = self;
-            [controller startConnection];
         }
     }
     

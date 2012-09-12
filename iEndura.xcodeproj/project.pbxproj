@@ -15,6 +15,14 @@
 		AD28626A15FF8D7D0038C95B /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD28626415FF8D7D0038C95B /* play@2x.png */; };
 		AD28626B15FF8D7D0038C95B /* prev.png in Resources */ = {isa = PBXBuildFile; fileRef = AD28626515FF8D7D0038C95B /* prev.png */; };
 		AD28626C15FF8D7D0038C95B /* prev@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD28626615FF8D7D0038C95B /* prev@2x.png */; };
+		AD286271160106590038C95B /* IEHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28626F160106580038C95B /* IEHelpViewController.m */; };
+		AD286272160106590038C95B /* IEHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD286270160106580038C95B /* IEHelpViewController.xib */; };
+		AD286276160107CD0038C95B /* IEAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD286274160107CC0038C95B /* IEAboutViewController.m */; };
+		AD286277160107CD0038C95B /* IEAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD286275160107CD0038C95B /* IEAboutViewController.xib */; };
+		AD286279160109DA0038C95B /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = AD286278160109DA0038C95B /* help.png */; };
+		AD28627B16010CD10038C95B /* help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD28627A16010CD10038C95B /* help@2x.png */; };
+		AD28627E160111D30038C95B /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = AD28627C160111D30038C95B /* about.png */; };
+		AD28627F160111D30038C95B /* about@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD28627D160111D30038C95B /* about@2x.png */; };
 		AD335BF015F52049004401FA /* IECamPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD335BEE15F52049004401FA /* IECamPlayViewController.m */; };
 		AD335BF115F52049004401FA /* IECamPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD335BEF15F52049004401FA /* IECamPlayViewController.xib */; };
 		AD335BF715F694A2004401FA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD335BF615F694A2004401FA /* MediaPlayer.framework */; };
@@ -113,6 +121,16 @@
 		AD28626415FF8D7D0038C95B /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
 		AD28626515FF8D7D0038C95B /* prev.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prev.png; sourceTree = "<group>"; };
 		AD28626615FF8D7D0038C95B /* prev@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prev@2x.png"; sourceTree = "<group>"; };
+		AD28626E160106570038C95B /* IEHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEHelpViewController.h; sourceTree = "<group>"; };
+		AD28626F160106580038C95B /* IEHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEHelpViewController.m; sourceTree = "<group>"; };
+		AD286270160106580038C95B /* IEHelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IEHelpViewController.xib; sourceTree = "<group>"; };
+		AD286273160107CC0038C95B /* IEAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEAboutViewController.h; sourceTree = "<group>"; };
+		AD286274160107CC0038C95B /* IEAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEAboutViewController.m; sourceTree = "<group>"; };
+		AD286275160107CD0038C95B /* IEAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IEAboutViewController.xib; sourceTree = "<group>"; };
+		AD286278160109DA0038C95B /* help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help.png; sourceTree = "<group>"; };
+		AD28627A16010CD10038C95B /* help@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help@2x.png"; sourceTree = "<group>"; };
+		AD28627C160111D30038C95B /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about.png; sourceTree = "<group>"; };
+		AD28627D160111D30038C95B /* about@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about@2x.png"; sourceTree = "<group>"; };
 		AD335BED15F52049004401FA /* IECamPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IECamPlayViewController.h; sourceTree = "<group>"; };
 		AD335BEE15F52049004401FA /* IECamPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IECamPlayViewController.m; sourceTree = "<group>"; };
 		AD335BEF15F52049004401FA /* IECamPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IECamPlayViewController.xib; sourceTree = "<group>"; };
@@ -254,6 +272,19 @@
 			name = XML;
 			sourceTree = "<group>";
 		};
+		AD286280160118240038C95B /* Other Pages */ = {
+			isa = PBXGroup;
+			children = (
+				AD28626E160106570038C95B /* IEHelpViewController.h */,
+				AD28626F160106580038C95B /* IEHelpViewController.m */,
+				AD286270160106580038C95B /* IEHelpViewController.xib */,
+				AD286273160107CC0038C95B /* IEAboutViewController.h */,
+				AD286274160107CC0038C95B /* IEAboutViewController.m */,
+				AD286275160107CD0038C95B /* IEAboutViewController.xib */,
+			);
+			name = "Other Pages";
+			sourceTree = "<group>";
+		};
 		ADB7243D15EA658300D3D749 /* TemplateClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +357,7 @@
 				ADE7D99C15ED477D007F4C85 /* IESettingsViewController.h */,
 				ADE7D99D15ED477D007F4C85 /* IESettingsViewController.m */,
 				ADE7D99E15ED477D007F4C85 /* IESettingsViewController.xib */,
+				AD286280160118240038C95B /* Other Pages */,
 				ADB7243D15EA658300D3D749 /* TemplateClasses */,
 				ADDE2FBB15E98EAC00DA582D /* Security */,
 				ADE7D9BB15F14D65007F4C85 /* Statics */,
@@ -356,6 +388,10 @@
 		ADDE2FA415E7BE2300DA582D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AD28627C160111D30038C95B /* about.png */,
+				AD28627D160111D30038C95B /* about@2x.png */,
+				AD28627A16010CD10038C95B /* help@2x.png */,
+				AD286278160109DA0038C95B /* help.png */,
 				AD28626115FF8D7D0038C95B /* next.png */,
 				AD28626215FF8D7D0038C95B /* next@2x.png */,
 				AD28626315FF8D7D0038C95B /* play.png */,
@@ -618,6 +654,12 @@
 				AD28626A15FF8D7D0038C95B /* play@2x.png in Resources */,
 				AD28626B15FF8D7D0038C95B /* prev.png in Resources */,
 				AD28626C15FF8D7D0038C95B /* prev@2x.png in Resources */,
+				AD286272160106590038C95B /* IEHelpViewController.xib in Resources */,
+				AD286277160107CD0038C95B /* IEAboutViewController.xib in Resources */,
+				AD286279160109DA0038C95B /* help.png in Resources */,
+				AD28627B16010CD10038C95B /* help@2x.png in Resources */,
+				AD28627E160111D30038C95B /* about.png in Resources */,
+				AD28627F160111D30038C95B /* about@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +694,8 @@
 				ADB05A4E15FAA337004813E0 /* IECamImgViewController.m in Sources */,
 				ADB05A5315FB7B99004813E0 /* IEFavoritesViewController.m in Sources */,
 				ADB05A8215FCCB4E004813E0 /* IESearchViewController.m in Sources */,
+				AD286271160106590038C95B /* IEHelpViewController.m in Sources */,
+				AD286276160107CD0038C95B /* IEAboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

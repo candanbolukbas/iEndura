@@ -12,6 +12,8 @@
 #import "IESettingsViewController.h"
 #import "IECamListViewController.h"
 #import "IESearchViewController.h"
+#import "IEHelpViewController.h"
+#import "IEAboutViewController.h"
 
 @implementation IEAppDelegate
 
@@ -80,6 +82,18 @@
     forthViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:tbaImageSettings tag:3];
     UINavigationController *forthNavController = [[UINavigationController alloc]initWithRootViewController:forthViewController];
     
+//    IEHelpViewController *fifthViewController = [[IEHelpViewController alloc]init];
+//    firstViewController.title = @"Help";
+//    UIImage *tbaImageHelp = [UIImage imageNamed:@"help.png"];
+//    fifthViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Help" image:tbaImageHelp tag:4];
+//    UINavigationController *fifthNavController = [[UINavigationController alloc]initWithRootViewController:fifthViewController];
+//    
+//    IEAboutViewController *sixthViewController = [[IEAboutViewController alloc]init];
+//    sixthViewController.title = @"About";
+//    UIImage *tbaImageAbout = [UIImage imageNamed:@"about.png"];
+//    sixthViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"About" image:tbaImageAbout tag:5];
+//    UINavigationController *sixhNavController = [[UINavigationController alloc]initWithRootViewController:sixthViewController];
+    
     tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
     tabBarController.viewControllers = [[NSArray alloc] initWithObjects:firstNavController, secondNavController, thirdNavController, forthNavController, nil];
     tabBarController.tabBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARKER_BLUE];
@@ -108,6 +122,33 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    //[self.tabBarController setSelectedIndex:0];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+	
+	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
+    [UIApplication sharedApplication].keyWindow.frame=CGRectMake(0, 20, 320, 460);
+    APP_DELEGATE.userSeesionId = @"";
+    APP_DELEGATE.dbRequiresUpdate = NO;
+    APP_DELEGATE.favMenuOpened = NO;
+    APP_DELEGATE.currCam = nil;
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    self.window.rootViewController = self.viewController;
+    [self.window makeKeyAndVisible];
+    
+    NSString *app_requires_init = [IEHelperMethods getUserDefaultSettingsString:APP_REQUIRES_INIT_KEY];
+    
+    if(app_requires_init == nil || [app_requires_init isEqualToString:POZITIVE_VALUE])
+    {
+        IEDatabaseOps *dbOps = [[IEDatabaseOps alloc] init];
+        [dbOps CopyDbToDocumentsFolder];
+        NSArray *favoriteCameras = [[NSArray alloc] init];
+        [IEHelperMethods setUserDefaultSettingsObject:favoriteCameras key:FAVORITE_CAMERAS_KEY];
+        [IEHelperMethods setUserDefaultSettingsString:NEGATIVE_VALUE key:APP_REQUIRES_INIT_KEY];
+        [IEHelperMethods setUserDefaultSettingsString:POZITIVE_VALUE key:AUTO_UPDATE_CAMERA_DB_KEY];
+    }
+    
+    [self setUpTabBar];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

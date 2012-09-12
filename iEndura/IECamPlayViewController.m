@@ -63,8 +63,15 @@
             testLabel.text = sc.Value;
         }
     }
-	else 
+	else if (tag == IE_Req_Auth)
     {
+        NSDictionary *jsDict = [IEHelperMethods getExtractedDataFromJSONItem:data];
+        SimpleClass *sc = [[SimpleClass alloc] initWithDictionary:jsDict];
+        if ([sc.Id isEqualToString:POZITIVE_VALUE]) 
+        {
+            APP_DELEGATE.userSeesionId = sc.Value;
+            [self hideUpdateView];
+        }
     }
 }
 
@@ -176,7 +183,15 @@
         CurrentCamera = APP_DELEGATE.currCam;
         APP_DELEGATE.currCam = nil;
     }
-    [self ResetObjects];
+    
+    if([APP_DELEGATE.userSeesionId isEqualToString:@""])
+    {
+        [self GetSessionId];
+    }
+    else 
+    {
+        [self ResetObjects];
+    }
 }
 
 - (void)viewDidUnload
@@ -239,6 +254,15 @@
         [controller startConnection];
         connnectionReady = NO;
     }
+}
+
+- (void)GetSessionId
+{
+    NSURL *authUrl = [IEServiceManager GetAuthenticationUrlFromUsrPass];
+    [self showUpdateView];
+    IEConnController *controller = [[IEConnController alloc] initWithURL:authUrl property:IE_Req_Auth];
+    controller.delegate = self;
+    [controller startConnection];
 }
 
 - (void)UpdatePlaySmoothCounter:(NSTimer *)theTimer
@@ -427,12 +451,12 @@
 
 - (void) showUpdateView
 {
-    [overlayView setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.3f]];
+    //[overlayView setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.0f]];
     [overlayView setAlpha:0.0f];
     
     [UIView animateWithDuration:0.5
                      animations:^{
-                         [overlayView setAlpha:1.0f];
+                         [overlayView setAlpha:0.9f];
                      }];
 }
 
