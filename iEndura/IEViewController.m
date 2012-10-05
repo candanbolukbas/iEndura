@@ -76,7 +76,7 @@
     SimpleClass *sc = [[SimpleClass alloc] initWithDictionary:jsDict];
     if(sc == nil)
     {
-        [submitButton setEnabled:YES];
+        [self EnableInputFields:YES];
         [submitButton setTitle:@"Submit" forState:UIControlStateNormal];
         [resultLabel setText:@"Can't connect to server. Please check server name."];
     }
@@ -96,7 +96,7 @@
     }
     else 
     {
-        [submitButton setEnabled:YES];
+        [self EnableInputFields:YES];
         [submitButton setTitle:@"Submit" forState:UIControlStateNormal];
         [resultLabel setText:sc.Value];
     }

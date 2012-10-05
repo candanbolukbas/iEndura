@@ -63,12 +63,12 @@
         if(CurrentCameraLocation.LocationType == IE_Cam_Loc_Remote)
         {
             cell.summary = cl.LocationRoot;
-            cell.detail = @"Detail text goes here";
+            cell.detail = [NSString stringWithFormat:@"%@", CurrentCameraLocation.RemoteLocation];
         }
         else if(CurrentCameraLocation.LocationType == IE_Cam_Loc_Root)
         {
             cell.summary = cl.LocationChild;
-            cell.detail = @"Detail text goes here";
+            cell.detail = [NSString stringWithFormat:@"%@/%@", CurrentCameraLocation.RemoteLocation, cl.LocationRoot];
         }
         cell.badgeText = cl.NumberOfCameras;
         cell.badgeColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
@@ -170,7 +170,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
     return YES;
 }
 

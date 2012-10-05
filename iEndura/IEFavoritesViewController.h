@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *alertBoxDescLabel;
 
 - (IBAction)favButtonClicked:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UIView *favContainerView;
 
 @end

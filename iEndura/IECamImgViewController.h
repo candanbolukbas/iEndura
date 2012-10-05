@@ -19,7 +19,6 @@
 @property (nonatomic,retain) IECameraClass *CurrentCamera;
 @property (weak, nonatomic) IBOutlet UIImageView *screenshotImageView;
 @property (nonatomic,retain) NSArray *neighborCameras;
-@property (weak, nonatomic) IBOutlet UIWebView *videoWebView;
 @property (nonatomic, retain) NSTimer *imageTimer;
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
 

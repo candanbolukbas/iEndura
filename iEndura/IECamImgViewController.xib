@@ -43,7 +43,7 @@
 						<string key="NSFrameSize">{320, 460}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="570103941"/>
+						<reference key="NSNextKeyView" ref="2173748"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -53,7 +53,7 @@
 						<array key="IBUIGestureRecognizers" id="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIView" id="570103941">
+					<object class="IBUIView" id="2173748">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{320, 460}</string>
@@ -63,7 +63,7 @@
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
-							<object class="NSColorSpace" key="NSCustomColorSpace" id="178950375">
+							<object class="NSColorSpace" key="NSCustomColorSpace" id="347519238">
 								<int key="NSID">2</int>
 							</object>
 						</object>
@@ -78,15 +78,15 @@
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
-					<reference key="NSCustomColorSpace" ref="178950375"/>
+					<reference key="NSCustomColorSpace" ref="347519238"/>
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUISwipeGestureRecognizer" id="768001623"/>
-			<object class="IBUISwipeGestureRecognizer" id="870848235">
+			<object class="IBUISwipeGestureRecognizer" id="664853231"/>
+			<object class="IBUISwipeGestureRecognizer" id="370666689">
 				<int key="IBUIDirection">2</int>
 			</object>
-			<object class="IBUITapGestureRecognizer" id="731468047"/>
+			<object class="IBUITapGestureRecognizer" id="9350159"/>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -110,7 +110,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">overlayView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="570103941"/>
+						<reference key="destination" ref="2173748"/>
 					</object>
 					<int key="connectionID">19</int>
 				</object>
@@ -118,7 +118,7 @@
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">gestureRecognizers</string>
 						<reference key="source" ref="69413570"/>
-						<reference key="destination" ref="768001623"/>
+						<reference key="destination" ref="664853231"/>
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
@@ -128,7 +128,7 @@
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">gestureRecognizers</string>
 						<reference key="source" ref="69413570"/>
-						<reference key="destination" ref="870848235"/>
+						<reference key="destination" ref="370666689"/>
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
@@ -138,7 +138,7 @@
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">gestureRecognizers</string>
 						<reference key="source" ref="69413570"/>
-						<reference key="destination" ref="731468047"/>
+						<reference key="destination" ref="9350159"/>
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
@@ -147,7 +147,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="768001623"/>
+						<reference key="source" ref="664853231"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">11</int>
@@ -155,7 +155,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">imageSwipeRightAction</string>
-						<reference key="source" ref="768001623"/>
+						<reference key="source" ref="664853231"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">12</int>
@@ -163,7 +163,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="870848235"/>
+						<reference key="source" ref="370666689"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">10</int>
@@ -171,7 +171,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">imageSwipeLeftAction</string>
-						<reference key="source" ref="870848235"/>
+						<reference key="source" ref="370666689"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">13</int>
@@ -179,7 +179,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="731468047"/>
+						<reference key="source" ref="9350159"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">16</int>
@@ -187,7 +187,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">imageViewTouchAction</string>
-						<reference key="source" ref="731468047"/>
+						<reference key="source" ref="9350159"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">17</int>
@@ -206,7 +206,7 @@
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="69413570"/>
-							<reference ref="570103941"/>
+							<reference ref="2173748"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -229,22 +229,22 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
-						<reference key="object" ref="768001623"/>
+						<reference key="object" ref="664853231"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">8</int>
-						<reference key="object" ref="870848235"/>
+						<reference key="object" ref="370666689"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
-						<reference key="object" ref="731468047"/>
+						<reference key="object" ref="9350159"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
-						<reference key="object" ref="570103941"/>
+						<reference key="object" ref="2173748"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>

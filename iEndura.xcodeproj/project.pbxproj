@@ -108,6 +108,7 @@
 		ADE7D9E215F2721D007F4C85 /* IECameraLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9E115F2721D007F4C85 /* IECameraLocation.m */; };
 		ADE7D9E615F2732E007F4C85 /* IECamListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7D9E415F2732C007F4C85 /* IECamListViewController.m */; };
 		ADE7D9E715F2732E007F4C85 /* IECamListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE7D9E515F2732E007F4C85 /* IECamListViewController.xib */; };
+		ADFD8A5416135522006715B1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADFD8A5316135522006715B1 /* Default-568h@2x.png */; };
 		EB3C5FA215ECE522000B4E70 /* IEConnController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3C5FA115ECE522000B4E70 /* IEConnController.m */; };
 /* End PBXBuildFile section */
 
@@ -242,6 +243,7 @@
 		ADE7D9E315F2732B007F4C85 /* IECamListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IECamListViewController.h; sourceTree = "<group>"; };
 		ADE7D9E415F2732C007F4C85 /* IECamListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IECamListViewController.m; sourceTree = "<group>"; };
 		ADE7D9E515F2732E007F4C85 /* IECamListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IECamListViewController.xib; sourceTree = "<group>"; };
+		ADFD8A5316135522006715B1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		EB3C5FA015ECE522000B4E70 /* IEConnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEConnController.h; sourceTree = "<group>"; };
 		EB3C5FA115ECE522000B4E70 /* IEConnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEConnController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -299,6 +301,7 @@
 		ADDE2F6D15E7B1A200DA582D = {
 			isa = PBXGroup;
 			children = (
+				ADFD8A5316135522006715B1 /* Default-568h@2x.png */,
 				ADB05A9615FD155C004813E0 /* Default@2x.png */,
 				ADB05A9415FD1553004813E0 /* Default.png */,
 				ADDE2F8215E7B1A200DA582D /* iEndura */,
@@ -566,7 +569,7 @@
 			attributes = {
 				CLASSPREFIX = IE;
 				LastUpgradeCheck = 0430;
-				ORGANIZATIONNAME = "T.C. Cumhurbaşkanlığı";
+				ORGANIZATIONNAME = "Polar Software";
 			};
 			buildConfigurationList = ADDE2F7215E7B1A200DA582D /* Build configuration list for PBXProject "iEndura" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -660,6 +663,7 @@
 				AD28627B16010CD10038C95B /* help@2x.png in Resources */,
 				AD28627E160111D30038C95B /* about.png in Resources */,
 				AD28627F160111D30038C95B /* about@2x.png in Resources */,
+				ADFD8A5416135522006715B1 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,6 +778,7 @@
 				INFOPLIST_FILE = "iEndura/iEndura-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -786,6 +791,7 @@
 				INFOPLIST_FILE = "iEndura/iEndura-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

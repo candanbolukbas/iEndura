@@ -71,7 +71,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
     if(interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
     {
         settingsScrollView.contentSize = CGSizeMake(320, 380);
@@ -192,6 +191,9 @@
 - (IBAction)locoutButtonClicked:(id)sender 
 {
     [IEHelperMethods resetUserDefaultSettings];
+    userNameTextField.text = @"";
+    passwordTestField.text = @"";
+    serviceUrlTextField.text = @"";
     [self.tabBarController setSelectedIndex:0];
 }
 

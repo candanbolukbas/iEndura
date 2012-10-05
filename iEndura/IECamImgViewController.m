@@ -16,7 +16,7 @@
 @implementation IECamImgViewController
 @synthesize overlayView;
 
-@synthesize CurrentCamera, screenshotImageView, videoWebView, imageTimer, neighborCameras;
+@synthesize CurrentCamera, screenshotImageView, imageTimer, neighborCameras;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,14 +31,12 @@
 {
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-    [UIApplication sharedApplication].keyWindow.frame=CGRectMake(0, 0, 320, 480);
     connectionReady = YES;
 }
 
 - (void)viewDidUnload
 {
     [self setScreenshotImageView:nil];
-    [self setVideoWebView:nil];
     [self setImageTimer:nil];
     CurrentCamera = nil;
     [self setOverlayView:nil];
@@ -88,7 +86,12 @@
             NSString *base64EncodedString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSData *imgData = [[NSData alloc] initWithBase64EncodedString:base64EncodedString];
             UIImage *ret = [UIImage imageWithData:imgData];
-            screenshotImageView.image = ret;
+            [UIView transitionWithView:self.view
+                              duration:0.2f
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                screenshotImageView.image = ret;
+                            } completion:NULL];
         }
         connectionReady = YES;
     }

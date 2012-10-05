@@ -27,7 +27,6 @@
     // Override point for customization after application launch.
 	
 	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
-    [UIApplication sharedApplication].keyWindow.frame=CGRectMake(0, 20, 320, 460);
     APP_DELEGATE.userSeesionId = @"";
     APP_DELEGATE.dbRequiresUpdate = NO;
     APP_DELEGATE.favMenuOpened = NO;
@@ -99,7 +98,8 @@
     tabBarController.tabBar.tintColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARKER_BLUE];
     tabBarController.delegate = self;             
     // add tabbar and show
-    [[self window] addSubview:[tabBarController view]];
+    self.window.rootViewController = tabBarController;
+    authTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(extendSessionTime:) userInfo:nil repeats:YES];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -127,7 +127,6 @@
     // Override point for customization after application launch.
 	
 	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
-    [UIApplication sharedApplication].keyWindow.frame=CGRectMake(0, 20, 320, 460);
     APP_DELEGATE.userSeesionId = @"";
     APP_DELEGATE.dbRequiresUpdate = NO;
     APP_DELEGATE.favMenuOpened = NO;
@@ -172,12 +171,24 @@
     viewController.navigationItem.titleView = label;
 }
 
-//- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-//{
-//    UILabel *titleLabel = [[UILabel alloc] init];
-//    titleLabel.font = [UIFont fontWithName:@"Helvetica" size: 15.0];
-//    titleLabel.text = @"iEnduraa";
-//    viewController.navigationItem.titleView = titleLabel;
-//}
+
+- (void)extendSessionTime:(NSTimer *)theTimer
+{
+    dispatch_async(IENDURA_DISPATCH_QUEUE, ^{
+        NSData* data = [NSData dataWithContentsOfURL:[IEServiceManager GetAuthenticationUrlFromUsrPass]];
+        [self performSelectorOnMainThread:@selector(fetchedData:)
+                               withObject:data waitUntilDone:YES];
+    });
+}
+
+- (void)fetchedData:(NSData *)responseData
+{
+    NSDictionary *jsDict = [IEHelperMethods getExtractedDataFromJSONItem:responseData];
+    SimpleClass *sc = [[SimpleClass alloc] initWithDictionary:jsDict];
+    if ([sc.Id isEqualToString:POZITIVE_VALUE])
+    {
+        APP_DELEGATE.userSeesionId = sc.Value;
+    }
+}
 
 @end

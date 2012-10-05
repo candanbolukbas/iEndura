@@ -198,7 +198,7 @@
     if (sqlite3_open([filePath UTF8String], &database) == SQLITE_OK) 
     {
         //setup the SQL statement and compile it for faster access
-        const char *sqlStatement = "SELECT RemoteLocation, COUNT (*) as NumberOfCameras FROM Cameras GROUP BY RemoteLocation ORDER BY RemoteLocation";
+        const char *sqlStatement = "SELECT RemoteLocation, COUNT (*) as NumberOfCameras, SMsIPAddress FROM Cameras GROUP BY RemoteLocation ORDER BY RemoteLocation";
         sqlite3_stmt *compiledStatement;
         
         if (sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) 
@@ -211,6 +211,7 @@
                 //read the data from the result row
                 rl.RemoteLocationName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 0)];
                 rl.NumberOfCameras = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 1)];
+                rl.SMsIPAddress = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)];
                 
                 //add the camera object to the cameras array
                 [remoteLocations addObject:rl];
@@ -224,6 +225,7 @@
             //read the data from the result row
             rl.RemoteLocationName = FAVORITE_CAMERAS_TITLE;
             rl.NumberOfCameras = [NSString stringWithFormat:@"%d", [currentFovorites count]];
+            rl.SMsIPAddress = @"Your favorite cameras";
             
             //add the camera object to the cameras array
             [remoteLocations addObject:rl];

@@ -10,6 +10,6 @@
 
 @implementation IERemoteLocations
 
-@synthesize RemoteLocationName, NumberOfCameras;
+@synthesize RemoteLocationName, NumberOfCameras, SMsIPAddress;
 
 @end

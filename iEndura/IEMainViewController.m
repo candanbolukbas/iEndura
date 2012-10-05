@@ -50,7 +50,7 @@
     
     cell.summary = rl.RemoteLocationName;
     cell.summaryColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
-    cell.detail = @"Detail text goes here";
+    cell.detail = [rl.SMsIPAddress isEqualToString:@""] ? @"No System Manager" : [NSString stringWithFormat:@"%@", rl.SMsIPAddress];
     cell.badgeText = [NSString stringWithFormat:@"%@", rl.NumberOfCameras];
     cell.badgeColor = [IEHelperMethods getColorFromRGBColorCode:BACKGROUNG_COLOR_DARK_BLUE];
     cell.badgeHighlightedColor = [UIColor lightGrayColor];
@@ -147,16 +147,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
-    if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-    {
-        UIView *overlayView = [self.view viewWithTag:105];
-        overlayView.frame = CGRectMake(0, 0, 480, 320);
-    }
-    else 
-    {
-        UIView *overlayView = [self.view viewWithTag:105];
-        overlayView.frame = CGRectMake(0, 0, 320, 480);
-    }
     return YES;
 }
 

@@ -84,12 +84,16 @@
 
 + (NSString *)ConvertJsonStringToNormalString:(NSString *)jsonString
 {
+    if(jsonString == nil)
+        return nil;
     jsonString = [jsonString substringWithRange:NSMakeRange(1, jsonString.length - 2)];
     return  [jsonString stringByReplacingOccurrencesOfString:@"\\" withString:@""]; //url friendly
 }
 
 + (NSArray *)getExtractedDataFromJSONArray:(NSData *)data
 {
+    if(data == nil)
+        return nil;
     NSError* error;
     NSArray *jsArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     return jsArray;
@@ -97,6 +101,8 @@
 
 + (NSDictionary *)getExtractedDataFromJSONItem:(NSData *)data
 {
+    if(data == nil)
+        return nil;
     NSError* error;
     NSDictionary *jsDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     return jsDict;

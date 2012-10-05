@@ -62,8 +62,8 @@
     double angleRadius = (angle / 180) * M_PI;
     
     [UIView animateWithDuration:0.3/1.5 animations:^{
-        //int distance = self.view.center.x > self.view.center.y ? self.view.center.y : self.view.center.x;
-        sender.center = CGPointMake(self.view.center.x + radius * cos(angleRadius), self.view.center.y - radius * sin(angleRadius));
+        double distance = (self.view.frame.size.height - self.view.frame.size.width) / 2;
+        sender.center = CGPointMake(self.favContainerView.center.x + radius * cos(angleRadius), sender.center.y - radius * sin(angleRadius) + distance);
         sender.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.3/2 animations:^{
@@ -83,7 +83,7 @@
     name.font = [UIFont boldSystemFontOfSize:10];
     //name.center = CGPointMake(self.view.center.x + radius * cos(angleRadius) * 0.3, self.view.center.y - radius * sin(angleRadius) * 0.3);
     //[name sizeToFit];
-    name.frame = CGRectMake(self.view.center.x -50 + radius * cos(angleRadius) * 0.64, self.view.center.y - 10 - radius *sin(angleRadius) * 0.64, 100, 20);
+    name.frame = CGRectMake(self.favContainerView.center.x -50 + radius * cos(angleRadius) * 0.64, self.view.center.y - 10 - radius *sin(angleRadius) * 0.64, 100, 20);
     /*if(sender.center.y < 220)
      name.frame = CGRectMake(sender.center.x-40, sender.center.y - 35, 80, 20);
      else
@@ -111,11 +111,6 @@
 {
     [UIView animateWithDuration:0.3/1.5 animations:^{
         sender.center = CGPointMake(self.view.center.x, self.view.center.y - 20);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.3/2 animations:^{                
-            if(finished)
-                [self dismissModalViewControllerAnimated:YES];                          
-        }];
     }];
 }
 
@@ -124,9 +119,7 @@
     for(int i=1; i<=12; i++)
     {
         UIButton *button = (UIButton *)[self.view viewWithTag:i];
-        UILabel *label = (UILabel *)[self.view viewWithTag:i+20];
-        [label removeFromSuperview];
-        [self animateButtonSwap:button isFinished:i==12];
+        [self animateButtonSwap:button isFinished:NO];
     }
     
 	[self dismissModalViewControllerAnimated:NO];
@@ -135,6 +128,7 @@
 - (void)viewDidUnload
 {
     [self setAlertBoxDescLabel:nil];
+    [self setFavContainerView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

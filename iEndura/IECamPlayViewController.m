@@ -35,32 +35,43 @@
             NSString *base64EncodedString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSData *imgData = [[NSData alloc] initWithBase64EncodedString:base64EncodedString];
             UIImage *ret = [UIImage imageWithData:imgData];
-            screenshotImageView.image = ret;
+            [UIView transitionWithView:self.view
+                              duration:0.2f
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                screenshotImageView.image = ret;
+                            } completion:NULL];
         }
         connnectionReady = YES;
     }
     else if (tag == IE_Req_CamHls) 
     {
-        NSDictionary *jsDict = [IEHelperMethods getExtractedDataFromJSONItem:data];
-        SimpleClass *sc = [[SimpleClass alloc] initWithDictionary:jsDict];
         
-        if([sc.Id isEqualToString:POZITIVE_VALUE])
+        IECameraClass *cc = [[IECameraClass alloc] init];
+        cc = (IECameraClass *)additionalParameters;
+        if([cc.Name isEqualToString:CurrentCamera.Name] && [cc.IP isEqualToString:CurrentCamera.IP])
         {
-            if(civc && civc != nil)
-                [civc dismissModalViewControllerAnimated:YES];
-            NSURL *streamUrl = [[NSURL alloc] initWithString:sc.Value];
-            [playSmoothTimer invalidate];
-            [playSmoothButton setEnabled:YES];
-            playSmoothCounter = 20;
-            NSLog(@"%@", streamUrl);
-            [videoWebView loadRequest:[NSURLRequest requestWithURL:streamUrl]];
-        }
-        else 
-        {
-            [playSmoothTimer invalidate];
-            [playSmoothButton setEnabled:YES];
-            playSmoothCounter = 20;
-            testLabel.text = sc.Value;
+            NSDictionary *jsDict = [IEHelperMethods getExtractedDataFromJSONItem:data];
+            SimpleClass *sc = [[SimpleClass alloc] initWithDictionary:jsDict];
+            
+            if([sc.Id isEqualToString:POZITIVE_VALUE])
+            {
+                if(civc && civc != nil)
+                    [civc dismissModalViewControllerAnimated:YES];
+                NSURL *streamUrl = [[NSURL alloc] initWithString:sc.Value];
+                [playSmoothTimer invalidate];
+                [playSmoothButton setEnabled:YES];
+                playSmoothCounter = 30;
+                NSLog(@"%@", streamUrl);
+                [videoWebView loadRequest:[NSURLRequest requestWithURL:streamUrl]];
+            }
+            else 
+            {
+                [playSmoothTimer invalidate];
+                [playSmoothButton setEnabled:YES];
+                playSmoothCounter = 30;
+                testLabel.text = sc.Value;
+            }
         }
     }
 	else if (tag == IE_Req_Auth)
@@ -284,12 +295,14 @@
     NSURL *camHlsReqUrl = [IEServiceManager GetCamHlsReqUrl:CurrentCamera.IP];
 	IEConnController *controller = [[IEConnController alloc] initWithURL:camHlsReqUrl property:IE_Req_CamHls];
 	controller.delegate = self;
+    controller.addParams = CurrentCamera;
 	[controller startConnection];
     
-    playSmoothCounter = 20;
+    playSmoothCounter = 30;
     [playSmoothButton setEnabled:NO];
+    [playSmoothTimer invalidate];
+    [self setPlaySmoothTimer:nil];
     testLabel.text = [NSString stringWithFormat:@"The smooth stream will be ready in %d secs.", playSmoothCounter--];
-    //[playSmoothButton setTitle:[NSString stringWithFormat:@"The stream will be ready in %d secs.", playSmoothCounter] forState:UIControlStateDisabled];
     playSmoothTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(UpdatePlaySmoothCounter:) userInfo:nil repeats:YES];
 }
 
@@ -297,6 +310,10 @@
 {        
     [imageTimer invalidate];
     [self setImageTimer:nil];
+    [playSmoothTimer invalidate];
+    [self  setPlaySmoothTimer:nil];
+    playSmoothCounter = 30;
+    [playSmoothButton setEnabled:YES];
     screenshotImageView.image = [UIImage imageNamed:@"connecting.png"];
     camIPLabel.text = CurrentCamera.IP;
     camModelLabel.text = CurrentCamera.UpnpModelNumber;
