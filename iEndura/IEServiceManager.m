@@ -36,6 +36,17 @@
     return authUrl;
 }
 
++ (NSURL *)GetSessionExtendUrlFromSessionId
+{
+    NSString *extUrlFormat = @"https://%@/iservice/i/e/ext/%@"; //...SERVER_ADDRESS...SESSIONID
+    NSString *iEnduraServerAddress = [IEHelperMethods getUserDefaultSettingsString:IENDURA_SERVER_ADDRESS_KEY];
+    NSString *sessionId = [StringEncryption EncryptString:APP_DELEGATE.userSeesionId];
+    NSString *urlStr = [NSString stringWithFormat:extUrlFormat, iEnduraServerAddress, sessionId];
+    NSURL *extUrl = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+    
+    return extUrl;
+}
+
 + (NSURL *)GetAuthenticationUrlFromEncStr:(NSString *)encStr
 {
     NSString *authUrlFormat = @"https://%@/iservice/i/e/auth/%@"; //...SERVER_ADDRESS...ENCSTR and USR_PASS_ENC_STR

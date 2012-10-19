@@ -16,5 +16,6 @@
 + (NSURL *)GetCamImgUrl:(NSString *)IP;
 + (NSURL *)GetCamHlsReqUrl:(NSString *)IP;
 + (NSURL *)GetAuthenticationUrlFromEncStr:(NSString *)encStr;
++ (NSURL *)GetSessionExtendUrlFromSessionId;
 
 @end

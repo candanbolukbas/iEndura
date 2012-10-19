@@ -175,7 +175,7 @@
 - (void)extendSessionTime:(NSTimer *)theTimer
 {
     dispatch_async(IENDURA_DISPATCH_QUEUE, ^{
-        NSData* data = [NSData dataWithContentsOfURL:[IEServiceManager GetAuthenticationUrlFromUsrPass]];
+        NSData* data = [NSData dataWithContentsOfURL:[IEServiceManager GetSessionExtendUrlFromSessionId]];
         [self performSelectorOnMainThread:@selector(fetchedData:)
                                withObject:data waitUntilDone:YES];
     });
