@@ -786,11 +786,13 @@
 		ADDE2F9815E7B1A200DA582D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: POLAR MUHENDISLIK VE DANISMANLIK LTD STI";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iEndura/iEndura-Prefix.pch";
 				INFOPLIST_FILE = "iEndura/iEndura-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "870BD509-791F-4B85-80F2-88AF07E3CD2D";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
